@@ -8,7 +8,7 @@ import lombok.ToString;
 import com.eadmarket.pangu.domain.TradeDO.TradeStatus;
 
 /**
- * ���׵Ĳ�ѯ
+ * 交易的查询
  * 
  * @author liuyongpo@gmail.com
  */

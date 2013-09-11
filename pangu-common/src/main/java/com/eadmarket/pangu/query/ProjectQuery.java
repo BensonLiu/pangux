@@ -4,18 +4,18 @@ import lombok.Data;
 import lombok.ToString;
 
 /**
- * ¹¤³ÌµÄ²éÑ¯¶ÔÏó
+ * å·¥ç¨‹çš„æŸ¥è¯¢å¯¹è±¡
  * 
  * @author liuyongpo@gmail.com
  */
 @Data@ToString
 public class ProjectQuery {
 	/**
-	 * ËùÊôÀàÄ¿±àºÅ
+	 * æ‰€å±ç±»ç›®ç¼–å·
 	 */
 	private Long categoryId;
 	/**
-	 * ÃèÊö¹Ø¼ü×Ö
+	 * æè¿°å…³é”®å­—
 	 */
 	private String descriKeyWord;
 	

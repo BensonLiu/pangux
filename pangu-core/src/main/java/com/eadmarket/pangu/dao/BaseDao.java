@@ -8,7 +8,7 @@ import org.springframework.dao.DataAccessException;
 import com.eadmarket.pangu.DaoException;
 
 /**
- * ͨ�õ�dao
+ * 通用的dao
  * 
  * @author liuyongpo@gmail.com
  */

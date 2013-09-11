@@ -6,7 +6,7 @@ import com.eadmarket.pangu.DaoException;
 import com.eadmarket.pangu.domain.ProductDO;
 
 /**
- * ²úÆ·Êı¾İ´æ´¢²ã½Ó¿Ú
+ * äº§å“æ•°æ®å­˜å‚¨å±‚æ¥å£
  * 
  * @author liuyongpo@gmail.com
  */

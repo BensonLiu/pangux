@@ -5,7 +5,7 @@ import com.eadmarket.pangu.domain.ReportDO;
 import com.eadmarket.pangu.manager.report.ReportManager;
 
 /**
- * ±¨±íÒµÎñ½Ó¿ÚÊµÏÖÀà
+ * æŠ¥è¡¨ä¸šåŠ¡æ¥å£å®ç°ç±»
  * 
  * @author liuyongpo@gmail.com
  */

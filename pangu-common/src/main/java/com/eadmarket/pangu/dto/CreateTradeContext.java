@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.ToString;
 
 /**
- * ´´½¨½»Ò×ÉÏÏÂÎÄ
+ * åˆ›å»ºäº¤æ˜“ä¸Šä¸‹æ–‡
  * 
  * @author liuyongpo@gmail.com
  *
@@ -12,19 +12,19 @@ import lombok.ToString;
 @Data@ToString
 public class CreateTradeContext {
 	/**
-	 * Âò¼Ò±àºÅ
+	 * ä¹°å®¶ç¼–å·
 	 */
 	private Long buyerId;
 	/**
-	 * ¹ã¸æÎ»±àºÅ
+	 * å¹¿å‘Šä½ç¼–å·
 	 */
 	private Long positionId;
 	/**
-	 * ¹ºÂòÊıÁ¿£¬ÒÔÔÂÎªµ¥Î»
+	 * è´­ä¹°æ•°é‡ï¼Œä»¥æœˆä¸ºå•ä½
 	 */
 	private int num;
 	/**
-	 * ³É½»½ğ¶î£¬ÒÔ·ÖÎªµ¥Î»
+	 * æˆäº¤é‡‘é¢ï¼Œä»¥åˆ†ä¸ºå•ä½
 	 */
 	private Long price;
 	

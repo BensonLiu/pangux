@@ -8,7 +8,7 @@ import com.eadmarket.pangu.dao.product.ProductDao;
 import com.eadmarket.pangu.domain.ProductDO;
 
 /**
- * ²úÆ·´æ´¢²ãÄ¬ÈÏÊµÏÖ
+ * äº§å“å­˜å‚¨å±‚é»˜è®¤å®ç°
  * 
  * @author liuyongpo@gmail.com
  */

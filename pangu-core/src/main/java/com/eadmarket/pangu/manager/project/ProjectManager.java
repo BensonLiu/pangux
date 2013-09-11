@@ -9,7 +9,7 @@ import com.eadmarket.pangu.dto.CreateProjectContext;
 import com.eadmarket.pangu.query.ProjectQuery;
 
 /**
- * 网站业务操作接口
+ * 缃戠珯涓氬姟鎿嶄綔鎺ュ彛
  * 
  * @author liuyongpo@gmail.com
  */

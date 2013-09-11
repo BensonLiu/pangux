@@ -8,7 +8,7 @@ import com.eadmarket.pangu.domain.ProjectDO;
 import com.eadmarket.pangu.query.ProjectQuery;
 
 /**
- * Project´æ´¢²ã½Ó¿Ú
+ * Projectå­˜å‚¨å±‚æ¥å£
  * 
  * @author liuyongpo@gmail.com
  */

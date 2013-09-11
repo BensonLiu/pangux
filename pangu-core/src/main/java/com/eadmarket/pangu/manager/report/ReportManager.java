@@ -4,7 +4,7 @@ import com.eadmarket.pangu.ManagerException;
 import com.eadmarket.pangu.domain.ReportDO;
 
 /**
- * ¹ã¸æĞ§¹ûÍ³¼ÆÒµÎñ²Ù×÷Àà
+ * å¹¿å‘Šæ•ˆæœç»Ÿè®¡ä¸šåŠ¡æ“ä½œç±»
  * 
  * @author liuyongpo@gmail.com
  */

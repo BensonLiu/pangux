@@ -10,61 +10,61 @@ import lombok.Getter;
 import lombok.ToString;
 
 /**
- * ÍøÕ¾°¡ÉñÂíµÄ£¬¿ÉÒÔÌá¹©¹ã¸æÎ»µÄÊµÌå
+ * ç½‘ç«™å•Šç¥é©¬çš„ï¼Œå¯ä»¥æä¾›å¹¿å‘Šä½çš„å®ä½“
  * 
  * @author liuyongpo@gmail.com
  */
 @Data@ToString
 public class ProjectDO {
 	/**
-	 * ÍøÕ¾±àºÅ
+	 * ç½‘ç«™ç¼–å·
 	 */
 	private Long id;
 	/**
-	 * ±êÌâ
+	 * æ ‡é¢˜
 	 */
 	private String title;
 	/**
-	 * ÍøÕ¾Á´½Ó
+	 * ç½‘ç«™é“¾æ¥
 	 */
 	private String url;
 	/**
-	 * ÍøÕ¾ÃèÊö
+	 * ç½‘ç«™æè¿°
 	 */
 	private String description;
 	/**
-	 * logoÍ¼±êurl
+	 * logoå›¾æ ‡url
 	 */
 	private String logoUrl;
 	/**
-	 * ËùÊôÄ¿Â¼
+	 * æ‰€å±ç›®å½•
 	 */
 	private Long categoryId;
 	/**
-	 * ÀàĞÍ£¬0´ú±íÍøÕ¾£¬1´ú±í²©¿Í
+	 * ç±»å‹ï¼Œ0ä»£è¡¨ç½‘ç«™ï¼Œ1ä»£è¡¨åšå®¢
 	 */
 	private Integer type;
 	/**
-	 * ÊôÓÚË­
+	 * å±äºè°
 	 */
 	private Long ownerId;
 	/**
-	 * ×´Ì¬
+	 * çŠ¶æ€
 	 */
 	private ProjectStatus status;
 	/**
-	 * alexaÅÅÃû
+	 * alexaæ’å
 	 */
 	private Long alexa;
 	/**
-	 * ÍøÕ¾ÏÂµÄ¹ã¸æÎ»
+	 * ç½‘ç«™ä¸‹çš„å¹¿å‘Šä½
 	 */
 	private List<PositionDO> positions = Collections.emptyList();
 	
 	public static enum ProjectStatus implements IEnum {
-		INVALIDE(0, "Î´ÑéÖ¤"),
-		NORMAL(1, "ÒÑÑéÖ¤"),
-		DELETED(2, "ÒÑÉ¾³ı"),
+		INVALIDE(0, "æœªéªŒè¯"),
+		NORMAL(1, "å·²éªŒè¯"),
+		DELETED(2, "å·²åˆ é™¤"),
 		;
 		
 		@Getter private final int code;

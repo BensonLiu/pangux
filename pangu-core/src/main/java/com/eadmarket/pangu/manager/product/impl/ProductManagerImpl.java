@@ -12,7 +12,7 @@ import com.eadmarket.pangu.domain.ProductDO;
 import com.eadmarket.pangu.manager.product.ProductManager;
 
 /**
- * 产品业务操作接口默认实现
+ * 浜у搧涓氬姟鎿嶄綔鎺ュ彛榛樿瀹炵幇
  * 
  * @author liuyongpo@gmail.com
  */

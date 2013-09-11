@@ -9,7 +9,7 @@ import com.eadmarket.pangu.domain.TradeDO.TradeStatus;
 import com.eadmarket.pangu.query.TradeQuery;
 
 /**
- * ���׵Ĵ洢�ӿ�
+ * 交易的存储接口
  * 
  * @author liuyongpo@gmail.com
  */

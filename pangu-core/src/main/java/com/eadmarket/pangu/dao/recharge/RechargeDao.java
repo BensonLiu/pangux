@@ -7,7 +7,7 @@ import com.eadmarket.pangu.domain.RechargeDO;
 import com.eadmarket.pangu.domain.RechargeDO.RechargeStatus;
 
 /**
- * 充值记录存储层接口
+ * 鍏呭�艰褰曞瓨鍌ㄥ眰鎺ュ彛
  * 
  * @author liuyongpo@gmail.com
  */

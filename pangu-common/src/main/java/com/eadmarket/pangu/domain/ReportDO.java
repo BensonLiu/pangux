@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.ToString;
 
 /**
- * 报表对象
+ * 鎶ヨ〃瀵硅薄
  * 
  * @author liuyongpo@gmail.com
  */
@@ -20,23 +20,23 @@ public class ReportDO {
 	
 	private Long tradeId;
 	/**
-	 * 展示次数
+	 * 灞曠ず娆℃暟
 	 */
 	private Long impression;
 	/**
-	 * 点击次数
+	 * 鐐瑰嚮娆℃暟
 	 */
 	private Long click;
 	/**
-	 * 买家编号
+	 * 涔板缂栧彿
 	 */
 	private Long buyerId;
 	/**
-	 * 卖家编号
+	 * 鍗栧缂栧彿
 	 */
 	private Long sellerId;
 	/**
-	 * 创建时间
+	 * 鍒涘缓鏃堕棿
 	 */
 	private Date gmtCreate;
 	

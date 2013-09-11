@@ -4,27 +4,27 @@ import com.eadmarket.pangu.ManagerException;
 import com.eadmarket.pangu.dto.RechargeDTO;
 
 /**
- * ³äÖµÒµÎñ²Ù×÷²ã
+ * å……å€¼ä¸šåŠ¡æ“ä½œå±‚
  * 
  * @author liuyongpo@gmail.com
  */
 public interface RechargeManager {
 	/**
-	 * Íê½áµ¥¶ÀµÄ³äÖµ¼ÇÂ¼
+	 * å®Œç»“å•ç‹¬çš„å……å€¼è®°å½•
 	 * 
-	 * @param rechargeId ³äÖµ¼ÇÂ¼±àºÅ
-	 * @param outOrderId Íâ²¿±àºÅ
-	 * @param cash ³äÖµ½ğ¶î£¬ÒÔ·ÖÎªµ¥Î»
-	 * @return true Èç¹ûÕı³£Íê½á
+	 * @param rechargeId å……å€¼è®°å½•ç¼–å·
+	 * @param outOrderId å¤–éƒ¨ç¼–å·
+	 * @param cash å……å€¼é‡‘é¢ï¼Œä»¥åˆ†ä¸ºå•ä½
+	 * @return true å¦‚æœæ­£å¸¸å®Œç»“
 	 * @throws ManagerException
 	 */
 	boolean finish(Long rechargeId, String outOrderId, Long cash) throws ManagerException;
 	
 	/**
-	 * ÎªÖ¸¶¨»áÔ±´´½¨³äÖµ¼ÇÂ¼
+	 * ä¸ºæŒ‡å®šä¼šå‘˜åˆ›å»ºå……å€¼è®°å½•
 	 * 
-	 * @param rechargeDTO ³äÖµ´«Êä¶ÔÏó
-	 * @return ĞÂÉú³ÉµÄ³äÖµ¼ÇÂ¼±àºÅ
+	 * @param rechargeDTO å……å€¼ä¼ è¾“å¯¹è±¡
+	 * @return æ–°ç”Ÿæˆçš„å……å€¼è®°å½•ç¼–å·
 	 * @throws ManagerException
 	 */
 	Long create(RechargeDTO rechargeDTO) throws ManagerException;

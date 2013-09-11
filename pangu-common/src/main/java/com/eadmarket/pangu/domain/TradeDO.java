@@ -9,54 +9,54 @@ import lombok.Getter;
 import lombok.ToString;
 
 /**
- * ½»Ò×ĞÅÏ¢¶ÔÏó
+ * äº¤æ˜“ä¿¡æ¯å¯¹è±¡
  * 
  * @author liuyongpo@gmail.com
  */
 @Data@ToString
 public class TradeDO {
 	/**
-	 * ½»Ò×±àºÅ
+	 * äº¤æ˜“ç¼–å·
 	 */
 	private Long id;
 	/**
-	 * ½»Ò××´Ì¬
+	 * äº¤æ˜“çŠ¶æ€
 	 */
 	private TradeStatus status;
 	/**
-	 * ¶ÔÓ¦µÄ¹ã¸æÎ»±àºÅ
+	 * å¯¹åº”çš„å¹¿å‘Šä½ç¼–å·
 	 */
 	private Long positionId;
 	/**
-	 * ¶ÔÓ¦µÄ²úÆ·
+	 * å¯¹åº”çš„äº§å“
 	 */
 	private Long productId;
 	/**
-	 * ³É½»¼Û¸ñ£¬ÒÔ·ÖÎªµ¥Î»
+	 * æˆäº¤ä»·æ ¼ï¼Œä»¥åˆ†ä¸ºå•ä½
 	 */
 	private Long price;
 	/**
-	 * ¿ªÊ¼Ê±¼ä
+	 * å¼€å§‹æ—¶é—´
 	 */
 	private Date startDate;
 	/**
-	 * ½áÊøÊ±¼ä
+	 * ç»“æŸæ—¶é—´
 	 */
 	private Date endDate;
 	/**
-	 * Âò¼Ò±àºÅ
+	 * ä¹°å®¶ç¼–å·
 	 */
 	private Long buyerId;
 	/**
-	 * Âô¼Ò±àºÅ
+	 * å–å®¶ç¼–å·
 	 */
 	private Long sellerId;
 	/**
-	 * ³É½»ÊıÁ¿
+	 * æˆäº¤æ•°é‡
 	 */
 	private Integer num;
 	/**
-	 * ½»Ò×½ø¶È
+	 * äº¤æ˜“è¿›åº¦
 	 */
 	//private Integer process;
 	
@@ -65,9 +65,9 @@ public class TradeDO {
 	}
 	
 	public static enum TradeStatus implements IEnum {
-		//NEW(1, "ĞÂ½¨"),
-		IMPLEMENTING(2, "Ö´ĞĞÖĞ"),
-		COMPLETED(3, "ÒÑÍê³É"),
+		//NEW(1, "æ–°å»º"),
+		IMPLEMENTING(2, "æ‰§è¡Œä¸­"),
+		COMPLETED(3, "å·²å®Œæˆ"),
 		;
 
 		@Getter private final int code;

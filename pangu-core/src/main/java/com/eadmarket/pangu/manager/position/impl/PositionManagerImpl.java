@@ -10,7 +10,7 @@ import com.eadmarket.pangu.domain.PositionDO;
 import com.eadmarket.pangu.manager.position.PositionManager;
 
 /**
- * ¹ã¸æÎ»µÄÒµÎñ½Ó¿ÚÊµÏÖÀà
+ * å¹¿å‘Šä½çš„ä¸šåŠ¡æ¥å£å®ç°ç±»
  * 
  * @author liuyongpo@gmail.com
  */

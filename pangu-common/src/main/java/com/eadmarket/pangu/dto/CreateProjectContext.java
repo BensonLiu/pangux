@@ -4,38 +4,38 @@ import lombok.Data;
 import lombok.ToString;
 
 /**
- * ´´½¨ProjectµÄÉÏÏÂÎÄ
+ * åˆ›å»ºProjectçš„ä¸Šä¸‹æ–‡
  * 
  * @author liuyongpo@gmail.com
  */
 @Data@ToString
 public class CreateProjectContext {
 	/**
-	 * ±êÌâ
+	 * æ ‡é¢˜
 	 */
 	private String title;
 	/**
-	 * ÍøÕ¾Á´½Ó
+	 * ç½‘ç«™é“¾æ¥
 	 */
 	private String url;
 	/**
-	 * ÍøÕ¾ÃèÊö
+	 * ç½‘ç«™æè¿°
 	 */
 	private String description;
 	/**
-	 * logoÍ¼±êurl
+	 * logoå›¾æ ‡url
 	 */
 	private String logoUrl;
 	/**
-	 * ËùÊôÄ¿Â¼
+	 * æ‰€å±ç›®å½•
 	 */
 	private Long categoryId;
 	/**
-	 * ÀàĞÍ£¬0´ú±íÍøÕ¾£¬1´ú±í²©¿Í
+	 * ç±»å‹ï¼Œ0ä»£è¡¨ç½‘ç«™ï¼Œ1ä»£è¡¨åšå®¢
 	 */
 	private Integer type;
 	/**
-	 * ÊôÓÚË­
+	 * å±äºè°
 	 */
 	private Long ownerId;
 }

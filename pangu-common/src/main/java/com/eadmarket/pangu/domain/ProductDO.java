@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.ToString;
 
 /**
- * ÒªÍÆ¹ãµÄ²úÆ·
+ * è¦æ¨å¹¿çš„äº§å“
  * 
  * @author liuyongpo@gmail.com
  */
@@ -16,43 +16,43 @@ public class ProductDO {
 	public final static int NORMAL_STATUS = 1;
 	
 	/**
-	 * ±àºÅ
+	 * ç¼–å·
 	 */
 	private Long id;
 	/**
-	 * Ãû³Æ
+	 * åç§°
 	 */
 	private String name;
 	/**
-	 * ×´Ì¬
+	 * çŠ¶æ€
 	 */
 	private Integer status;
 	/**
-	 * ²úÆ·¶ÔÓ¦µÄÁ´½Ó
+	 * äº§å“å¯¹åº”çš„é“¾æ¥
 	 */
 	private String url;
 	/**
-	 * Õ¹Ê¾´ÎÊı
+	 * å±•ç¤ºæ¬¡æ•°
 	 */
 	private Long impression;
 	/**
-	 * µã»÷´ÎÊı
+	 * ç‚¹å‡»æ¬¡æ•°
 	 */
 	private Long click;
 	/**
-	 * ¸ñÊ½
+	 * æ ¼å¼
 	 */
 	private Integer format;
 	/**
-	 * ¹ã¸æÖ÷
+	 * å¹¿å‘Šä¸»
 	 */
 	private Long ownerId;
 	/**
-	 * ÒªÕ¹Ê¾µÄĞÅÏ¢url(Í¼Æ¬orflash)
+	 * è¦å±•ç¤ºçš„ä¿¡æ¯url(å›¾ç‰‡orflash)
 	 */
 	private String showUrl;
 	/**
-	 * ·ÑÓÃ
+	 * è´¹ç”¨
 	 */
 	private Long fee;
 }

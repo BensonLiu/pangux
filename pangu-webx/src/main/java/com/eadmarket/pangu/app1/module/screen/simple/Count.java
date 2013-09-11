@@ -17,14 +17,14 @@
 
 package com.eadmarket.pangu.app1.module.screen.simple;
 
-import static com.alibaba.citrus.util.StringEscapeUtil.*;
-
 import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.citrus.service.requestcontext.buffered.BufferedRequestContext;
 import com.alibaba.citrus.turbine.dataresolver.Param;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 在浏览器上显示计数。

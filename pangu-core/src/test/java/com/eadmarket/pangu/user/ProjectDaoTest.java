@@ -26,7 +26,7 @@ public class ProjectDaoTest extends BaseTest {
 	
 	@Test public void testCount() throws DaoException {
 		ProjectQuery projectQuery = new ProjectQuery();
-		projectQuery.setDescriKeyWord("人气");
+		projectQuery.setDescriKeyWord("浜烘皵");
 		//projectQuery.setCategoryId(12L);
 		
 		Query<ProjectQuery> query = Query.create(projectQuery);
@@ -38,7 +38,7 @@ public class ProjectDaoTest extends BaseTest {
 	
 	@Test public void testQuery() throws DaoException {
 		ProjectQuery projectQuery = new ProjectQuery();
-		projectQuery.setDescriKeyWord("人气");
+		projectQuery.setDescriKeyWord("浜烘皵");
 		//projectQuery.setCategoryId(12L);
 		
 		Query<ProjectQuery> query = Query.create(projectQuery);

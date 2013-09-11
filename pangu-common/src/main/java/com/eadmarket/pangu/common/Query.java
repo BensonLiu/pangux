@@ -5,7 +5,7 @@ import lombok.Setter;
 
 
 /**
- * Í¨ÓÃµÄquery¶ÔÏó
+ * é€šç”¨çš„queryå¯¹è±¡
  * 
  * @author liuyongpo@gmail.com
  */
@@ -210,7 +210,7 @@ public class Query<T> {
         int cPage = this.getCurrentPage().intValue();
 
         if (cPage == 1) {
-            return 1; // µÚÒ»Ò³¿ªÊ¼µ±È»ÊÇµÚ 1 Ìõ¼ÇÂ¼
+            return 1; // ç¬¬ä¸€é¡µå¼€å§‹å½“ç„¶æ˜¯ç¬¬ 1 æ¡è®°å½•
         }
 
         cPage--;

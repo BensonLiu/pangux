@@ -9,7 +9,7 @@ import com.eadmarket.pangu.dto.CreateTradeContext;
 import com.eadmarket.pangu.query.TradeQuery;
 
 /**
- * 交易的业务操作接口层
+ * 浜ゆ槗鐨勪笟鍔℃搷浣滄帴鍙ｅ眰
  * 
  * @author liuyongpo@gmail.com
  */

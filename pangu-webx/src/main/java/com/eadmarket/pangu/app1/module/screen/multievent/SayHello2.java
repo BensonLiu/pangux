@@ -17,10 +17,6 @@
 
 package com.eadmarket.pangu.app1.module.screen.multievent;
 
-import java.io.IOException;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Screen方法可带有返回值。

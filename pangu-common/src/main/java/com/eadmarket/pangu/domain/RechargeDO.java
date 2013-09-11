@@ -9,38 +9,38 @@ import lombok.Getter;
 import lombok.ToString;
 
 /**
- * ³äÖµ¼ÇÂ¼
+ * å……å€¼è®°å½•
  * 
  * @author liuyongpo@gmail.com
  */
 @Data@ToString
 public class RechargeDO {
 	/**
-	 * ³äÖµ¼ÇÂ¼±àºÅ
+	 * å……å€¼è®°å½•ç¼–å·
 	 */
 	private Long id;
 	/**
-	 * »áÔ±±àºÅ
+	 * ä¼šå‘˜ç¼–å·
 	 */
 	private Long userId;
 	/**
-	 * ³äÖµ¼ÇÂ¼×´Ì¬
+	 * å……å€¼è®°å½•çŠ¶æ€
 	 */
 	private RechargeStatus status;
 	/**
-	 * ³äÖµ½ğ¶î£¬ÒÔ·ÖÎªµ¥Î»
+	 * å……å€¼é‡‘é¢ï¼Œä»¥åˆ†ä¸ºå•ä½
 	 */
 	private Long cash;
 	/**
-	 * ³äÖµÇşµÀ
+	 * å……å€¼æ¸ é“
 	 */
 	private ChannelType channelType;
 	/**
-	 * Íâ²¿±àºÅ£¬¿ÉÄÜÓÃ»§¶ÔÕË
+	 * å¤–éƒ¨ç¼–å·ï¼Œå¯èƒ½ç”¨æˆ·å¯¹è´¦
 	 */
 	private Long outOrderId;
 	/**
-	 * ¼ÇÂ¼´´½¨Ê±¼ä
+	 * è®°å½•åˆ›å»ºæ—¶é—´
 	 */
 	private Date gmtCreate;
 	
@@ -53,8 +53,8 @@ public class RechargeDO {
 	}
 	
 	public static enum ChannelType implements IEnum {
-		ALIPAY(101, "Ö§¸¶±¦"),
-		CFT(102, "²Æ¸¶Í¨"),
+		ALIPAY(101, "æ”¯ä»˜å®"),
+		CFT(102, "è´¢ä»˜é€š"),
 		;
 		
 		@Getter private final int code;
@@ -69,8 +69,8 @@ public class RechargeDO {
 	}
 	
 	public static enum RechargeStatus implements IEnum {
-		NEW(1, "´ı¸¶¿î"),
-		COMPELETED(2, "ÒÑÍê³É"),
+		NEW(1, "å¾…ä»˜æ¬¾"),
+		COMPELETED(2, "å·²å®Œæˆ"),
 		;
 
 		@Getter private final int code;

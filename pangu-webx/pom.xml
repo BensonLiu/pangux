@@ -10,7 +10,7 @@
 	</parent>
 	
     <artifactId>pangu-webx</artifactId>
-    <name>eadmarket-web</name>
+    <name>pangu-web</name>
     <packaging>war</packaging>
     
     <dependencies>
@@ -25,6 +25,10 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
         </dependency>
     </dependencies>
     <build>

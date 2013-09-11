@@ -4,7 +4,7 @@ import com.eadmarket.pangu.ManagerException;
 import com.eadmarket.pangu.domain.PositionDO;
 
 /**
- * 广告位的业务操作接口
+ * 骞垮憡浣嶇殑涓氬姟鎿嶄綔鎺ュ彛
  * 
  * @author liuyongpo@gmail.com
  */

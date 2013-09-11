@@ -19,7 +19,7 @@ import com.eadmarket.pangu.dto.RechargeDTO;
 import com.eadmarket.pangu.manager.recharge.RechargeManager;
 
 /**
- * ³äÖµÒµÎñ²Ù×÷
+ * å……å€¼ä¸šåŠ¡æ“ä½œ
  * 
  * @author liuyongpo@gmail.com
  */
@@ -47,7 +47,7 @@ class RechargeManagerImpl implements RechargeManager {
 		}
 		if (rechargeDO.isCompleted()) {
 			/*
-			 * ´Ë´¦ÎªÁËÖ§³ÖÃİµÈ
+			 * æ­¤å¤„ä¸ºäº†æ”¯æŒå¹‚ç­‰
 			 */
 			return true;
 		}

@@ -17,20 +17,19 @@
 
 package com.eadmarket.pangu.app1.module.screen.simple;
 
-import static com.alibaba.citrus.util.ObjectUtil.*;
-import static com.alibaba.citrus.util.StringEscapeUtil.*;
-import static org.apache.commons.lang.StringUtils.*;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
+
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 
-import com.alibaba.citrus.service.requestcontext.buffered.BufferedRequestContext;
-import com.alibaba.citrus.turbine.dataresolver.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.alibaba.citrus.service.requestcontext.buffered.BufferedRequestContext;
 
 /**
  * 动态创建二进制图片。

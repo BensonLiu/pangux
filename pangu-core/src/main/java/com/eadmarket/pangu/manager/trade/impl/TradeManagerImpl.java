@@ -95,7 +95,7 @@ class TradeManagerImpl implements TradeManager, InitializingBean {
 		});
 		
 		if (code != null) {
-			//ÓĞÒì³£·¢Éú
+			//æœ‰å¼‚å¸¸å‘ç”Ÿ
 			throw new ManagerException(code);
 		}
 		
@@ -136,7 +136,7 @@ class TradeManagerImpl implements TradeManager, InitializingBean {
 	
 	private void init() {
 		/*
-		 * Æô¶¯Ïß³ÌÉ¨ÃèÒÑ¾­¹ıÆÚµÄ½»Ò×£¬ĞŞ¸Ä½»Ò××´Ì¬ÎªÍê³É²¢ÇÒĞŞ¸Ä¹ã¸æÎ»µÄ×´Ì¬Îª´ı³öÊÛ
+		 * å¯åŠ¨çº¿ç¨‹æ‰«æå·²ç»è¿‡æœŸçš„äº¤æ˜“ï¼Œä¿®æ”¹äº¤æ˜“çŠ¶æ€ä¸ºå®Œæˆå¹¶ä¸”ä¿®æ”¹å¹¿å‘Šä½çš„çŠ¶æ€ä¸ºå¾…å‡ºå”®
 		 */
 		SCHEDULED_SERVICE.scheduleAtFixedRate(new Runnable() {
 

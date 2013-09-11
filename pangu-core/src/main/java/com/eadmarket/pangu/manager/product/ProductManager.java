@@ -6,7 +6,7 @@ import com.eadmarket.pangu.ManagerException;
 import com.eadmarket.pangu.domain.ProductDO;
 
 /**
- * 产品的业务接口类
+ * 浜у搧鐨勪笟鍔℃帴鍙ｇ被
  * 
  * @author liuyongpo@gmail.com
  */

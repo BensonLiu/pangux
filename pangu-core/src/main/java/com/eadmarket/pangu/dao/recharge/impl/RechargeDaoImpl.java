@@ -11,7 +11,7 @@ import com.eadmarket.pangu.domain.RechargeDO.RechargeStatus;
 import com.google.common.collect.Maps;
 
 /**
- * 充值功能存储层默认实现
+ * 鍏呭�煎姛鑳藉瓨鍌ㄥ眰榛樿瀹炵幇
  * 
  * @author liuyongpo@gmail.com
  */

@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.ToString;
 
 /**
- * 财务业务对象
+ * 璐㈠姟涓氬姟瀵硅薄
  * 
  * @author liuyongpo@gmail.com
  */

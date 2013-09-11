@@ -20,7 +20,7 @@ import com.eadmarket.pangu.query.ProjectQuery;
 
 
 /**
- * Project业务接口默认实现
+ * Project涓氬姟鎺ュ彛榛樿瀹炵幇
  * 
  * @author liuyongpo@gmail.com
  */
@@ -62,7 +62,7 @@ class ProjectManagerImpl implements ProjectManager {
 		project.setTitle(projectContext.getTitle());
 		project.setType(projectContext.getType());
 		project.setStatus(ProjectStatus.NORMAL);
-		//TODO:补充alex
+		//TODO:琛ュ厖alex
 		try {
 			return projectDao.create(project);
 		} catch (DaoException ex) {

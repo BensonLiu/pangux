@@ -6,22 +6,22 @@ import lombok.ToString;
 import com.eadmarket.pangu.domain.RechargeDO.ChannelType;
 
 /**
- * RechargeÊı¾İ´«Êä¶ÔÏó
+ * Rechargeæ•°æ®ä¼ è¾“å¯¹è±¡
  * 
  * @author liuyongpo@gmail.com
  */
 @Data @ToString
 public class RechargeDTO {
 	/**
-	 * »áÔ±±àºÅ
+	 * ä¼šå‘˜ç¼–å·
 	 */
 	private Long userId;
 	/**
-	 * ³äÖµÇşµÀ
+	 * å……å€¼æ¸ é“
 	 */
 	private ChannelType channelType;
 	/**
-	 * ³äÖµ½ğ¶î£¬ÒÔ·ÖÎªµ¥Î»
+	 * å……å€¼é‡‘é¢ï¼Œä»¥åˆ†ä¸ºå•ä½
 	 */
 	private Long cash;
 }
