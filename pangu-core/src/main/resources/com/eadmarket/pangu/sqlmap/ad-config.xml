@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <typeAliases>
+  	<package name="com.eadmarket.pangu.domain"/>
+  	<package name="com.eadmarket.pangu.dao.typehandler"/>
+  </typeAliases>
+  <typeHandlers>
+  	<package name="com.eadmarket.pangu.dao.typehandler"/>
+  </typeHandlers>
+  <mappers>
+    <mapper resource="com/eadmarket/pangu/sqlmap/mapper/UserMapper.xml"/>
+    <mapper resource="com/eadmarket/pangu/sqlmap/mapper/PositionMapper.xml"/>
+    <mapper resource="com/eadmarket/pangu/sqlmap/mapper/ProjectMapper.xml"/>
+    <mapper resource="com/eadmarket/pangu/sqlmap/mapper/ProductMapper.xml"/>
+    <mapper resource="com/eadmarket/pangu/sqlmap/mapper/RechargeMapper.xml"/>
+    <mapper resource="com/eadmarket/pangu/sqlmap/mapper/TradeMapper.xml"/>
+  </mappers>
+</configuration>

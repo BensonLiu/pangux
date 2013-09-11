@@ -1,0 +1,50 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RechargeDao">
+	<resultMap type="RechargeDO" id="rechargeMap">
+		<result column="id" property="id"/>
+		<result column="user_id" property="userId"/>
+		<result column="cash" property="cash"/>
+		<result column="r_status" property="status" typeHandler="RechargeStatusTypeHandler"/>
+		<result column="channel_type" property="channelType" typeHandler="ChannelTypeTypeHandler"/>
+		<result column="out_order_id" property="outOrderId"/>
+		<result column="gmt_create" property="gmtCreate"/>
+	</resultMap>
+	
+	<sql id="allFields">
+		id,
+		user_id,
+		cash,
+		r_status,
+		channel_type,
+		out_order_id,
+		gmt_create
+	</sql>
+	
+	<select id="getById" resultMap="rechargeMap" parameterType="long">
+		select 
+		<include refid="allFields"/>
+		from recharge_info 
+		where id = #{id}
+	</select>
+	
+	<insert id="insert" parameterType="RechargeDO" useGeneratedKeys="true" keyProperty="id">
+	    insert into recharge_info (user_id, cash, r_status, channel_type, gmt_create, gmt_modified) 
+	    values (
+	    	#{userId}, #{cash}, #{status,typeHandler=RechargeStatusTypeHandler}, #{channelType,typeHandler=ChannelTypeTypeHandler}, now(), now()
+	    )
+	</insert>
+	
+	<update id="updateStatus" parameterType="hashMap">
+		update recharge_info 
+		set r_status = #{status,typeHandler=RechargeStatusTypeHandler},gmt_modified=now()
+		where id = #{id} and r_status = #{expectedStatus,typeHandler=RechargeStatusTypeHandler}
+	</update>
+	
+	<update id="updateOutOrderId" parameterType="hashMap">
+		update recharge_info 
+		set out_order_id=#{outOrderId},gmt_modified=now()
+		where id = #{id}
+	</update>
+</mapper>

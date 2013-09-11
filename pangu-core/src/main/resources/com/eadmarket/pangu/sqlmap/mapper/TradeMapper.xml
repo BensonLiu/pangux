@@ -1,0 +1,90 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TradeDao">
+	<resultMap type="TradeDO" id="tradeMap">
+		<result column="id" property="id"/>
+		<result column="product" property="productId"/>
+		<result column="advertise" property="positionId"/>
+		<result column="price" property="price"/>
+		<result column="number" property="num"/>
+		<result column="startTime" property="startDate"/>
+		<result column="endTime" property="endDate"/>
+		<result column="state" property="status" typeHandler="TradeStatusTypeHandler"/>
+		<result column="buyer" property="buyerId"/>
+		<result column="seller" property="sellerId"/>
+	</resultMap>
+	
+	<sql id="allFields">
+		id,
+		product,
+		advertise,
+		price,
+		number,
+		startTime,
+		endTime,
+		state,
+		buyer,
+		seller
+	</sql>
+	
+	<select id="getById" resultMap="tradeMap" parameterType="long">
+		select 
+		<include refid="allFields"/>
+		from trade 
+		where id = #{id}
+	</select>
+	
+	<insert id="createTrade" parameterType="TradeDO" useGeneratedKeys="true" keyProperty="id">
+	    insert into trade (product, advertise, price, number, startTime, endTime, state, buyer, seller) 
+	    values 
+	    (#{productId}, #{positionId}, #{price}, #{num}, #{startDate}, #{endDate}, #{status,typeHandler=TradeStatusTypeHandler}, #{buyerId},#{sellerId})
+	</insert>
+	
+	<update id="updateStatus" parameterType="hashMap">
+		update trade
+		set state=#{targetStatus,typeHandler=TradeStatusTypeHandler}
+		where id = #{id} and state = #{orginalStatus,typeHandler=TradeStatusTypeHandler}
+	</update>
+	
+	<select id="query" resultMap="tradeMap" parameterType="com.eadmarket.pangu.common.Query">
+		select 
+		<include refid="allFields"/>
+		from trade
+		<where>
+			<if test="condition.buyerId != null">
+				buyer=#{condition.buyerId}
+			</if>
+			<if test="condition.sellerId != null">
+				AND seller=#{condition.sellerId}
+			</if>
+			<if test="condition.status != null">
+				AND state=#{condition.status,typeHandler=TradeStatusTypeHandler}
+			</if>
+			<if test="condition.endDate != null">
+				AND endTime &lt;#{condition.endDate}
+			</if>
+		</where>
+		limit #{mysqlPageFirstItem}, #{pageSize}
+	</select>
+	
+	<select id="count" resultType="int" parameterType="com.eadmarket.pangu.common.Query">
+		select count(*)
+		from trade
+		<where>
+			<if test="condition.buyerId != null">
+				buyer=#{condition.buyerId}
+			</if>
+			<if test="condition.sellerId != null">
+				AND seller=#{condition.sellerId}
+			</if>
+			<if test="condition.status != null">
+				AND state=#{condition.status,typeHandler=TradeStatusTypeHandler}
+			</if>
+			<if test="condition.endDate != null">
+				AND endTime &lt;#{condition.endDate}
+			</if>
+		</where>
+	</select>
+	
+</mapper>

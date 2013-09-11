@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	
+	<bean id="positionManager" class="com.eadmarket.pangu.manager.position.impl.PositionManagerImpl" />
+	
+	<bean id="productManager" class="com.eadmarket.pangu.manager.product.impl.ProductManagerImpl" />
+	
+	<bean id="projectManager" class="com.eadmarket.pangu.manager.project.impl.ProjectManagerImpl" />
+	
+	<bean id="rechargeManager" class="com.eadmarket.pangu.manager.recharge.impl.RechargeManagerImpl" />
+	
+	<bean id="reportManager" class="com.eadmarket.pangu.manager.report.impl.ReportManagerImpl" />
+	
+	<bean id="tradeManager" class="com.eadmarket.pangu.manager.trade.impl.TradeManagerImpl" />
+	
+	<bean id="userManager" class="com.eadmarket.pangu.manager.user.impl.UserManagerImpl"/>
+</beans>

@@ -1,0 +1,79 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProductDao">
+	<resultMap type="ProductDO" id="productMap">
+		<result column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="url" property="url"/>
+		<result column="impression" property="impression"/>
+		<result column="click" property="click"/>
+		<result column="format" property="format"/>
+		<result column="owner" property="ownerId"/>
+		<result column="shown" property="showUrl"/>
+		<result column="fee" property="fee"/>
+		<result column="status" property="status"/>
+	</resultMap>
+	
+	<sql id="allFields">
+		id,
+		name,
+		url,
+		impression,
+		click,
+		format,
+		owner,
+		shown,
+		fee,
+		status
+	</sql>
+	
+	<select id="getById" resultMap="productMap" parameterType="long">
+		select 
+		<include refid="allFields"/>
+		from product 
+		where id = #{id}
+	</select>
+	
+	<select id="getProductsByUserId" resultMap="productMap" parameterType="long">
+		select 
+		<include refid="allFields"/>
+		from product 
+		where owner = #{userId} and status = 1
+	</select>
+	
+	<insert id="insert" parameterType="ProductDO" useGeneratedKeys="true" keyProperty="id">
+	    insert into product (name, url, impression, click, format, owner, shown, fee, status) 
+	    values (#{name}, #{url}, #{impression}, #{click}, #{format}, #{ownerId}, #{showUrl}, #{fee},#{status})
+	</insert>
+	
+	<update id="updateProduct" parameterType="ProductDO">
+		update product
+		<set>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="url != null">
+				url = #{url},
+			</if>
+			<if test="impression != null">
+				impression = #{impression},
+			</if>
+			<if test="click != null">
+				click = #{click},
+			</if>
+			<if test="format != null">
+				format = #{format},
+			</if>
+			<if test="status != null">
+				status = #{status}
+			</if>
+			<if test="showUrl != null">
+				shown = #{showUrl},
+			</if>
+			<if test="fee != null">
+				fee = #{fee}
+			</if>
+		</set>
+		where id =#{id}
+	</update>
+		
+</mapper>

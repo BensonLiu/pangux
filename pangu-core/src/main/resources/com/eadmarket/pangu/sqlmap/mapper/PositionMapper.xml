@@ -1,0 +1,65 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PositionDao">
+	<resultMap type="PositionDO" id="positionMap">
+		<result column="id" property="id"/>
+		<result column="project" property="projectId"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="format" property="format"/>
+		<result column="width" property="width"/>
+		<result column="height" property="height"/>
+		<result column="price" property="price"/>
+		<result column="profit" property="profit"/>
+		<result column="state" property="status" typeHandler="PositionStatusTypeHandler"/>
+	</resultMap>
+	
+	<sql id="allFields">
+		id,
+		project,
+		title,
+		content,
+		format,
+		width,
+		height,
+		price,
+		profit,
+		state
+	</sql>
+	
+	<select id="getById" resultMap="positionMap" parameterType="long">
+		select 
+		<include refid="allFields"/>
+		from advertise 
+		where id = #{id}
+	</select>
+	
+	<select id="getByProjectId" resultMap="positionMap" parameterType="long">
+		select
+		<include refid="allFields"/>
+		from advertise
+		where project =#{id}
+	</select>
+	
+	<insert id="addPosition" parameterType="PositionDO" useGeneratedKeys="true" keyProperty="id">
+	    insert into advertise (project, title, content, format, width, height, price, profit, state) 
+	    values (#{projectId}, #{title}, #{content}, #{format}, #{width}, #{height}, #{price}, #{profit},#{status,typeHandler=PositionStatusTypeHandler})
+	</insert>
+	
+	<update id="updatePositionById" parameterType="PositionDO">
+		update advertise
+		set
+		<set>
+			<if test="status != null">status=#{status,typeHandler=PositionStatusTypeHandler},</if>
+			<if test="price != null">price=#{price},</if>
+			<if test="title != null">title=#{title},</if>
+			<if test="content != null">content=#{content},</if>
+			<if test="width != null">width=#{width},</if>
+			<if test="height != null">height=#{height},</if>
+			<if test="format != null">format=#{format}</if>
+		</set>
+		where id =#{id}
+	</update>
+</mapper>
