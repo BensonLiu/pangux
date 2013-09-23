@@ -1,4 +1,5 @@
-    <div class="section">
+    $page.setTitle("广告市场——用户登录")
+	<div class="section">
       <div class="container"  style="width:500px; padding:60px 0 100px 0;">
          <form class="form-horizontal" action="#" method="POST">
           <input type="hidden" name="action" value="memberAction" />
