@@ -1,5 +1,8 @@
 package com.eadmarket.web.common;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -46,6 +49,12 @@ public class LoginCheckValve extends AbstractValve {
 		URIBroker loginUriBroker = uriBrokerService.getURIBroker("loginLink").fork();
 		
 		String redirectUrl = request.getRequestURL().append('?').append(request.getQueryString()).toString();
+		
+		try {
+			redirectUrl = URLEncoder.encode(redirectUrl,  LoginConstants.REDIRECT_URL_ENCODE_CHARSET);
+		} catch (UnsupportedEncodingException ex) {
+			throw new RuntimeException("encode '" + redirectUrl + "' with " + LoginConstants.REDIRECT_URL_ENCODE_CHARSET, ex);
+		}
 		
 		return loginUriBroker.addQueryData("redirectUrl", redirectUrl).render();
 	}

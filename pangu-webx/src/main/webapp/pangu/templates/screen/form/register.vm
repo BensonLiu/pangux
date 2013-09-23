@@ -1,6 +1,6 @@
 $page.setTitle("Register")
-
-<form action="$app1Link.setTarget("form/register")" method="post">
+$loginLink
+<form action="$panguLink.setTarget("form/register")" method="post">
     $csrfToken.hiddenField
     <input type="hidden" name="action" value="register_action"/>
 

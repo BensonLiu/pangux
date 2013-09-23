@@ -13,14 +13,17 @@
              ">
 
     <services:uris>
-        <uris:uri id="server" requestAware="true" />
+        <uris:uri id="server" requestAware="false" />
 
-        <uris:turbine-uri id="app1Link" exposed="true" extends="server">
+        <uris:turbine-uri id="pangLink" exposed="true" extends="server">
             <componentPath>/</componentPath>
         </uris:turbine-uri>
 
-        <uris:turbine-content-uri id="app1Content" exposed="true" extends="app1Link" />
-
+        <uris:turbine-content-uri id="panguContent" exposed="true" extends="pangLink" />
+		
+		<uris:turbine-uri id="loginLink" extends="panguContent" exposed="true">
+			<target>/member/login.html</target>
+		</uris:turbine-uri>
     </services:uris>
 
 </beans:beans>
