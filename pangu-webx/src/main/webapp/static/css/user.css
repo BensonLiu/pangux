@@ -1,0 +1,75 @@
+﻿body{font-size:12px;font-family: "雅黑","微软雅黑"}
+.orange{background-color: #ED561B;}
+.blue{background-color: #058DC7;}
+.green{background-color: #50B432;}
+.yellow{background-color: #DDDF00;}
+.a{background-color: #24CBE5;}
+.b{background-color: #64E572;}
+.c{background-color: #FF9655;}
+.d{background-color: #FFF263;}
+.e{background-color: #6AF9C4;}
+.red-color{color: #EC4F4F;}
+.blue-color{color: #058DC7;}
+.green-color{color:#07733f;}
+.orange-color{color: #ed4306;}
+.gray-color{color: #f6f6f6;}
+.logo-small{width: 162px;height:40px;}
+.msg{display: none;color:red;}
+.btn{font-weight: bold;}
+.header{padding:10px;}
+.header .span3{margin-top:30px;}
+.header .btn{ font-weight: bold; width: 50px;}
+.header .container{border-bottom:solid 1px #ededed; }
+.container{ width: 96%;padding: 5px;}
+.title{font-weight: bold;}
+.nav-head{margin:0px;border:0;padding: 0px;text-align:right;}
+.nav-head a{ margin-left: 20px; color: #000;}
+.nav-head li a:hover{background-color: #fff;color: #000; text-decoration: underline;}
+.nav-head .active a{background-color: #fff;color: #000;font-weight: bold;}
+.nav-head li.active a:hover{background-color: #fff;color: #000; text-decoration: underline;}
+.intro{box-shadow: 0px 0px 1px #eee;border: solid 1px #ededed; border-radius: 5px; background-color: #fff; padding:10px;
+width: 98%;margin-left: 10px;}
+.intro .close{right: 0;}
+a{color: #c33e00;}
+.box{box-shadow: 0px 0px 1px #eee;border: solid 1px #ededed; border-radius: 5px; background-color: #fff; padding:10px;
+width: 98%;margin: 15px 0px;}
+.table td{vertical-align: middle;padding:10px 20px;}
+
+.nav-tabs .active{font-weight: bold;}
+.tabbable{padding: 20px;}
+.tabbable .table{padding: 0px;margin: 0;}
+.tab-pane{padding:0px 10px;}
+a{ cursor: pointer;}
+a:hover{color: #c33e00;}
+.file{visibility: hidden;}
+
+.section .row-fluid{padding: 10px 0px;}
+.section{ padding: 10px;}
+
+.nav-bar {box-shadow: 0px 0px 1px #eee;border: solid 1px #ededed; border-radius: 5px; background-color: #fff;
+}
+.left-bar{}
+.left-bar .title{font-weight: bold;}
+.left-bar .category{margin: 0;padding: 0;}
+.left-bar p{padding:5px;}
+.left-bar .categories{padding: 10px;}
+.side-bar li a{padding: 10px 40px;color: #000;border-bottom: solid 1px #e5e5e5;font-size: 14px;}
+.side-bar li a:hover{color: #005580;border-bottom: solid 1px #e5e5e5;}
+.side-bar li.active{font-weight: bold;}
+.side-bar .nav-header{padding: 10px 20px;}
+
+.main-body{box-shadow: 0px 0px 1px #eee;border: solid 1px #ededed; border-radius: 5px; background-color: #fff;
+padding: 20px;}
+.hot{ padding: 0px;margin: 0;}
+.ad-box{font-size: 12px;}
+#controller{bottom: 0px; background-color: #000; margin-left: 10px;}
+.ad{padding:5px;font-size: 12px;}
+
+.footer .container{padding: 20px 0px; border-top: solid 1px #ededed;font-size: 12px;}
+.footer .span4 a{color:#000;}
+.control-group{ margin-left:0px;}
+#legend{border: 0;}
+#legend .span4{ font-size: 14px;}
+#legend span{ font-size: 14px; margin-right: 20px;}
+#legend input{ width: 200px;}
+#legend .progress{padding: 0;}

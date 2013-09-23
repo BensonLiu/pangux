@@ -15,6 +15,9 @@ import com.eadmarket.pangu.common.IEnum;
  */
 @Data@ToString
 public class UserDO {
+	
+	public static final int MAIN_SELLER_TYPE = 1;
+	
 	/**
 	 * 会员编号
 	 */
@@ -38,8 +41,10 @@ public class UserDO {
 	/**
 	 * 账户类型
 	 */
-	private Integer type; 
-	
+	private Integer type = MAIN_SELLER_TYPE; 
+	/**
+	 * 提现方式
+	 */
 	private Integer payment;
 	/**
 	 * 资金账户用于会员提现
@@ -52,11 +57,11 @@ public class UserDO {
 	/**
 	 * 注册时间
 	 */
-	private Date registerDate;
+	private Date registerDate = new Date();
 	/**
 	 * 头像图片链接
 	 */
-	private String headerUrl;
+	private String headerUrl = "default.jpg";
 	/**
 	 * 会员评分
 	 */

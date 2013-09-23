@@ -1,0 +1,80 @@
+    <div class="section">
+      <div class="container"  style="width:500px; padding:60px 0 100px 0;">
+         <form class="form-horizontal" action="#" method="POST">
+          <input type="hidden" name="action" value="memberAction" />
+          <input type="hidden" name="event_submit_do_login" value="anything" />
+          <fieldset>
+            <div id="legend" align="center">
+                <h3>ÓÃ»§µÇÂ¼</h3>
+            </div>
+          <div class="control-group">
+                <div id="alert-msg" class="alert alert-error ">
+                  <strong><i class="icon-info-sign"></i>&nbsp;&nbsp;ÑéÖ¤Ê§°Ü£¡</strong> ÓÃ»§ÓÊÏä»òÃÜÂë´íÎó!ÇëÖØÐÂÊäÈë.
+                </div>
+                <!-- Text input-->
+                <label class="control-label" for="input01">ÓÊÏä£º</label>
+                <div class="controls">
+                   <div class="input-prepend">
+                    <span class="add-on"><i class="icon-envelope"></i></span>
+                    <input type="text" placeholder="ÊäÈëÄúµÄÓÊÏäµØÖ·" class="input-xlarge" id="txt-email">
+                    <p class="help-block"></p>
+                  </div>
+                </div>
+              </div>
+              <div class="control-group">
+                <!-- Prepended text-->
+                <label class="control-label">ÃÜÂë£º</label>
+                <div class="controls">
+                  <div class="input-prepend">
+                    <span class="add-on"><i class="icon-key"></i></span>
+                    <input class="input-xlarge" placeholder="ÊäÈëÄúµÄµÇÂ¼ÃÜÂë" id="txt-password" type="password">
+                  </div>
+                  <p class="help-block"></p>
+                </div>
+
+              </div>
+
+          <div class="control-group">
+                <label class="control-label"></label>
+
+                <!-- Button -->
+                <div class="controls">
+                  <span>
+                  	<!--
+                    <a class="btn btn-primary" data-toggle="button"  data-loading-text="µÇÂ¼ÖÐ..." >
+                      µÇÂ¼</a>
+                    -->
+                    <input type="submit" name="login" value="µÇÂ¼" />
+                  </span>
+                  <label class="checkbox inline" style="width:50%;margin-left:20px;">
+                    <input type="checkbox" checked="checked" id="inlineCheckbox2" value="option2"> 
+                    <span style="margin-right:20px;">¼Ç×¡ÎÒ</span>
+                    <a>Íü¼ÇÃÜÂë£¿</a>
+                  </label>
+                </div>
+              </div>
+          </fieldset>
+        </form>
+        
+      </div>
+    </div>
+    <script src="/static/js/jquery-1.9.1.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <!--
+    <script type="text/javascript">
+      $(".btn").click(function(){
+          $(".btn").button('loading');
+          $.post("<{spUrl c=cuser a=login}>", { email: $("#txt-email").val(), password: $("#txt-password").val() },
+           function(data){
+             if(data){
+              $("#alert-msg").hide();
+                window.location.href="<{spUrl c=sub a=dashboard}>";
+             }else{
+              $("#alert-msg").show();
+              $('.btn').button('toggle');
+              $('.btn').button('reset');
+             }
+           });
+      });
+    </script>
+    -->
