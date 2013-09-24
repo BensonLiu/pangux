@@ -40,7 +40,7 @@
 				<configuration>
 					<resourceEncoding>UTF-8</resourceEncoding>
 					<warName>pangu</warName>
-					<webappDirectory>${project.build.directory}/pangu-exploded2.war</webappDirectory>
+					<webappDirectory>${project.build.directory}/pangu-exploded.war</webappDirectory>
 				</configuration>
 			</plugin>
 		</plugins>
