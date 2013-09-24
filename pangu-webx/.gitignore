@@ -12,3 +12,4 @@ target
 /.idea/libraries/Maven*.xml
 /.idea/artifacts/*.xml
 /*.iws
+/pangu.log
