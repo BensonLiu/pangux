@@ -71,6 +71,6 @@ public class LoginCheckValve extends AbstractValve {
 	 */
 	private boolean isMemberLogined() {
 		HttpSession session = request.getSession();
-		return session.getAttribute("_ead_user_id_") != null && session.getAttribute("_ead_user_nick_") != null;
+		return session.getAttribute(LoginConstants.U_ID_SESSION_KEY) != null && session.getAttribute(LoginConstants.U_NICK_SESSION_KEY) != null;
 	}
 }

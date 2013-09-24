@@ -42,7 +42,7 @@ public class MemberAction {
 	@Resource private UserManager userManager;
 	
 	@Autowired private URIBrokerService uriBrokerService;
-	
+	/*
 	public void doRegister(@FormField(name="email",group="register")CustomErrors err, 
 			@FormGroup("register")MemberRegisterForm userForm, Navigator nav) {
 		try {
@@ -62,7 +62,7 @@ public class MemberAction {
 		UserDO userDO = new UserDO();
 		BeanUtils.copyProperties(userForm, userDO);
 		return userDO;
-	}
+	}*/
 	
 	public void doLogin(TurbineRunData runData, Context context){
 		try {
@@ -72,17 +72,21 @@ public class MemberAction {
 			String password = runData.getParameters().getString("password", "");
 			
 			UserDO user = userManager.getUserByEmailAndPwd(email, password);
-			//httpSession.setAttribute("_ead_u_id_", user.getId());
-			//httpSession.setAttribute("_ead_u_nick_", user.getNick());
+			
+			HttpSession httpSession = runData.getRequest().getSession();
+			httpSession.setAttribute(LoginConstants.U_ID_SESSION_KEY, user.getId());
+			httpSession.setAttribute(LoginConstants.U_NICK_SESSION_KEY, user.getNick());
+			
 			String redirectUrl = runData.getParameters().getString("redirect_url", "");
 			if (!StringUtils.isBlank(redirectUrl)) {
 				redirectUrl = URLDecoder.decode(redirectUrl, LoginConstants.REDIRECT_URL_ENCODE_CHARSET);
 			} else {
-				//TODO:跳转到index
+				redirectUrl = uriBrokerService.getURIBroker("indexLink").fork().render();
 			}
 			LOG.warn("redirectUrl is " + redirectUrl);
+			runData.setRedirectLocation(redirectUrl);
 		} catch (ManagerException ex) {
-			LOG.error("loginError ", ex);
+			LOG.error("loginError " + ex.getCode(), ex);
 		} catch (UnsupportedEncodingException ex) {
 			LOG.error("loginError ", ex);
 		}

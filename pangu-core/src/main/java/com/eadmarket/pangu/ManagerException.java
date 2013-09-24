@@ -9,29 +9,25 @@ import lombok.Getter;
  */
 public class ManagerException extends Exception {
 	
-	@Getter private final int code;
-	private final boolean isSystemException;
+	@Getter private final ExceptionCode code;
 	
 	public ManagerException(ExceptionCode code) {
 		super();
-		this.code = code.getCode();
-		isSystemException = code.isSystemError();
+		this.code = code;
 	}
 	
 	public ManagerException(ExceptionCode code, Throwable t) {
 		super(t);
-		this.code = code.getCode();
-		isSystemException = code.isSystemError();
+		this.code = code;
 	}
 	
 	public ManagerException(ExceptionCode code, String message, Throwable t) {
 		super(message, t);
-		this.code = code.getCode();
-		isSystemException = code.isSystemError();
+		this.code = code;
 	}
 	
 	public boolean isSystemException() {
-		return isSystemException;
+		return code.isSystemError();
 	}
 	
 	private static final long serialVersionUID = 1L;

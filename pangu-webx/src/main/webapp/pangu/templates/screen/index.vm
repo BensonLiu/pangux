@@ -6,35 +6,35 @@ $page.setTitle("It works.")
 <li>
     <h2>Simple Page without Template</h2>
 
-    #set($url = "$app1Link.setTarget('simple/SayHi.do')")
+    #set($url = "$pangLink.setTarget('simple/SayHi.do')")
     <a href="$url">$url</a>
 </li>
 
 <li>
     <h2>Simple Image</h2>
 
-    #set($url = "$app1Link.setTarget('simple/sayHiImage.do')")
+    #set($url = "$pangLink.setTarget('simple/sayHiImage.do')")
     <a href="$url">$url</a>
 </li>
 
 <li>
     <h2>Show a SLOW Page</h2>
 
-    #set($url = "$app1Link.setTarget('simple/count.do').addQueryData('to', 10)")
+    #set($url = "$pangLink.setTarget('simple/count.do').addQueryData('to', 10)")
     <a href="$url">$url</a>
 </li>
 
 <li>
     <h2>Download a Large File</h2>
 
-    #set($url = "$app1Link.setTarget('simple/download.do').addQueryData('filename', 'blob')")
+    #set($url = "$pangLink.setTarget('simple/download.do').addQueryData('filename', 'blob')")
     <a href="$url">$url</a>
 </li>
 
 <li>
     <h2>Form Validation</h2>
 
-    #set($url = "$app1Link.setTarget('form/register')")
+    #set($url = "$pangLink.setTarget('form/register')")
     <a href="$url">$url</a>
 </li>
 
@@ -42,15 +42,15 @@ $page.setTitle("It works.")
     <h2>Single Screen for Multiple Templates</h2>
 
     <ul>
-      <li>#set($url = "$app1Link.setTarget('list/as_html.htm')")
+      <li>#set($url = "$pangLink.setTarget('list/as_html.htm')")
       <a href="$url">Show as HTML: $url</a>
       </li>
 
-      <li>#set($url = "$app1Link.setTarget('list/as_xml.htm')")
+      <li>#set($url = "$pangLink.setTarget('list/as_xml.htm')")
       <a href="$url">Show as XML: $url</a>
       </li>
 
-      <li>#set($url = "$app1Link.setTarget('list/as_json.htm')")
+      <li>#set($url = "$pangLink.setTarget('list/as_json.htm')")
       <a href="$url">Show as JSON: $url</a>
       </li>
     </ul>
@@ -60,19 +60,19 @@ $page.setTitle("It works.")
     <h2>Single Screen with Multiple Event Handlers</h2>
 
     <ul>
-      <li>#set($url = "$app1Link.setTarget('multievent/say_hello_1.do')")
+      <li>#set($url = "$pangLink.setTarget('multievent/say_hello_1.do')")
       <a href="$url">$url</a>
       </li>
 
-      <li>#set($url = "$app1Link.setTarget('multievent/say_hello_1/chinese.do')")
+      <li>#set($url = "$pangLink.setTarget('multievent/say_hello_1/chinese.do')")
       <a href="$url">$url</a>
       </li>
 
-      <li>#set($url = "$app1Link.setTarget('multievent/say_hello_1/french.do')")
+      <li>#set($url = "$pangLink.setTarget('multievent/say_hello_1/french.do')")
       <a href="$url">$url</a>
       </li>
 
-      <li>#set($url = "$app1Link.setTarget('multievent/say_hello_1/spanish.do')")
+      <li>#set($url = "$pangLink.setTarget('multievent/say_hello_1/spanish.do')")
       <a href="$url">$url</a>
       </li>
     </ul>
@@ -82,19 +82,19 @@ $page.setTitle("It works.")
     <h2>JSON</h2>
 
     <ul>
-      <li>#set($url = "$app1Link.setTarget('multievent/say_hello_2/english.json')")
+      <li>#set($url = "$pangLink.setTarget('multievent/say_hello_2/english.json')")
       <a href="$url">$url</a>
       </li>
 
-      <li>#set($url = "$app1Link.setTarget('multievent/say_hello_2/chinese.json')")
+      <li>#set($url = "$pangLink.setTarget('multievent/say_hello_2/chinese.json')")
       <a href="$url">$url</a>
       </li>
 
-      <li>#set($url = "$app1Link.setTarget('multievent/say_hello_2/french.json')")
+      <li>#set($url = "$pangLink.setTarget('multievent/say_hello_2/french.json')")
       <a href="$url">$url</a>
       </li>
 
-      <li>#set($url = "$app1Link.setTarget('multievent/say_hello_2/spanish.json')")
+      <li>#set($url = "$pangLink.setTarget('multievent/say_hello_2/spanish.json')")
       <a href="$url">$url</a>
       </li>
     </ul>
