@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xmlns:p="http://www.springframework.org/schema/p"
-             xmlns:services="http://www.alibaba.com/schema/services"
-             xmlns:uris="http://www.alibaba.com/schema/services/uris"
-             xmlns:uri-interceptors="http://www.alibaba.com/schema/services/uris/interceptors"
-             xsi:schemaLocation="
-                 http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:services="http://www.alibaba.com/schema/services" xmlns:uris="http://www.alibaba.com/schema/services/uris"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="
+                 http://www.alibaba.com/schema/services      http://localhost:8080/schema/services.xsd
                  http://www.alibaba.com/schema/services/uris http://localhost:8080/schema/services-uris.xsd
-                 http://www.alibaba.com/schema/services/uris/interceptors http://localhost:8080/schema/services-uris-interceptors.xsd
                  http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
              ">
 
-    <services:uris requestAware="true">
-    	<!-- 
-        <uris:uri id="outWebsiteId">
-        	<serverURI></serverURI>
-        </uris:uri>
-		 -->
-        <uris:turbine-uri id="pangLink" exposed="true">
-        </uris:turbine-uri>
+	<services:uris>
+		<!-- 
+			<uris:uri id="outWebsiteId">
+			<serverURI></serverURI>
+			</uris:uri>
+		-->
+		<uris:turbine-uri id="pangLink" exposed="true" requestAware="true"></uris:turbine-uri>
 
-        <uris:turbine-content-uri id="panguContent" exposed="true" extends="pangLink" />
-		
+		<uris:turbine-content-uri id="panguContent" exposed="true" extends="pangLink" />
+
 		<uris:turbine-uri id="loginLink" extends="pangLink" exposed="true">
 			<target>/member/login.htm</target>
 		</uris:turbine-uri>
-		
+
+		<uris:turbine-uri id="logoutLink" extends="pangLink" exposed="true">
+			<target>/member/logout.htm</target>
+		</uris:turbine-uri>
+
 		<uris:turbine-uri id="indexLink" extends="pangLink" exposed="true">
 			<target>/index.htm</target>
 		</uris:turbine-uri>
-			
-    </services:uris>
+
+	</services:uris>
 
 </beans:beans>

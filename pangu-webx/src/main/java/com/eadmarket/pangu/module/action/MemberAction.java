@@ -20,6 +20,7 @@ import com.alibaba.citrus.turbine.Navigator;
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.turbine.dataresolver.FormField;
 import com.alibaba.citrus.turbine.dataresolver.FormGroup;
+import com.eadmarket.pangu.ExceptionCode;
 import com.eadmarket.pangu.ManagerException;
 import com.eadmarket.pangu.domain.UserDO;
 import com.eadmarket.pangu.form.MemberLoginForm;
@@ -31,7 +32,7 @@ import com.google.common.collect.Maps;
 /**
  * 会员操作Action
  * 
- * @author liuyongpo@eadmarket.com
+ * @author liuyongpo@gmail.com
  */
 public class MemberAction {
 	
@@ -66,10 +67,21 @@ public class MemberAction {
 	
 	public void doLogin(TurbineRunData runData, Context context){
 		try {
-			
+			boolean formIsInvalid = false;
 			String email = runData.getParameters().getString("email", "");
-			
+			if (StringUtils.isBlank(email)) {
+				context.put("login_email_error", "请填写email");
+				formIsInvalid = true;
+			}
 			String password = runData.getParameters().getString("password", "");
+			if (StringUtils.isBlank(password)) {
+				context.put("login_password_error", "请填写密码");
+				formIsInvalid = true;
+			}
+			
+			if (formIsInvalid) {
+				return;
+			}
 			
 			UserDO user = userManager.getUserByEmailAndPwd(email, password);
 			
@@ -86,9 +98,14 @@ public class MemberAction {
 			LOG.warn("redirectUrl is " + redirectUrl);
 			runData.setRedirectLocation(redirectUrl);
 		} catch (ManagerException ex) {
-			LOG.error("loginError " + ex.getCode(), ex);
+			ExceptionCode code = ex.getCode();
+			context.put("error_message", code.getDesc());
+			if (code.isSystemError()) {
+				LOG.error("loginError " + code, ex);
+			}
 		} catch (UnsupportedEncodingException ex) {
 			LOG.error("loginError ", ex);
 		}
 	}
+
 }
