@@ -16,9 +16,15 @@ import com.eadmarket.pangu.domain.TradeDO.TradeStatus;
 public class TradeQuery {
 	private TradeStatus status;
 	
-	private Date endDate;
+	private Date maxEndDate;
+	
+	private Date minEndDate;
 	
 	private Long buyerId;
 	
 	private Long sellerId;
+	/**
+	 * 上次划款时间
+	 */
+	private Date lastTransferDate;
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref local="transferMoneyToSellerTrigger"/>
+				<ref local="notifyBuyerAndSellerWhenTradeExpireTrigger"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="transferMoneyToSellerTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+		    <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		        <property name="concurrent" value="false"/>
+                <property name="targetObject" local="tradeTimer"/>
+                <property name="targetMethod" value="transferMoneyToSeller"/>
+		    </bean>
+		</property>
+		<property name="cronExpression" value="0 0 21 * * ?"/>
+	</bean>
+	
+	<bean id="notifyBuyerAndSellerWhenTradeExpireTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+		    <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		        <property name="concurrent" value="false"/>
+                <property name="targetObject" local="tradeTimer"/>
+                <property name="targetMethod" value="notifyBuyerAndSellerWhenTradeExpire"/>
+		    </bean>
+		</property>
+		<property name="cronExpression" value="0 0 23 * * ?"/>
+	</bean>
+	
+	<bean id="tradeTimer" class="com.eadmarket.pangu.timer.TradeRelatedTimerTask" />
+</beans>

@@ -144,7 +144,7 @@ class TradeManagerImpl implements TradeManager, InitializingBean {
 			public void run() {
 				Query<TradeQuery> query = new Query<TradeQuery>();
 				TradeQuery tradeQuery = new TradeQuery();
-				tradeQuery.setEndDate(new Date());
+				tradeQuery.setMaxEndDate(new Date());
 				tradeQuery.setStatus(TradeStatus.IMPLEMENTING);
 				query.setCondition(tradeQuery);
 				int count;
@@ -202,6 +202,6 @@ class TradeManagerImpl implements TradeManager, InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		init();
+		//init();
 	}
 }

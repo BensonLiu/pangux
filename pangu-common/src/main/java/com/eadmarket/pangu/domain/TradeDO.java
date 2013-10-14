@@ -60,6 +60,8 @@ public class TradeDO {
 	 */
 	//private Integer process;
 	
+	private Date lastTransferDate;
+	
 	public Long getTotalFee() {
 		return price * num;
 	}

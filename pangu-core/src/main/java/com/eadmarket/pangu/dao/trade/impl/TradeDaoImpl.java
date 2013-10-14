@@ -47,4 +47,10 @@ class TradeDaoImpl extends BaseDao implements TradeDao {
 		return selectOne("TradeDao.getById", id);
 	}
 
+	@Override
+	public void updateTrade(TradeDO trade) throws DaoException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -24,4 +24,6 @@ public interface TradeDao {
 	Integer count(Query<TradeQuery> query) throws DaoException;
 	
 	int updateStatus(Long id, TradeStatus originalStatus, TradeStatus targetStatus) throws DaoException;
+
+	void updateTrade(TradeDO trade) throws DaoException;
 }
