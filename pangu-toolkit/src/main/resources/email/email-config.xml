@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emailConfig>
+	<template id="201410141717" subject="广告位交易到期通知" contentPath="template/trade_expire_notify_seller.vm" />
+	
+	<template id="201410141747" subject="广告位交易到期通知" contentPath="template/trade_expire_notify_buyer.vm" />
+</emailConfig>

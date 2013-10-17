@@ -17,5 +17,6 @@
     <mapper resource="com/eadmarket/pangu/sqlmap/mapper/ProductMapper.xml"/>
     <mapper resource="com/eadmarket/pangu/sqlmap/mapper/RechargeMapper.xml"/>
     <mapper resource="com/eadmarket/pangu/sqlmap/mapper/TradeMapper.xml"/>
+    <mapper resource="com/eadmarket/pangu/sqlmap/mapper/FinanceMapper.xml"/>
   </mappers>
 </configuration>

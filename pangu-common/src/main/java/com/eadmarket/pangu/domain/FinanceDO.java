@@ -16,13 +16,28 @@ public class FinanceDO {
 	
 	private Long userId;
 	
-	private Integer type;
+	private String type;
 	
-	private Integer number;
-	
-	private Long balance;
+	private Long number;
 	
 	private String remark;
 	
 	private Date gmtCreate;
+	
+	/**
+	 * 广告收入
+	 */
+	public final static String TYPE_AD_IN = "00";
+	/**
+	 * 广告支出
+	 */
+	public final static String TYPE_AD_OUT = "01";
+	/**
+	 * 充值
+	 */
+	public final static String TYPE_RECHARGE = "10";
+	/**
+	 * 提现
+	 */
+	public final static String TYPE_WITHDRAW = "11";
 }

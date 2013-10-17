@@ -7,10 +7,12 @@
 	
 	<bean id="projectDao" class="com.eadmarket.pangu.dao.project.impl.ProjectDaoImpl" />
 	
-	<bean id="rechargeDao" class="com.eadmarket.pangu.dao.recharge.impl.RechargeDaoImpl"/>
+	<bean id="rechargeDao" class="com.eadmarket.pangu.dao.recharge.impl.RechargeDaoImpl" />
 	
 	<bean id="tradeDao" class="com.eadmarket.pangu.dao.trade.impl.TradeDaoImpl" />
 	
-	<bean id="userDao" class="com.eadmarket.pangu.dao.user.impl.UserDaoImpl"/>
+	<bean id="userDao" class="com.eadmarket.pangu.dao.user.impl.UserDaoImpl" />
+	
+	<bean id="financeDao" class="com.eadmarket.pangu.dao.finance.impl.FinanceDaoImpl" />
 	
 </beans>

@@ -8,20 +8,19 @@ import com.eadmarket.pangu.dao.finance.FinanceDao;
 import com.eadmarket.pangu.domain.FinanceDO;
 
 /**
+ * 财务存储层实现
+ * 
  * @author liuyongpo@gmail.com
- *
  */
 class FinanceDaoImpl extends BaseDao implements FinanceDao {
 
 	@Override
 	public void insert(FinanceDO finance) throws DaoException {
-		// TODO Auto-generated method stub
-		
+		insert("FinanceDao.insert", finance);
 	}
 
 	@Override
 	public List<FinanceDO> getByUserId(Long userId) throws DaoException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -14,22 +14,22 @@
 		<property name="jobDetail">
 		    <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		        <property name="concurrent" value="false"/>
-                <property name="targetObject" local="tradeTimer"/>
+                <property name="targetObject" ref="tradeTimer"/>
                 <property name="targetMethod" value="transferMoneyToSeller"/>
 		    </bean>
 		</property>
-		<property name="cronExpression" value="0 0 21 * * ?"/>
+		<property name="cronExpression" value="0 0/5 * * * ?"/>
 	</bean>
 	
 	<bean id="notifyBuyerAndSellerWhenTradeExpireTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail">
 		    <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		        <property name="concurrent" value="false"/>
-                <property name="targetObject" local="tradeTimer"/>
+                <property name="targetObject" ref="tradeTimer"/>
                 <property name="targetMethod" value="notifyBuyerAndSellerWhenTradeExpire"/>
 		    </bean>
 		</property>
-		<property name="cronExpression" value="0 0 23 * * ?"/>
+		<property name="cronExpression" value="0 0/10 * * * ?"/>
 	</bean>
 	
 	<bean id="tradeTimer" class="com.eadmarket.pangu.timer.TradeRelatedTimerTask" />

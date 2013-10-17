@@ -1,6 +1,4 @@
-<!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="TradeDao">
 	<resultMap type="TradeDO" id="tradeMap">
 		<result column="id" property="id"/>
@@ -13,6 +11,8 @@
 		<result column="state" property="status" typeHandler="TradeStatusTypeHandler"/>
 		<result column="buyer" property="buyerId"/>
 		<result column="seller" property="sellerId"/>
+		<result column="originalPrice" property="originalPrice"/>
+		<result column="last_transfer_date" property="lastTransferDate"/>
 	</resultMap>
 	
 	<sql id="allFields">
@@ -25,7 +25,9 @@
 		endTime,
 		state,
 		buyer,
-		seller
+		seller,
+		originalPrice,
+		last_transfer_date
 	</sql>
 	
 	<select id="getById" resultMap="tradeMap" parameterType="long">
@@ -61,8 +63,14 @@
 			<if test="condition.status != null">
 				AND state=#{condition.status,typeHandler=TradeStatusTypeHandler}
 			</if>
-			<if test="condition.endDate != null">
-				AND endTime &lt;#{condition.endDate}
+			<if test="condition.maxEndDate != null">
+				AND endTime &lt;#{condition.maxEndDate}
+			</if>
+			<if test="condition.minEndDate != null">
+				AND endTime &gt;#{condition.minEndDate}
+			</if>
+			<if test="condition.lastTransferDate != null">
+				AND last_transfter_date &gt;#{condition.lastTransferDate}
 			</if>
 		</where>
 		limit #{mysqlPageFirstItem}, #{pageSize}
@@ -81,8 +89,14 @@
 			<if test="condition.status != null">
 				AND state=#{condition.status,typeHandler=TradeStatusTypeHandler}
 			</if>
-			<if test="condition.endDate != null">
-				AND endTime &lt;#{condition.endDate}
+			<if test="condition.maxEndDate != null">
+				AND endTime &lt;#{condition.maxEndDate}
+			</if>
+			<if test="condition.minEndDate != null">
+				AND endTime &gt;#{condition.minEndDate}
+			</if>
+			<if test="condition.lastTransferDate != null">
+				AND last_transfter_date &gt;#{condition.lastTransferDate}
 			</if>
 		</where>
 	</select>

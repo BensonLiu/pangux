@@ -3,6 +3,7 @@ package com.eadmarket.pangu.timer;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -18,16 +19,23 @@ import com.eadmarket.pangu.DaoException;
 import com.eadmarket.pangu.common.Query;
 import com.eadmarket.pangu.dao.finance.FinanceDao;
 import com.eadmarket.pangu.dao.position.PositionDao;
+import com.eadmarket.pangu.dao.product.ProductDao;
 import com.eadmarket.pangu.dao.trade.TradeDao;
 import com.eadmarket.pangu.dao.user.UserDao;
 import com.eadmarket.pangu.domain.FinanceDO;
 import com.eadmarket.pangu.domain.PositionDO;
+import com.eadmarket.pangu.domain.ProductDO;
 import com.eadmarket.pangu.domain.TradeDO;
 import com.eadmarket.pangu.domain.PositionDO.PositionStatus;
 import com.eadmarket.pangu.domain.TradeDO.TradeStatus;
+import com.eadmarket.pangu.domain.UserDO;
 import com.eadmarket.pangu.query.TradeQuery;
+import com.eadmarket.pangu.util.email.EmailService;
+import com.google.common.collect.Maps;
 
 /**
+ * 交易相关的时间程序
+ * 
  * @author liuyongpo@gmail.com
  */
 public class TradeRelatedTimerTask {
@@ -48,6 +56,12 @@ public class TradeRelatedTimerTask {
 	
 	@Resource
 	private PositionDao positionDao;
+	
+	@Resource
+	private ProductDao productDao;
+	
+	@Resource 
+	private EmailService emailService;
 
 	/**
 	 * 交易到期通知买卖家双方,更改交易状态为完成，恢复广告位的状态为待出售
@@ -58,7 +72,10 @@ public class TradeRelatedTimerTask {
 		
 		Query<TradeQuery> query = new Query<TradeQuery>();
 		TradeQuery tradeQuery = new TradeQuery();
-		tradeQuery.setMaxEndDate(new Date());
+		/*
+		 * 至少延后30分钟处理，为了和划款时间程序避开冲突
+		 */
+		tradeQuery.setMinEndDate(DateUtils.addMinutes(new Date(), 30));
 		tradeQuery.setStatus(TradeStatus.IMPLEMENTING);
 		query.setCondition(tradeQuery);
 		int count;
@@ -107,7 +124,31 @@ public class TradeRelatedTimerTask {
 				});
 				
 				if (success) {
-					//send email to buyer and seller 
+					try {
+						UserDO seller = userDao.getById(trade.getSellerId());
+						Map<String, Object> emailParam = Maps.newHashMap();
+						emailParam.put("name", seller.getNick());
+						PositionDO position = positionDao.getById(trade.getPositionId());
+						emailParam.put("title", position.getTitle());
+						emailService.sendEmail("201410141717", seller.getEmail(), emailParam);
+					} catch (Exception ex) {
+						LOG.error("failed to send email to userId:" + trade.getSellerId(), ex);
+					}
+					
+					try {
+						UserDO buyer = userDao.getById(trade.getBuyerId());
+						Map<String, Object> emailParam = Maps.newHashMap();
+						emailParam.put("name", buyer.getNick());
+						
+						ProductDO product = productDao.getById(trade.getProductId());
+						emailParam.put("title", product.getName());
+						
+						PositionDO position = positionDao.getById(trade.getPositionId());
+						emailParam.put("positionTitle", position.getTitle());
+						emailService.sendEmail("201410141747", buyer.getEmail(), emailParam);
+					} catch (Exception ex) {
+						LOG.error("failed to send email to userId:" + trade.getBuyerId(), ex);
+					}
 				}
 			}
 			
@@ -118,7 +159,7 @@ public class TradeRelatedTimerTask {
 				return;
 			}
 		}
-		LOG.warn("TradeTimer end, begin to scan expired trades");
+		LOG.warn("TradeTimer end");
 	}
 
 	/**
@@ -126,9 +167,10 @@ public class TradeRelatedTimerTask {
 	 */
 	public void transferMoneyToSeller() {
 		TradeQuery tradeQuery = new TradeQuery();
-		// tradeQuery.setMinEndDate(now);
-		Date now = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH);
-		tradeQuery.setLastTransferDate(now);
+		Date now = new Date();
+		tradeQuery.setMaxEndDate(now);
+		Date yesterday = DateUtils.addDays(now, -1);
+		tradeQuery.setLastTransferDate(yesterday);
 		tradeQuery.setStatus(TradeStatus.IMPLEMENTING);
 
 		Query<TradeQuery> query = Query.create(tradeQuery);
@@ -149,11 +191,11 @@ public class TradeRelatedTimerTask {
 
 	private final class TransferMoneyTransaction implements TransactionCallback<Boolean> {
 		private final TradeDO trade;
-		private final Date now;
+		private final Date transferDate;
 
 		private TransferMoneyTransaction(TradeDO trade, Date now) {
 			this.trade = trade;
-			this.now = now;
+			this.transferDate = now;
 		}
 
 		@Override
@@ -162,21 +204,30 @@ public class TradeRelatedTimerTask {
 				/*
 				 * 1.划款到卖家账户中
 				 */
-				userDao.addCashTo(trade.getSellerId(), 0L);
+				Long originalPrice = trade.getOriginalPrice();
+				
+				trade.getLastTransferDate();
+				
+				int rangeDays = DateUtils.truncatedCompareTo(new Date(), trade.getLastTransferDate(), Calendar.DATE);
+				
+				Long cash = rangeDays * originalPrice;
+				
+				userDao.addCashTo(trade.getSellerId(), cash);
 				/*
 				 * 2.插入财务记录
 				 */
 				FinanceDO financeDO = new FinanceDO();
-				financeDO.setBalance(0L);
+				financeDO.setNumber(cash);
 				financeDO.setUserId(trade.getSellerId());
-				financeDO.setType(0);
+				financeDO.setType(FinanceDO.TYPE_AD_IN);
+				financeDO.setRemark("广告位" + trade.getPositionId() + "收入");
 				financeDao.insert(financeDO);
 				/*
 				 * 3.更新交易记录上次划款时间
 				 */
 				TradeDO tradeDO = new TradeDO();
 				tradeDO.setId(trade.getId());
-				tradeDO.setLastTransferDate(now);
+				tradeDO.setLastTransferDate(transferDate);
 				tradeDao.updateTrade(tradeDO);
 
 			} catch (DaoException ex) {

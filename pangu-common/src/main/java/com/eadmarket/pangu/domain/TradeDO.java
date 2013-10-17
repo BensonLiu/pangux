@@ -59,8 +59,14 @@ public class TradeDO {
 	 * 交易进度
 	 */
 	//private Integer process;
-	
+	/**
+	 * 上次划款时间
+	 */
 	private Date lastTransferDate;
+	/**
+	 * 卖家定的原始金额
+	 */
+	private Long originalPrice;
 	
 	public Long getTotalFee() {
 		return price * num;
@@ -68,8 +74,8 @@ public class TradeDO {
 	
 	public static enum TradeStatus implements IEnum {
 		//NEW(1, "新建"),
-		IMPLEMENTING(2, "执行中"),
-		COMPLETED(3, "已完成"),
+		IMPLEMENTING(0, "执行中"),
+		COMPLETED(1, "已完成"),
 		;
 
 		@Getter private final int code;

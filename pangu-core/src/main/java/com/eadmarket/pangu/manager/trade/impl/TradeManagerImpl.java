@@ -3,20 +3,15 @@ package com.eadmarket.pangu.manager.trade.impl;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
-import org.springframework.util.CollectionUtils;
 
 import com.eadmarket.pangu.DaoException;
 import com.eadmarket.pangu.ExceptionCode;
@@ -32,12 +27,11 @@ import com.eadmarket.pangu.domain.TradeDO.TradeStatus;
 import com.eadmarket.pangu.dto.CreateTradeContext;
 import com.eadmarket.pangu.manager.trade.TradeManager;
 import com.eadmarket.pangu.query.TradeQuery;
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 /**
  * @author liuyongpo@gmail.com
  */
-class TradeManagerImpl implements TradeManager, InitializingBean {
+class TradeManagerImpl implements TradeManager {
 	
 	private final static Logger LOG = LoggerFactory.getLogger(TradeManagerImpl.class);
 	
@@ -131,77 +125,4 @@ class TradeManagerImpl implements TradeManager, InitializingBean {
 		}
 	}
 	
-	private final static ScheduledExecutorService SCHEDULED_SERVICE 
-		= Executors.newSingleThreadScheduledExecutor(new ThreadFactoryBuilder().setNameFormat("Trade-Status-Scaner-%d").build());
-	
-	private void init() {
-		/*
-		 * 启动线程扫描已经过期的交易，修改交易状态为完成并且修改广告位的状态为待出售
-		 */
-		SCHEDULED_SERVICE.scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				Query<TradeQuery> query = new Query<TradeQuery>();
-				TradeQuery tradeQuery = new TradeQuery();
-				tradeQuery.setMaxEndDate(new Date());
-				tradeQuery.setStatus(TradeStatus.IMPLEMENTING);
-				query.setCondition(tradeQuery);
-				int count;
-				try {
-					count = tradeDao.count(query);
-				} catch (DaoException ex) {
-					LOG.error("count trade failed, " + query, ex);
-					return;
-				}
-				
-				while (count > 0) {
-					List<TradeDO> timeouttedTrades;
-					try {
-						timeouttedTrades = tradeDao.query(query);
-					} catch (DaoException ex) {
-						LOG.error("query trade failed, " + query, ex);
-						return;
-					}
-					if (CollectionUtils.isEmpty(timeouttedTrades)) {
-						return;
-					}
-					
-					for (final TradeDO trade : timeouttedTrades) {
-						adTransactionTemplate.execute(new TransactionCallback<Void>() {
-							@Override
-							public Void doInTransaction(TransactionStatus status) {
-								try {
-									int updateCount = tradeDao.updateStatus(trade.getId(), trade.getStatus(), TradeStatus.COMPLETED);
-									if (updateCount > 0) {
-										PositionDO position = new PositionDO();
-										position.setId(trade.getPositionId());
-										position.setStatus(PositionStatus.ON_SALE);
-										positionDao.updatePositionById(position);
-									}
-								} catch (DaoException ex) {
-									LOG.error("transaction failed, " + trade, ex);
-									status.setRollbackOnly();
-								}
-								return null;
-							}
-						});
-					}
-					
-					try {
-						count = tradeDao.count(query);
-					} catch (DaoException ex) {
-						LOG.error("count trade failed, " + query, ex);
-						return;
-					}
-				}
-				
-			}
-		}, 1, 1, TimeUnit.HOURS);
-	}
-
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		//init();
-	}
 }
