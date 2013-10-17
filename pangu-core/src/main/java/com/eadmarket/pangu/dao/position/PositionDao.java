@@ -19,4 +19,6 @@ public interface PositionDao {
 	Long addPosition(PositionDO position) throws DaoException;
 	
 	int updatePositionById(PositionDO position) throws DaoException;
+	
+	void updateProfitById(Long id, Long addProfit) throws DaoException;
 }

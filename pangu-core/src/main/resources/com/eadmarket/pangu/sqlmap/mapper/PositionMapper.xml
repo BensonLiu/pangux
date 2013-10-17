@@ -62,4 +62,10 @@
 		</set>
 		where id =#{id}
 	</update>
+	
+	<update id="updateProfitById" parameterType="java.util.HashMap">
+		update advertise
+		set profit = profit + #{addProfit}
+		where id = #{id}
+	</update>
 </mapper>

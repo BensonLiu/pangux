@@ -1,11 +1,13 @@
 package com.eadmarket.pangu.dao.position.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import com.eadmarket.pangu.DaoException;
 import com.eadmarket.pangu.dao.BaseDao;
 import com.eadmarket.pangu.dao.position.PositionDao;
 import com.eadmarket.pangu.domain.PositionDO;
+import com.google.common.collect.Maps;
 
 /**
  * 广告位存储层接口默认实现类
@@ -33,6 +35,16 @@ class PositionDaoImpl extends BaseDao implements PositionDao {
 	@Override
 	public int updatePositionById(PositionDO position) throws DaoException {
 		return update("PositionDao.updatePositionById", position);
+	}
+
+	@Override
+	public void updateProfitById(Long id, Long addProfit) throws DaoException {
+		
+		Map<String, Object> param = Maps.newHashMap();
+		param.put("id", id);
+		param.put("addprofit", addProfit);
+		
+		update("PositionDao.updateProfitById", param);
 	}
 
 }

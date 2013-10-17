@@ -201,20 +201,22 @@ public class TradeRelatedTimerTask {
 		@Override
 		public Boolean doInTransaction(TransactionStatus status) {
 			try {
+				Long originalPrice = trade.getOriginalPrice();
+				/*
+				 * 为了保证划款的正确性，此处还是算一下，如果时间程序中间挂了一天，继续跑的话还可以补齐之前的款项
+				 */
+				int rangeDays = DateUtils.truncatedCompareTo(transferDate, trade.getLastTransferDate(), Calendar.DATE);
+				Long cash = rangeDays * originalPrice;
 				/*
 				 * 1.划款到卖家账户中
 				 */
-				Long originalPrice = trade.getOriginalPrice();
-				
-				trade.getLastTransferDate();
-				
-				int rangeDays = DateUtils.truncatedCompareTo(new Date(), trade.getLastTransferDate(), Calendar.DATE);
-				
-				Long cash = rangeDays * originalPrice;
-				
 				userDao.addCashTo(trade.getSellerId(), cash);
 				/*
-				 * 2.插入财务记录
+				 * 2.增加广告位收益
+				 */
+				positionDao.updateProfitById(trade.getPositionId(), cash);
+				/*
+				 * 3.插入财务记录
 				 */
 				FinanceDO financeDO = new FinanceDO();
 				financeDO.setNumber(cash);
@@ -223,7 +225,7 @@ public class TradeRelatedTimerTask {
 				financeDO.setRemark("广告位" + trade.getPositionId() + "收入");
 				financeDao.insert(financeDO);
 				/*
-				 * 3.更新交易记录上次划款时间
+				 * 4.更新交易记录上次划款时间
 				 */
 				TradeDO tradeDO = new TradeDO();
 				tradeDO.setId(trade.getId());
