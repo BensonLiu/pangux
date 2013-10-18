@@ -8,6 +8,7 @@
 				<ref local="notifyBuyerAndSellerWhenTradeExpireTrigger"/>
 			</list>
 		</property>
+		<property name="startupDelay" value="120" />
 	</bean>
 	
 	<bean id="transferMoneyToSellerTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
