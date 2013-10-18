@@ -43,6 +43,22 @@
 					<webappDirectory>${project.build.directory}/pangu-exploded.war</webappDirectory>
 				</configuration>
 			</plugin>
+			<plugin>
+			    <groupId>com.alibaba.citrus.tool</groupId>
+			    <artifactId>autoconfig-maven-plugin</artifactId>
+			    <configuration>
+					<exploding>true</exploding>
+					<explodedDirectory>${project.build.directory}/pangu-exploded.war</explodedDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>autoconfig</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
   </build>
 </project>

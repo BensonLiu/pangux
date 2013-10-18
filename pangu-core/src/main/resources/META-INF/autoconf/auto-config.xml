@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="GB2312"?>
+<config>
+	<group>
+		<property name="eadmarket.db.url" description="数据库url" defaultValue="jdbc:mysql://127.0.0.1:8889/ad?characterEncoding=UTF-8" />
+		<property name="eadmarket.db.username" description="数据库username" defaultValue="root" />
+		<property name="eadmarket.db.password" description="数据库password" defaultValue="root" />
+	</group>
+	<script>
+		<generate template="com/eadmarket/pangu/bean/persistent.xml" />
+	</script>
+</config>

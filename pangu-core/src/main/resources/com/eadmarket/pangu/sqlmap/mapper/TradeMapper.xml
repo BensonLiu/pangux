@@ -70,7 +70,7 @@
 				AND endTime &gt;#{condition.minEndDate}
 			</if>
 			<if test="condition.lastTransferDate != null">
-				AND last_transfter_date &gt;#{condition.lastTransferDate}
+				AND last_transfer_date &gt;#{condition.lastTransferDate}
 			</if>
 		</where>
 		limit #{mysqlPageFirstItem}, #{pageSize}
@@ -96,7 +96,7 @@
 				AND endTime &gt;#{condition.minEndDate}
 			</if>
 			<if test="condition.lastTransferDate != null">
-				AND last_transfter_date &gt;#{condition.lastTransferDate}
+				AND last_transfer_date &gt;#{condition.lastTransferDate}
 			</if>
 		</where>
 	</select>

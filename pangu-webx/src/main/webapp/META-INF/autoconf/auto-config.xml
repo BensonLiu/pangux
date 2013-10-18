@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="GB2312"?>
+<config>
+	<group>
+		<property name="eadmarket.log.level" description="日志级别"
+			defaultValue="warn">
+			<validator name="choice" choice="trace, debug, info, warn, error" />
+		</property>
+		<property name="eadmarket.log.root" description="日志输出路径" defaultValue="/Users/liu/logs/eadmarket/" />
+	</group>
+	<script>
+		<generate template="WEB-INF/web.xml" />
+	</script>
+</config>

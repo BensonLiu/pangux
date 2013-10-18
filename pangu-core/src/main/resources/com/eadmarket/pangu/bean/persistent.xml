@@ -3,9 +3,9 @@
 <beans default-autowire="byName">
 	
 	<bean id="adDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close"> 
-	    <property name="url" value="jdbc:mysql://127.0.0.1:8889/ad?characterEncoding=UTF-8" />
-	    <property name="username" value="root" />
-	    <property name="password" value="root" />
+	    <property name="url" value="${eadmarket.db.url}" />
+	    <property name="username" value="${eadmarket.db.username}" />
+	    <property name="password" value="${eadmarket.db.password}" />
 	     
 	    <property name="filters" value="stat" />
 	 
@@ -28,7 +28,9 @@
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 	    <property name="dataSource" ref="adDataSource" />
-	    <property name="configLocation" value="classpath:com/eadmarket/pangu/sqlmap/ad-config.xml" />
+	    <property name="configLocation">
+	    	<value>classpath:com/eadmarket/pangu/sqlmap/ad-config.xml</value>
+	    </property>
 	</bean>
 	
 	<bean id="adTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
