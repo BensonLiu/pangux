@@ -75,7 +75,7 @@ public class TradeRelatedTimerTask {
 		/*
 		 * 至少延后30分钟处理，为了和划款时间程序避开冲突
 		 */
-		tradeQuery.setMinEndDate(DateUtils.addMinutes(new Date(), 30));
+		tradeQuery.setMaxEndDate(DateUtils.addMinutes(new Date(), 30));
 		tradeQuery.setStatus(TradeStatus.IMPLEMENTING);
 		query.setCondition(tradeQuery);
 		int count;
@@ -166,9 +166,12 @@ public class TradeRelatedTimerTask {
 	 * 划款给卖家,每天定时划款给卖家
 	 */
 	public void transferMoneyToSeller() {
+		
+		LOG.warn("Timer begin");
+		
 		TradeQuery tradeQuery = new TradeQuery();
 		Date now = new Date();
-		tradeQuery.setMaxEndDate(now);
+		tradeQuery.setMinEndDate(now);
 		Date yesterday = DateUtils.addDays(now, -1);
 		tradeQuery.setLastTransferDate(yesterday);
 		tradeQuery.setStatus(TradeStatus.IMPLEMENTING);
@@ -178,12 +181,15 @@ public class TradeRelatedTimerTask {
 		try {
 			Integer count = tradeDao.count(query);
 			while (count > 0) {
+				LOG.warn("found unprocessed trades,begin to process");
 				List<TradeDO> tradeList = tradeDao.query(query);
 				for (final TradeDO trade : tradeList) {
 					adTransactionTemplate.execute(new TransferMoneyTransaction(trade, now));
+					LOG.warn("processing " + trade);
 				}
 				count = tradeDao.count(query);
 			}
+			LOG.warn("Timer end");
 		} catch (Exception ex) {
 			LOG.error("timerTask transfer money exception", ex);
 		}

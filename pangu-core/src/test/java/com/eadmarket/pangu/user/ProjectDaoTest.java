@@ -9,10 +9,10 @@ import javax.annotation.Resource;
 
 import org.junit.Test;
 
-
 import com.eadmarket.pangu.BaseTest;
 import com.eadmarket.pangu.DaoException;
 import com.eadmarket.pangu.common.Query;
+import com.eadmarket.pangu.dao.position.PositionDao;
 import com.eadmarket.pangu.dao.project.ProjectDao;
 import com.eadmarket.pangu.domain.ProjectDO;
 import com.eadmarket.pangu.query.ProjectQuery;
@@ -23,6 +23,8 @@ import com.eadmarket.pangu.query.ProjectQuery;
 public class ProjectDaoTest extends BaseTest {
 	
 	@Resource private ProjectDao projectDao;
+	
+	@Resource private PositionDao positionDao;
 	
 	@Test public void testCount() throws DaoException {
 		ProjectQuery projectQuery = new ProjectQuery();
@@ -50,5 +52,9 @@ public class ProjectDaoTest extends BaseTest {
 		
 		assertThat(list, is(notNullValue()));
 		assertThat(list.size(), is(greaterThan(1)));
+	}
+	
+	@Test public void test() throws DaoException {
+		positionDao.updateProfitById(31L, 10L);
 	}
 }

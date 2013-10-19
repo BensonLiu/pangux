@@ -49,6 +49,16 @@
 		where id = #{id} and state = #{orginalStatus,typeHandler=TradeStatusTypeHandler}
 	</update>
 	
+	<update id="updateTrade" parameterType="TradeDO">
+		update trade
+		<set>
+			<if test="lastTransferDate">
+				last_transfer_date = #{lastTransferDate},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
 	<select id="query" resultMap="tradeMap" parameterType="com.eadmarket.pangu.common.Query">
 		select 
 		<include refid="allFields"/>
@@ -70,7 +80,7 @@
 				AND endTime &gt;#{condition.minEndDate}
 			</if>
 			<if test="condition.lastTransferDate != null">
-				AND last_transfer_date &gt;#{condition.lastTransferDate}
+				AND last_transfer_date &lt;#{condition.lastTransferDate}
 			</if>
 		</where>
 		limit #{mysqlPageFirstItem}, #{pageSize}
@@ -96,7 +106,7 @@
 				AND endTime &gt;#{condition.minEndDate}
 			</if>
 			<if test="condition.lastTransferDate != null">
-				AND last_transfer_date &gt;#{condition.lastTransferDate}
+				AND last_transfer_date &lt;#{condition.lastTransferDate}
 			</if>
 		</where>
 	</select>

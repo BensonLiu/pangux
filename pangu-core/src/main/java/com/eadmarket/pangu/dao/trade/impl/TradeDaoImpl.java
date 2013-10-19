@@ -49,8 +49,7 @@ class TradeDaoImpl extends BaseDao implements TradeDao {
 
 	@Override
 	public void updateTrade(TradeDO trade) throws DaoException {
-		// TODO Auto-generated method stub
-		
+		update("TradeDao.updateTrade", trade);
 	}
 
 }

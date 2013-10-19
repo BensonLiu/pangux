@@ -42,7 +42,7 @@ class PositionDaoImpl extends BaseDao implements PositionDao {
 		
 		Map<String, Object> param = Maps.newHashMap();
 		param.put("id", id);
-		param.put("addprofit", addProfit);
+		param.put("addProfit", addProfit);
 		
 		update("PositionDao.updateProfitById", param);
 	}
