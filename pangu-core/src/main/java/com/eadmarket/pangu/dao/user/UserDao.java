@@ -60,6 +60,14 @@ public interface UserDao {
 	boolean reduceCachFrom(Long userId, Long cash) throws DaoException;
 	
 	/**
+	 * 强制扣除用户账户金额(不管当前用户的账户是不是足够)
+	 * 
+	 * @param userId 用户编号
+	 * @param cash 扣除的金额
+	 * @throws DaoException
+	 */
+	void reduceCachWithoutCheck(Long userId, Long cash) throws DaoException;
+	/**
 	 * 重置用户的密码
 	 * 
 	 * @param userId 用户编号

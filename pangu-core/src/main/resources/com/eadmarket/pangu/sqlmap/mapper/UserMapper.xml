@@ -69,6 +69,10 @@
 		update user set balance = balance - #{cash} where id = #{userId} and balance >= #{cash}
 	</update>
 	
+	<update id="reduceCachWithoutCheck" parameterType="hashMap">
+		update user set balance = balance - #{cash} where id = #{userId}
+	</update>
+	
 	<update id="updateUser" parameterType="UserDO">
 		update user
 		<set>

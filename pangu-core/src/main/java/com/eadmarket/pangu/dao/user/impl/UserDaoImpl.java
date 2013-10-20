@@ -48,6 +48,14 @@ class UserDaoImpl extends BaseDao implements UserDao {
 		param.put("cash", cash);
 		return update("UserDao.reduceCachFrom", param) == 1;
 	}
+	
+	@Override
+	public void reduceCachWithoutCheck(Long userId, Long cash) throws DaoException {
+		Map<String, Object> param = Maps.newHashMap();
+		param.put("userId", userId);
+		param.put("cash", cash);
+		update("UserDao.reduceCachWithoutCheck", param);
+	}
 
 	@Override
 	public UserDO getByEmail(String email) throws DaoException {

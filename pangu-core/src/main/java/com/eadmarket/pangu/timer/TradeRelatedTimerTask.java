@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import lombok.Setter;
+
 import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,6 +64,11 @@ public class TradeRelatedTimerTask {
 	
 	@Resource 
 	private EmailService emailService;
+	
+	/**
+	 * 网站对应的中间账户，这样就把我们自己当成第三方同等对待了。
+	 */
+	@Setter private Long eadmarketAccountId;
 
 	/**
 	 * 交易到期通知买卖家双方,更改交易状态为完成，恢复广告位的状态为待出售
@@ -222,16 +229,30 @@ public class TradeRelatedTimerTask {
 				 */
 				positionDao.updateProfitById(trade.getPositionId(), cash);
 				/*
-				 * 3.插入财务记录
+				 * 3.插入卖家财务记录
 				 */
 				FinanceDO financeDO = new FinanceDO();
 				financeDO.setNumber(cash);
 				financeDO.setUserId(trade.getSellerId());
 				financeDO.setType(FinanceDO.TYPE_AD_IN);
-				financeDO.setRemark("广告位" + trade.getPositionId() + "收入");
+				financeDO.setRemark("广告位收入");
+				financeDao.insert(financeDO);
+				
+				/*
+				 * 4.减少默认账户金额
+				 */
+				userDao.reduceCachWithoutCheck(eadmarketAccountId, cash);
+				/*
+				 * 5.插入默认账户的财务记录
+				 */
+				financeDO = new FinanceDO();
+				financeDO.setNumber(cash);
+				financeDO.setUserId(eadmarketAccountId);
+				financeDO.setType(FinanceDO.TYPE_AD_OUT);
+				financeDO.setRemark("划款");
 				financeDao.insert(financeDO);
 				/*
-				 * 4.更新交易记录上次划款时间
+				 * 6.更新交易记录上次划款时间
 				 */
 				TradeDO tradeDO = new TradeDO();
 				tradeDO.setId(trade.getId());

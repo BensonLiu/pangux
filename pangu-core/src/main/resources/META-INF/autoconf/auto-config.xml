@@ -4,8 +4,10 @@
 		<property name="eadmarket.db.url" description="数据库url" defaultValue="jdbc:mysql://127.0.0.1:8889/ad?characterEncoding=UTF-8" />
 		<property name="eadmarket.db.username" description="数据库username" defaultValue="root" />
 		<property name="eadmarket.db.password" description="数据库password" defaultValue="root" />
+		<property name="eadmarket.account.id" description="自己的账户编号" defaultValue="0" />
 	</group>
 	<script>
 		<generate template="com/eadmarket/pangu/bean/persistent.xml" />
+		<generate template="com/eadmarket/pangu/bean/timer.xml" />
 	</script>
 </config>

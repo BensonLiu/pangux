@@ -33,5 +33,9 @@
 		<property name="cronExpression" value="0 0/10 * * * ?"/>
 	</bean>
 	
-	<bean id="tradeTimer" class="com.eadmarket.pangu.timer.TradeRelatedTimerTask" />
+	<bean id="tradeTimer" class="com.eadmarket.pangu.timer.TradeRelatedTimerTask">
+		<property name="eadmarketAccountId">
+			<value>${eadmarket.account.id}</value>
+		</property>
+	</bean>
 </beans>
