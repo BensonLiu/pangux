@@ -82,12 +82,13 @@ public class TradeRelatedTimerTask {
 		/*
 		 * 至少延后30分钟处理，为了和划款时间程序避开冲突
 		 */
-		tradeQuery.setMaxEndDate(DateUtils.addMinutes(new Date(), 30));
+		tradeQuery.setMaxEndDate(DateUtils.addMinutes(new Date(), -30));
 		tradeQuery.setStatus(TradeStatus.IMPLEMENTING);
 		query.setCondition(tradeQuery);
 		int count;
 		try {
 			count = tradeDao.count(query);
+			LOG.warn("{} records expired", count);
 		} catch (DaoException ex) {
 			LOG.error("count trade failed, " + query, ex);
 			return;
@@ -121,6 +122,7 @@ public class TradeRelatedTimerTask {
 							} else {
 								result = Boolean.FALSE;
 							}
+							LOG.warn("update {} {}", trade, updateCount);
 						} catch (DaoException ex) {
 							LOG.error("transaction failed, " + trade, ex);
 							status.setRollbackOnly();
@@ -161,6 +163,7 @@ public class TradeRelatedTimerTask {
 			
 			try {
 				count = tradeDao.count(query);
+				LOG.warn("{} records expired", count);
 			} catch (DaoException ex) {
 				LOG.error("count trade failed, " + query, ex);
 				return;

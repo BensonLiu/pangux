@@ -17,6 +17,7 @@ import com.eadmarket.pangu.DaoException;
 import com.eadmarket.pangu.common.Query;
 import com.eadmarket.pangu.dao.trade.TradeDao;
 import com.eadmarket.pangu.domain.TradeDO;
+import com.eadmarket.pangu.domain.TradeDO.TradeStatus;
 import com.eadmarket.pangu.query.TradeQuery;
 
 /**
@@ -52,5 +53,10 @@ public class TradeDaoTest extends BaseTest {
 		
 		assertThat(list, is(notNullValue()));
 		assertThat(list.size(), is(greaterThan(1)));
+	}
+	
+	@Test public void testUpdateStatus() throws DaoException {
+		int updateStatus = tradeDao.updateStatus(31L, TradeStatus.IMPLEMENTING, TradeStatus.COMPLETED);
+		assertThat(updateStatus, is(equalTo(1)));
 	}
 }

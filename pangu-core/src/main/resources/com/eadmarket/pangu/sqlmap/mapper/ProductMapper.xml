@@ -10,7 +10,9 @@
 		<result column="owner" property="ownerId"/>
 		<result column="shown" property="showUrl"/>
 		<result column="fee" property="fee"/>
+		<!-- 
 		<result column="status" property="status"/>
+		 -->
 	</resultMap>
 	
 	<sql id="allFields">
@@ -22,8 +24,7 @@
 		format,
 		owner,
 		shown,
-		fee,
-		status
+		fee
 	</sql>
 	
 	<select id="getById" resultMap="productMap" parameterType="long">
@@ -39,12 +40,12 @@
 		from product 
 		where owner = #{userId} and status = 1
 	</select>
-	
+	<!-- 
 	<insert id="insert" parameterType="ProductDO" useGeneratedKeys="true" keyProperty="id">
 	    insert into product (name, url, impression, click, format, owner, shown, fee, status) 
 	    values (#{name}, #{url}, #{impression}, #{click}, #{format}, #{ownerId}, #{showUrl}, #{fee},#{status})
 	</insert>
-	
+	 -->
 	<update id="updateProduct" parameterType="ProductDO">
 		update product
 		<set>

@@ -73,9 +73,9 @@ public class PositionDO {
 	}
 	
 	public static enum PositionStatus implements IEnum {
-		ON_SALE(1, "闲置中"),
-		SOLD_OUT(2, "已卖出"),
-		LOCKED(3, "已锁定"),
+		ON_SALE(0, "闲置中"),
+		SOLD_OUT(1, "已卖出"),
+		LOCKED(2, "已锁定"),
 		;
 		
 		@Getter private final int code;

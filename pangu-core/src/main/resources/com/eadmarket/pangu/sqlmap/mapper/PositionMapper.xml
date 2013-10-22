@@ -50,9 +50,8 @@
 	
 	<update id="updatePositionById" parameterType="PositionDO">
 		update advertise
-		set
 		<set>
-			<if test="status != null">status=#{status,typeHandler=PositionStatusTypeHandler},</if>
+			<if test="status != null">state=#{status,typeHandler=PositionStatusTypeHandler},</if>
 			<if test="price != null">price=#{price},</if>
 			<if test="title != null">title=#{title},</if>
 			<if test="content != null">content=#{content},</if>

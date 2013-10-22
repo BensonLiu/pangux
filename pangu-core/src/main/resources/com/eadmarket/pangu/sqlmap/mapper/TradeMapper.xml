@@ -46,7 +46,7 @@
 	<update id="updateStatus" parameterType="hashMap">
 		update trade
 		set state=#{targetStatus,typeHandler=TradeStatusTypeHandler}
-		where id = #{id} and state = #{orginalStatus,typeHandler=TradeStatusTypeHandler}
+		where id = #{id} and state = #{originalStatus,typeHandler=TradeStatusTypeHandler}
 	</update>
 	
 	<update id="updateTrade" parameterType="TradeDO">
