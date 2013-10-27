@@ -67,14 +67,16 @@
 				category = #{categoryId},
 			</if>
 			<if test="status != null">
-				verify = #{status,typeHandler=ProjectStatusTypeHandler}
+				verify = #{status,typeHandler=ProjectStatusTypeHandler},
+			</if>
+			<if test="alexa != null">
+				alexa = #{alexa}
 			</if>
 		</set>
 		where id =#{id}
 	</update>
 	
 	<select id="query" resultMap="projectMap" parameterType="com.eadmarket.pangu.common.Query">
-		<bind name="keyWord" value="'%'+condition.descriKeyWord+'%'"/>
 		select 
 		<include refid="allFields"/>
 		from project
@@ -83,14 +85,13 @@
 				category=#{condition.categoryId}
 			</if>
 			<if test="condition.descriKeyWord != null">
-				AND description like #{keyWord}
+				AND description like '%'||#{condition.descriKeyWord}||'%'
 			</if>
 		</where>
 		limit #{mysqlPageFirstItem}, #{pageSize}
 	</select>
 	
 	<select id="count" resultType="int" parameterType="com.eadmarket.pangu.common.Query">
-		<bind name="keyWord" value="'%'+condition.descriKeyWord+'%'"/>
 		select count(*)
 		from project
 		<where>
@@ -98,7 +99,7 @@
 				category=#{condition.categoryId}
 			</if>
 			<if test="condition.descriKeyWord != null">
-				AND description like #{keyWord}
+				AND description like '%'||#{condition.descriKeyWord}||'%'
 			</if>
 		</where>
 	</select>

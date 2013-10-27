@@ -38,4 +38,17 @@
 			<value>${eadmarket.account.id}</value>
 		</property>
 	</bean>
+	
+	<bean id="websiteAlexaUpdator" class="com.eadmarket.pangu.timer.WebsiteAlexaUpdator" />
+	
+	<bean id="websiteAlexaUpdatorTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+		    <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		        <property name="concurrent" value="false"/>
+                <property name="targetObject" ref="websiteAlexaUpdator"/>
+                <property name="targetMethod" value="execute"/>
+		    </bean>
+		</property>
+		<property name="cronExpression" value="0 0 1 * * ?"/>
+	</bean>
 </beans>

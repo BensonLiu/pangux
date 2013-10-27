@@ -17,7 +17,7 @@ public class Query<T> {
 	
 	@Setter@Getter private T condition;
 	
-	private Integer pageSize = 10;
+	private Integer pageSize = defaultPageSize;
 	
 	private Integer totalItem;
 	

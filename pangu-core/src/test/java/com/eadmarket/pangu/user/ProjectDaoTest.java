@@ -16,6 +16,7 @@ import com.eadmarket.pangu.dao.position.PositionDao;
 import com.eadmarket.pangu.dao.project.ProjectDao;
 import com.eadmarket.pangu.domain.ProjectDO;
 import com.eadmarket.pangu.query.ProjectQuery;
+import com.eadmarket.pangu.timer.WebsiteAlexaUpdator;
 
 /**
  * @author liuyongpo@gmail.com
@@ -25,6 +26,8 @@ public class ProjectDaoTest extends BaseTest {
 	@Resource private ProjectDao projectDao;
 	
 	@Resource private PositionDao positionDao;
+	
+	@Resource private WebsiteAlexaUpdator websiteAlexaUpdator;
 	
 	@Test public void testCount() throws DaoException {
 		ProjectQuery projectQuery = new ProjectQuery();
@@ -54,7 +57,4 @@ public class ProjectDaoTest extends BaseTest {
 		assertThat(list.size(), is(greaterThan(1)));
 	}
 	
-	@Test public void test() throws DaoException {
-		positionDao.updateProfitById(31L, 10L);
-	}
 }
