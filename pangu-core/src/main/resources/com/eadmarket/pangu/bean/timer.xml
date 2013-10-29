@@ -6,6 +6,7 @@
 			<list>
 				<ref local="transferMoneyToSellerTrigger"/>
 				<ref local="notifyBuyerAndSellerWhenTradeExpireTrigger"/>
+				<ref local="websiteAlexaUpdatorTrigger"/>
 			</list>
 		</property>
 		<property name="startupDelay" value="120" />
