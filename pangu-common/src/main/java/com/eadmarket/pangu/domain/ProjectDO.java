@@ -57,6 +57,10 @@ public class ProjectDO {
 	 */
 	private Long alexa;
 	/**
+	 * 中国区排名
+	 */
+	private Long localRank;
+	/**
 	 * 网站下的广告位
 	 */
 	private List<PositionDO> positions = Collections.emptyList();

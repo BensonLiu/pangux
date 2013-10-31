@@ -10,6 +10,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import lombok.ToString;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -64,18 +66,25 @@ public final class WebsiteAlexaUpdator {
 	}
 
 	/**
-	 * 如果获取到了alexa排名指并且和数据库不同，那么更新数据中的alexa
+	 * 1.如果获取到了alexa排名指并且和数据库不同，那么更新数据中的alexa
+	 * 2.如果获取到了china排名指并且和数据库不同，那么更新数据中的localRank
 	 */
 	private void updateWebsiteRankValueIfNecessary(ProjectDO project) {
-		Long alexaValue = getWebsiteAlexaRankValue(project.getUrl());
+		LOG.warn("attempt to update project {}", project);
 		
-		if (alexaValue == null || alexaValue <= 0 || alexaValue.equals(project.getAlexa())) {
+		RankValuePair rankValuePair = getWebsiteAlexaRankValue(project.getUrl());
+		
+		LOG.warn("Got rankValuePair value is {}", rankValuePair);
+		
+		if (!rankValuePair.success 
+				|| (rankValuePair.alexaRankValue.equals(project.getAlexa()) && rankValuePair.chinaRankValue.equals(project.getLocalRank()))) {
 			return ;
 		}
-		
+		LOG.warn("update project {} alexa to {}", project, rankValuePair);
 		ProjectDO param = new ProjectDO();
 		param.setId(project.getId());
-		param.setAlexa(alexaValue);
+		param.setAlexa(rankValuePair.alexaRankValue);
+		param.setLocalRank(rankValuePair.chinaRankValue);
 		try {
 			projectDao.updateById(param);
 		} catch (DaoException ex) {
@@ -83,7 +92,8 @@ public final class WebsiteAlexaUpdator {
 		}
 	}
 	
-	private Long getWebsiteAlexaRankValue(String websiteDomain) {
+	private static RankValuePair getWebsiteAlexaRankValue(String websiteDomain) {
+		RankValuePair pair = new RankValuePair();
 		try {
 			String alexaQuery = "http://data.alexa.com/data/ezdy01DOo100QI?cli=10&url=" + websiteDomain;
 			HttpURLConnection urlCon = (HttpURLConnection) new URL(alexaQuery).openConnection();
@@ -94,7 +104,8 @@ public final class WebsiteAlexaUpdator {
 			int responseCode = urlCon.getResponseCode();
 			if (responseCode != HttpURLConnection.HTTP_OK) {
 				LOG.error("connect to " + websiteDomain + " got " + responseCode);
-				return 0L;
+				pair.success = false;
+				return pair;
 			}
 			InputStream inputStream = urlCon.getInputStream();
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -102,14 +113,30 @@ public final class WebsiteAlexaUpdator {
 			while ((currentLine = bufferedReader.readLine()) != null) {
 				if (currentLine.contains("<REACH RANK=")) {
 					currentLine = currentLine.replaceAll("[^0-9]", "").trim();
-					return Long.valueOf(currentLine);
+					Long alexaRankValue = Long.valueOf(currentLine);
+					pair.alexaRankValue = alexaRankValue;
+				} else if (currentLine.contains("<COUNTRY CODE=" + '"' + "CN" + '"'+ " NAME=" + '"' + "China")) {
+					currentLine = currentLine.replaceAll("[^0-9]", "").trim();
+					Long chinaRankValue = Long.valueOf(currentLine);
+					pair.chinaRankValue = chinaRankValue;
 				}
 			}
 			bufferedReader.close();
 		} catch (IOException ex) {
 			LOG.error("Failed to connect alexa for alexa value of " + websiteDomain, ex);
 		}
-		return 0L;
+		return pair;
 	}
-
+	
+	@ToString
+	private static class RankValuePair {
+		boolean success = true;
+		Long alexaRankValue = 0L;
+		Long chinaRankValue = 0L;
+	} 
+	
+	public static void main(String[] args) {
+		RankValuePair websiteAlexaRankValue = getWebsiteAlexaRankValue("http://eadmarket.com/");
+		System.out.println(websiteAlexaRankValue);
+	}
 }

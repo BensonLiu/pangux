@@ -1,8 +1,13 @@
 package com.eadmarket.pangu.user;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -57,4 +62,19 @@ public class ProjectDaoTest extends BaseTest {
 		assertThat(list.size(), is(greaterThan(1)));
 	}
 	
+	@Test public void testUpdate() throws DaoException {
+		long id = 1L;
+		
+		ProjectDO projectDO = new ProjectDO();
+		long alexa = Long.valueOf(new SimpleDateFormat("yymmdd").format(new Date()));
+		projectDO.setAlexa(alexa);
+		projectDO.setLocalRank(alexa);
+		projectDO.setId(id);
+		projectDao.updateById(projectDO);
+		
+		ProjectDO project = projectDao.getById(id);
+		
+		assertThat(project.getAlexa(), is(equalTo(alexa)));
+		assertThat(project.getLocalRank(), is(equalTo(alexa)));
+	}
 }
