@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
-import org.springframework.util.CollectionUtils;
 
 import com.eadmarket.pangu.DaoException;
 import com.eadmarket.pangu.common.Query;
@@ -26,9 +25,9 @@ import com.eadmarket.pangu.dao.trade.TradeDao;
 import com.eadmarket.pangu.dao.user.UserDao;
 import com.eadmarket.pangu.domain.FinanceDO;
 import com.eadmarket.pangu.domain.PositionDO;
+import com.eadmarket.pangu.domain.PositionDO.PositionStatus;
 import com.eadmarket.pangu.domain.ProductDO;
 import com.eadmarket.pangu.domain.TradeDO;
-import com.eadmarket.pangu.domain.PositionDO.PositionStatus;
 import com.eadmarket.pangu.domain.TradeDO.TradeStatus;
 import com.eadmarket.pangu.domain.UserDO;
 import com.eadmarket.pangu.query.TradeQuery;
@@ -71,117 +70,75 @@ public class TradeRelatedTimerTask {
 	@Setter private Long eadmarketAccountId;
 
 	/**
-	 * 交易到期通知买卖家双方,更改交易状态为完成，恢复广告位的状态为待出售
+	 * 交易过期，修改交易的状态为完成，并且发邮件通知交易双方
+	 * 
+	 * @param trade 要过期的交易对象
 	 */
-	public void notifyBuyerAndSellerWhenTradeExpire() {
+	private void applyExpireTrade(final TradeDO trade) {
 		
-		LOG.warn("TradeTimer starting, begin to scan expired trades");
+		LOG.warn("Trade({}) expired", trade.getId());
 		
-		Query<TradeQuery> query = new Query<TradeQuery>();
-		TradeQuery tradeQuery = new TradeQuery();
-		/*
-		 * 至少延后30分钟处理，为了和划款时间程序避开冲突
-		 */
-		tradeQuery.setMaxEndDate(DateUtils.addMinutes(new Date(), -30));
-		tradeQuery.setStatus(TradeStatus.IMPLEMENTING);
-		query.setCondition(tradeQuery);
-		int count;
-		try {
-			count = tradeDao.count(query);
-			LOG.warn("{} records expired", count);
-		} catch (DaoException ex) {
-			LOG.error("count trade failed, " + query, ex);
-			return;
-		}
-		
-		while (count > 0) {
-			List<TradeDO> timeouttedTrades;
-			try {
-				timeouttedTrades = tradeDao.query(query);
-			} catch (DaoException ex) {
-				LOG.error("query trade failed, " + query, ex);
-				return;
-			}
-			if (CollectionUtils.isEmpty(timeouttedTrades)) {
-				return;
-			}
-			
-			for (final TradeDO trade : timeouttedTrades) {
-				Boolean success = adTransactionTemplate.execute(new TransactionCallback<Boolean>() {
-					@Override
-					public Boolean doInTransaction(TransactionStatus status) {
-						Boolean result = Boolean.TRUE;
-						try {
-							int updateCount = tradeDao.updateStatus(trade.getId(), trade.getStatus(), TradeStatus.COMPLETED);
-							if (updateCount > 0) {
-								PositionDO position = new PositionDO();
-								position.setId(trade.getPositionId());
-								position.setStatus(PositionStatus.ON_SALE);
-								positionDao.updatePositionById(position);
-								LOG.warn("Trade {} expired, update position {} to ON_SALE", trade.getId(), trade.getPositionId());
-							} else {
-								result = Boolean.FALSE;
-							}
-							LOG.warn("update {} {}", trade, updateCount);
-						} catch (DaoException ex) {
-							LOG.error("transaction failed, " + trade, ex);
-							status.setRollbackOnly();
-							result = Boolean.FALSE;
-						}
-						return result;
+		Boolean success = adTransactionTemplate.execute(new TransactionCallback<Boolean>() {
+			@Override
+			public Boolean doInTransaction(TransactionStatus status) {
+				Boolean result = Boolean.TRUE;
+				try {
+					int updateCount = tradeDao.updateStatus(trade.getId(), trade.getStatus(), TradeStatus.COMPLETED);
+					if (updateCount > 0) {
+						PositionDO position = new PositionDO();
+						position.setId(trade.getPositionId());
+						position.setStatus(PositionStatus.ON_SALE);
+						positionDao.updatePositionById(position);
+						LOG.warn("Trade {} expired, update position {} to ON_SALE", trade.getId(), trade.getPositionId());
+					} else {
+						result = Boolean.FALSE;
 					}
-				});
-				
-				if (success) {
-					try {
-						UserDO seller = userDao.getById(trade.getSellerId());
-						Map<String, Object> emailParam = Maps.newHashMap();
-						emailParam.put("name", seller.getNick());
-						PositionDO position = positionDao.getById(trade.getPositionId());
-						emailParam.put("title", position.getTitle());
-						emailService.sendEmail("201410141717", seller.getEmail(), emailParam);
-					} catch (Exception ex) {
-						LOG.error("failed to send email to userId:" + trade.getSellerId(), ex);
-					}
-					
-					try {
-						UserDO buyer = userDao.getById(trade.getBuyerId());
-						Map<String, Object> emailParam = Maps.newHashMap();
-						emailParam.put("name", buyer.getNick());
-						
-						ProductDO product = productDao.getById(trade.getProductId());
-						emailParam.put("title", product.getName());
-						
-						PositionDO position = positionDao.getById(trade.getPositionId());
-						emailParam.put("positionTitle", position.getTitle());
-						emailService.sendEmail("201410141747", buyer.getEmail(), emailParam);
-					} catch (Exception ex) {
-						LOG.error("failed to send email to userId:" + trade.getBuyerId(), ex);
-					}
+					LOG.warn("update {} {}", trade, updateCount);
+				} catch (DaoException ex) {
+					LOG.error("transaction failed, " + trade, ex);
+					status.setRollbackOnly();
+					result = Boolean.FALSE;
 				}
+				return result;
+			}
+		});
+		
+		if (success) {
+			try {
+				UserDO seller = userDao.getById(trade.getSellerId());
+				Map<String, Object> emailParam = Maps.newHashMap();
+				emailParam.put("name", seller.getNick());
+				PositionDO position = positionDao.getById(trade.getPositionId());
+				emailParam.put("title", position.getTitle());
+				emailService.sendEmail("201410141717", seller.getEmail(), emailParam);
+			} catch (Exception ex) {
+				LOG.error("failed to send email to userId:" + trade.getSellerId(), ex);
 			}
 			
 			try {
-				count = tradeDao.count(query);
-				LOG.warn("{} records expired", count);
-			} catch (DaoException ex) {
-				LOG.error("count trade failed, " + query, ex);
-				return;
+				UserDO buyer = userDao.getById(trade.getBuyerId());
+				Map<String, Object> emailParam = Maps.newHashMap();
+				emailParam.put("name", buyer.getNick());
+				
+				ProductDO product = productDao.getById(trade.getProductId());
+				emailParam.put("title", product.getName());
+				
+				PositionDO position = positionDao.getById(trade.getPositionId());
+				emailParam.put("positionTitle", position.getTitle());
+				emailService.sendEmail("201410141747", buyer.getEmail(), emailParam);
+			} catch (Exception ex) {
+				LOG.error("failed to send email to userId:" + trade.getBuyerId(), ex);
 			}
 		}
-		LOG.warn("TradeTimer end");
 	}
 
 	/**
 	 * 划款给卖家,每天定时划款给卖家
 	 */
-	public void transferMoneyToSeller() {
-		
-		LOG.warn("Timer begin");
+	public void execute() {
 		
 		TradeQuery tradeQuery = new TradeQuery();
 		Date now = new Date();
-		tradeQuery.setMinEndDate(now);
 		Date yesterday = DateUtils.addDays(now, -1);
 		tradeQuery.setLastTransferDate(yesterday);
 		tradeQuery.setStatus(TradeStatus.IMPLEMENTING);
@@ -194,8 +151,14 @@ public class TradeRelatedTimerTask {
 				LOG.warn("found unprocessed trades,begin to process");
 				List<TradeDO> tradeList = tradeDao.query(query);
 				for (final TradeDO trade : tradeList) {
-					adTransactionTemplate.execute(new TransferMoneyTransaction(trade, now));
 					LOG.warn("processing " + trade);
+					Boolean success = adTransactionTemplate.execute(new TransferMoneyTransaction(trade, now));
+					/*
+					 * 划款成功并且交易确实过期了，执行交易的过期逻辑
+					 */
+					if (success && trade.getEndDate().before(now)) {
+						applyExpireTrade(trade);
+					}
 				}
 				count = tradeDao.count(query);
 			}
@@ -222,7 +185,20 @@ public class TradeRelatedTimerTask {
 				 * 为了保证划款的正确性，此处还是算一下，如果时间程序中间挂了一天，继续跑的话还可以补齐之前的款项
 				 */
 				int rangeDays = DateUtils.truncatedCompareTo(transferDate, trade.getLastTransferDate(), Calendar.DATE);
+				/*
+				 * 还是上述的情况，万一时间程序在开发人员不知道的情况下crash两天，而且交易本来应该在一天前结束的，那么要算出交易之后经历的天数
+				 */
+				int invalidDays = DateUtils.truncatedCompareTo(transferDate, trade.getEndDate(), Calendar.DATE);
+				if (invalidDays > 0) {
+					rangeDays = rangeDays - invalidDays;
+				}
+				
 				Long cash = rangeDays * originalPrice;
+				
+				if (cash <= 0) {
+					return Boolean.TRUE;
+				}
+				
 				/*
 				 * 1.划款到卖家账户中
 				 */
@@ -259,9 +235,10 @@ public class TradeRelatedTimerTask {
 				 */
 				TradeDO tradeDO = new TradeDO();
 				tradeDO.setId(trade.getId());
-				tradeDO.setLastTransferDate(transferDate);
+				//在此通过上次打款时间校正下最后划款时间
+				tradeDO.setLastTransferDate(DateUtils.addDays(trade.getLastTransferDate(), rangeDays));
 				tradeDao.updateTrade(tradeDO);
-
+				
 			} catch (DaoException ex) {
 				status.setRollbackOnly();
 				throw new RuntimeException(ex);

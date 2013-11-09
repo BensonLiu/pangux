@@ -56,7 +56,10 @@ public class PositionDO {
 	
 	private Long ownerId;
 	
-	//private String saleUrl;
+	/**
+	 * 广告位对应的激活链接
+	 */
+	private String activeUrl;
 	
 	//private Integer process;
 	

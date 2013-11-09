@@ -7,6 +7,7 @@ import com.eadmarket.pangu.DaoException;
 import com.eadmarket.pangu.dao.BaseDao;
 import com.eadmarket.pangu.dao.position.PositionDao;
 import com.eadmarket.pangu.domain.PositionDO;
+import com.eadmarket.pangu.domain.PositionDO.PositionStatus;
 import com.google.common.collect.Maps;
 
 /**
@@ -45,6 +46,15 @@ class PositionDaoImpl extends BaseDao implements PositionDao {
 		param.put("addProfit", addProfit);
 		
 		update("PositionDao.updateProfitById", param);
+	}
+
+	@Override
+	public List<PositionDO> queryPositionsForTimer(Long minId, PositionStatus status) 
+			throws DaoException {
+		Map<String, Object> param = Maps.newHashMap();
+		param.put("minId", minId);
+		param.put("status", status);
+		return selectList("PositionDao.queryPositionsForTimer", param);
 	}
 
 }
