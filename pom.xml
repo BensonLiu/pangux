@@ -282,7 +282,7 @@
                         <contextPath>/</contextPath>
                     </webApp>
                     <stopKey>webx</stopKey>
-                    <stopKey>9999</stopKey>
+                    <stopPort>9999</stopPort>
                     <connectors>
                         <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
                             <port>8081</port>
