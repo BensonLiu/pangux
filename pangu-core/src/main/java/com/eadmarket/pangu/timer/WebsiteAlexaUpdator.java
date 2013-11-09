@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 
 import lombok.ToString;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -113,11 +114,17 @@ public final class WebsiteAlexaUpdator {
 			while ((currentLine = bufferedReader.readLine()) != null) {
 				if (currentLine.contains("<REACH RANK=")) {
 					currentLine = currentLine.replaceAll("[^0-9]", "").trim();
-					Long alexaRankValue = Long.valueOf(currentLine);
+					Long alexaRankValue = 0L;
+					if (StringUtils.isNotBlank(currentLine)) {
+						alexaRankValue = Long.valueOf(currentLine);
+					}
 					pair.alexaRankValue = alexaRankValue;
 				} else if (currentLine.contains("<COUNTRY CODE=" + '"' + "CN" + '"'+ " NAME=" + '"' + "China")) {
 					currentLine = currentLine.replaceAll("[^0-9]", "").trim();
-					Long chinaRankValue = Long.valueOf(currentLine);
+					Long chinaRankValue = 0L;
+					if (StringUtils.isNotBlank(currentLine)) {
+						chinaRankValue = Long.valueOf(currentLine);
+					}
 					pair.chinaRankValue = chinaRankValue;
 				}
 			}

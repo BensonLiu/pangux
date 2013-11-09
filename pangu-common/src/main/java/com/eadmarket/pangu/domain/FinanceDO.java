@@ -31,11 +31,11 @@ public class FinanceDO {
 	/**
 	 * 广告支出
 	 */
-	public final static String TYPE_AD_OUT = "01";
+	public final static String TYPE_AD_OUT = "10";
 	/**
 	 * 充值
 	 */
-	public final static String TYPE_RECHARGE = "10";
+	public final static String TYPE_RECHARGE = "01";
 	/**
 	 * 提现
 	 */

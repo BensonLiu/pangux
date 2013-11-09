@@ -14,6 +14,7 @@
 		<result column="price" property="price"/>
 		<result column="profit" property="profit"/>
 		<result column="state" property="status" typeHandler="PositionStatusTypeHandler"/>
+		<result column="activeUrl" property="activeUrl"/>
 	</resultMap>
 	
 	<sql id="allFields">
@@ -26,7 +27,8 @@
 		height,
 		price,
 		profit,
-		state
+		state,
+		activeUrl
 	</sql>
 	
 	<select id="getById" resultMap="positionMap" parameterType="long">
@@ -67,4 +69,13 @@
 		set profit = profit + #{addProfit}
 		where id = #{id}
 	</update>
+	
+	<select id="queryPositionsForTimer" resultMap="positionMap" parameterType="map">
+		select
+		<include refid="allFields"/>
+		from advertise
+		where id > #{minId} and state = #{status,typeHandler=PositionStatusTypeHandler}
+		order by id
+		limit 30
+	</select>
 </mapper>

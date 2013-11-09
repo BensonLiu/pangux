@@ -1,37 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans default-autowire="byName">
-	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	<bean id="eadmarket-timer" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
-				<ref local="transferMoneyToSellerTrigger"/>
-				<ref local="notifyBuyerAndSellerWhenTradeExpireTrigger"/>
+				<ref local="tradeTrigger"/>
 				<ref local="websiteAlexaUpdatorTrigger"/>
 			</list>
 		</property>
 		<property name="startupDelay" value="120" />
 	</bean>
 	
-	<bean id="transferMoneyToSellerTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	<bean id="tradeTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail">
 		    <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		        <property name="concurrent" value="false"/>
                 <property name="targetObject" ref="tradeTimer"/>
-                <property name="targetMethod" value="transferMoneyToSeller"/>
+                <property name="targetMethod" value="execute"/>
 		    </bean>
 		</property>
-		<property name="cronExpression" value="0 0/5 * * * ?"/>
-	</bean>
-	
-	<bean id="notifyBuyerAndSellerWhenTradeExpireTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
-		<property name="jobDetail">
-		    <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		        <property name="concurrent" value="false"/>
-                <property name="targetObject" ref="tradeTimer"/>
-                <property name="targetMethod" value="notifyBuyerAndSellerWhenTradeExpire"/>
-		    </bean>
-		</property>
-		<property name="cronExpression" value="0 0/10 * * * ?"/>
+		<property name="cronExpression" value="0 0/2 * * * ?"/>
 	</bean>
 	
 	<bean id="tradeTimer" class="com.eadmarket.pangu.timer.TradeRelatedTimerTask">
@@ -50,6 +38,6 @@
                 <property name="targetMethod" value="execute"/>
 		    </bean>
 		</property>
-		<property name="cronExpression" value="0 0 13 * * ?"/>
+		<property name="cronExpression" value="0 0 23 * * ?"/>
 	</bean>
 </beans>
