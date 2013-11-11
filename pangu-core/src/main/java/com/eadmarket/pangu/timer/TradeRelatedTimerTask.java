@@ -195,7 +195,7 @@ public class TradeRelatedTimerTask {
 				
 				Long cash = rangeDays * originalPrice;
 				
-				if (cash <= 0) {
+				if (cash < 0) {
 					return Boolean.TRUE;
 				}
 				
