@@ -96,7 +96,7 @@ public final class WebsiteAlexaUpdator {
 	private static RankValuePair getWebsiteAlexaRankValue(String websiteDomain) {
 		RankValuePair pair = new RankValuePair();
 		try {
-			String alexaQuery = "http://data.alexa.com/data/ezdy01DOo100QI?cli=10&url=" + websiteDomain;
+			String alexaQuery = "http://data.alexa.com/data?cli=10&dat=snbamz&url=" + websiteDomain;
 			HttpURLConnection urlCon = (HttpURLConnection) new URL(alexaQuery).openConnection();
 			urlCon.setConnectTimeout(1000);
 			urlCon.setReadTimeout(1000);
@@ -112,7 +112,11 @@ public final class WebsiteAlexaUpdator {
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 			String currentLine = "";
 			while ((currentLine = bufferedReader.readLine()) != null) {
-				if (currentLine.contains("<REACH RANK=")) {
+				if (currentLine.contains("<POPULARITY ")) {
+					
+					int index = currentLine.indexOf("TEXT=");
+					currentLine = currentLine.substring(index);
+					
 					currentLine = currentLine.replaceAll("[^0-9]", "").trim();
 					Long alexaRankValue = 0L;
 					if (StringUtils.isNotBlank(currentLine)) {
@@ -143,7 +147,7 @@ public final class WebsiteAlexaUpdator {
 	} 
 	
 	public static void main(String[] args) {
-		RankValuePair websiteAlexaRankValue = getWebsiteAlexaRankValue("http://eadmarket.com/");
+		RankValuePair websiteAlexaRankValue = getWebsiteAlexaRankValue("http://unn114.com/");
 		System.out.println(websiteAlexaRankValue);
 	}
 }

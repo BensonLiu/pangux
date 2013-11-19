@@ -38,6 +38,6 @@
                 <property name="targetMethod" value="execute"/>
 		    </bean>
 		</property>
-		<property name="cronExpression" value="0 0 23 * * ?"/>
+		<property name="cronExpression" value="0 10 0 * * ?"/>
 	</bean>
 </beans>
