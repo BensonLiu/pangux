@@ -78,14 +78,19 @@ public final class WebsiteAlexaUpdator {
 		LOG.warn("Got rankValuePair value is {}", rankValuePair);
 		
 		if (!rankValuePair.success 
-				|| (rankValuePair.alexaRankValue.equals(project.getAlexa()) && rankValuePair.chinaRankValue.equals(project.getLocalRank()))) {
+				|| (rankValuePair.alexaRankValue.equals(project.getAlexa()) && rankValuePair.chinaRankValue.equals(project.getLocalRank()))
+				|| (rankValuePair.alexaRankValue.equals(0L) && rankValuePair.chinaRankValue.equals(0L))) {
 			return ;
 		}
 		LOG.warn("update project {} alexa to {}", project, rankValuePair);
 		ProjectDO param = new ProjectDO();
 		param.setId(project.getId());
-		param.setAlexa(rankValuePair.alexaRankValue);
-		param.setLocalRank(rankValuePair.chinaRankValue);
+		if (!rankValuePair.alexaRankValue.equals(0L)) {
+			param.setAlexa(rankValuePair.alexaRankValue);
+		}
+		if (!rankValuePair.chinaRankValue.equals(0L)) {
+			param.setLocalRank(rankValuePair.chinaRankValue);
+		}
 		try {
 			projectDao.updateById(param);
 		} catch (DaoException ex) {
@@ -147,7 +152,7 @@ public final class WebsiteAlexaUpdator {
 	} 
 	
 	public static void main(String[] args) {
-		RankValuePair websiteAlexaRankValue = getWebsiteAlexaRankValue("http://unn114.com/");
+		RankValuePair websiteAlexaRankValue = getWebsiteAlexaRankValue("http://www.jandou.com/");
 		System.out.println(websiteAlexaRankValue);
 	}
 }
