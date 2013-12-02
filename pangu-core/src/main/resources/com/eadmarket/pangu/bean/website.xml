@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	<bean id="alexaDataFetcher" class="com.eadmarket.pangu.api.website.impl.AlexaDataFetcher">
+		<property name="charset" value="gbk" />
+		<property name="serverUrl" value="http://alexa.chinaz.com/?Domain=" />
+	</bean>
+	
+	<bean id="seoDataFetcher" class="com.eadmarket.pangu.api.website.impl.SeoDataFetcher">
+		<property name="charset" value="utf-8" />
+		<property name="serverUrl" value="http://seo.chinaz.com/?q=" />
+	</bean>
+	
+	<bean id="baidusiteDataFetcher" class="com.eadmarket.pangu.api.website.impl.BaidusiteDataFetcher">
+		<property name="charset" value="utf-8" />
+		<property name="serverUrl" value="http://www.baidu.com/s?wd=site%3A" />
+	</bean>
+	
+	<bean id="baiduTodayDataFetcher" class="com.eadmarket.pangu.api.website.impl.BaiduTodayDataFetcher">
+		<property name="charset" value="utf-8" />
+		<property name="serverUrl" value="http://www.baidu.com/s?wd=site%3A" />
+	</bean>
+	
+	<bean id="baidulinkDataFetcher" class="com.eadmarket.pangu.api.website.impl.BaidulinkDataFetcher">
+		<property name="charset" value="utf-8" />
+		<property name="serverUrl" value="http://www.baidu.com/s?wd=domain%3A" />
+	</bean>
+	
+	<bean id="googlesiteDataFetcher" class="com.eadmarket.pangu.api.website.impl.GooglesiteDataFetcher">
+		<property name="charset" value="utf-8" />
+		<property name="serverUrl" value="http://www.google.com.hk/search?q=site%3A" />
+	</bean>
+	
+	<bean id="googlelinkDataFetcher" class="com.eadmarket.pangu.api.website.impl.GooglelinkDataFetcher">
+		<property name="charset" value="utf-8" />
+		<property name="serverUrl" value="http://www.google.com.hk/search?q=link%3A" />
+	</bean>
+	
+	<bean id="sositeDataFetcher" class="com.eadmarket.pangu.api.website.impl.SositeDataFetcher">
+		<property name="charset" value="utf-8" />
+		<property name="serverUrl" value="http://www.so.com/s?q=site%3A" />
+	</bean>
+	
+	<bean id="solinkDataFetcher" class="com.eadmarket.pangu.api.website.impl.SolinkDataFetcher">
+		<property name="charset" value="utf-8" />
+		<property name="serverUrl" value="http://www.so.com/s?q='" />
+	</bean>
+	
+	<bean id="dataFetcherManager" class="com.eadmarket.pangu.api.website.DataFetcherManager" />
+</beans>

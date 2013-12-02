@@ -1,5 +1,7 @@
 /.settings
 /target
 /.project
+/*.iml
 /pangu.ipr
 /pangu.iws
+/.idea

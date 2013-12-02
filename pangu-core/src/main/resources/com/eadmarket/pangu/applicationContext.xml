@@ -7,4 +7,6 @@
 	
 	<import resource="bean/timer.xml"/>
 	<import resource="bean/util.xml"/>
+	
+	<import resource="bean/website.xml"/>
 </beans>
