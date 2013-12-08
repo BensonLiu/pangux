@@ -5,8 +5,8 @@ package com.eadmarket.pangu.api.website.impl;
 
 import com.eadmarket.pangu.api.website.WebSiteDataDO;
 import com.google.common.collect.Lists;
+import org.apache.commons.lang.StringUtils;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -18,17 +18,15 @@ class BaiduTodayDataFetcher extends AbstractDataFetcher {
 
 	@Override
 	protected List<WebSiteDataDO> exactValueFromHtml(String htmlContent) {
-        List<WebSiteDataDO> siteDataDOs = Collections.emptyList();
-
+        String baiduToday = "";
 		if(htmlContent.contains("找到相关结果数") && htmlContent.contains("个")){
             int startIndex = htmlContent.indexOf("找到相关结果数");
             htmlContent = htmlContent.substring(startIndex);
             int endIndex = htmlContent.indexOf("个");
-            String value = htmlContent.substring(0,endIndex).replaceAll("[^0-9]", "").trim();
-
-            siteDataDOs = Lists.newArrayList(new WebSiteDataDO("baidu", "today", value));
+            baiduToday = htmlContent.substring(0,endIndex).replaceAll("[^0-9]", "").trim();
         }
-		return siteDataDOs;
+        baiduToday = assignDefaultValueIfBlank(baiduToday);
+        return Lists.newArrayList(new WebSiteDataDO("baidu", "today", baiduToday));
 	}
 
 	@Override

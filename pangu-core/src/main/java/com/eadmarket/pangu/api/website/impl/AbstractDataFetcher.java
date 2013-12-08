@@ -20,6 +20,9 @@ import com.eadmarket.pangu.api.website.WebSiteDataDO;
 
 abstract class AbstractDataFetcher implements IDataFetcher {
 	private final static Logger LOG = LoggerFactory.getLogger(AbstractDataFetcher.class);
+
+    protected final static String NEGATIVE_ONE = "-1";
+
 	/**
 	 * 数据请求地址
 	 */
@@ -42,8 +45,15 @@ abstract class AbstractDataFetcher implements IDataFetcher {
 		
 		return exactValueFromHtml(htmlContent);
 	}
-	
-	protected String getHTMLContent(String url) {
+
+    protected String assignDefaultValueIfBlank(String value) {
+        if (StringUtils.isBlank(value)) {
+            value = NEGATIVE_ONE;
+        }
+        return value;
+    }
+
+    protected String getHTMLContent(String url) {
 		
 		InputStream inputStream = null;
 		try {

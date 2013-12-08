@@ -18,16 +18,16 @@ class SositeDataFetcher extends AbstractDataFetcher {
 
 	@Override
 	protected List<WebSiteDataDO> exactValueFromHtml(String htmlContent) {
-        List<WebSiteDataDO> list = Collections.emptyList();
+        String soSite = "";
 		if(htmlContent.contains("找到相关结果约") && htmlContent.contains("个")){
             String temp = htmlContent;
             int startIndex = temp.lastIndexOf("找到相关结果约");
             temp = temp.substring(startIndex);
             int endIndex = temp.indexOf("个");
-            String value = temp.substring(0,endIndex).replaceAll("[^0-9]", "").trim();
-            list = Lists.newArrayList(new WebSiteDataDO("so", "site", value));
+            soSite = temp.substring(0,endIndex).replaceAll("[^0-9]", "").trim();
         }
-		return list;
+        soSite = assignDefaultValueIfBlank(soSite);
+        return Lists.newArrayList(new WebSiteDataDO("so", "site", soSite));
 	}
 
 }

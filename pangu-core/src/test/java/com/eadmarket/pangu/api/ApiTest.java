@@ -30,7 +30,6 @@ public class ApiTest extends BaseTest {
 		
 		String jsonString = JSON.toJSONString(siteDataDOs);
 		LOG.debug(jsonString);
-		
 	}
 	
 	@Test public void test2() {

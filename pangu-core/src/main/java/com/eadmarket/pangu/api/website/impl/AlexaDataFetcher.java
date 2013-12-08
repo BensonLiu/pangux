@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.eadmarket.pangu.api.website.WebSiteDataDO;
 import com.google.common.collect.Lists;
+import org.apache.commons.lang.StringUtils;
 
 class AlexaDataFetcher extends AbstractDataFetcher {
 
@@ -28,7 +29,11 @@ class AlexaDataFetcher extends AbstractDataFetcher {
 		
 		return list;
 	}
-	
+
+    /**
+     * 把多个document.getElementById('rankName').innerHTML='rankValue';
+     * 转化成{@link com.eadmarket.pangu.api.website.WebSiteDataDO}列表
+     */
 	private List<WebSiteDataDO> translateToList(String jsString) {
 		jsString = jsString.replaceAll("document.getElementById\\('", "");
 		jsString = jsString.replaceAll("'\\).innerHTML", "");
@@ -37,7 +42,7 @@ class AlexaDataFetcher extends AbstractDataFetcher {
 
         List<WebSiteDataDO> list = Lists.newArrayList();
 		for (String str : split) {
-			if (str == null || str.trim().isEmpty()) {
+			if (StringUtils.isBlank(str)) {
 				continue;
 			}
 			String[] keyValue = str.split("=");

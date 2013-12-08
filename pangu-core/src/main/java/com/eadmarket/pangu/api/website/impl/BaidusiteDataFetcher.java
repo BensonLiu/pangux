@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.eadmarket.pangu.api.website.WebSiteDataDO;
 import com.google.common.collect.Lists;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * 获取百度快照时间
@@ -31,32 +32,30 @@ class BaidusiteDataFetcher extends AbstractDataFetcher {
 	}
 	
 	private WebSiteDataDO resolveBaiduSite(String htmlContent) {
-        WebSiteDataDO websiteDateDO = null;
+        String baiduSite = "";
         if(htmlContent.contains("找到相关结果数")&&htmlContent.contains("个")){
             String temp = htmlContent;
             int startIndex = temp.indexOf("找到相关结果数");
             temp = temp.substring(startIndex);
             int endIndex = temp.indexOf("个");
-            String baidu_site = temp.substring(0,endIndex).replaceAll("[^0-9]", "").trim();
-            
-            websiteDateDO = new WebSiteDataDO("baidu", "site", baidu_site);
+            baiduSite = temp.substring(0,endIndex).replaceAll("[^0-9]", "").trim();
         }
-        return websiteDateDO;
+        baiduSite = assignDefaultValueIfBlank(baiduSite);
+        return new WebSiteDataDO("baidu", "site", baiduSite);
     }
 	
 	private WebSiteDataDO resolveBaiduPhoto(String htmlContent) {
-        WebSiteDataDO websiteDateDO = null;
-        if(htmlContent.contains("<span class = \"g\">")&&htmlContent.contains("</span>")){
+        String photo = "";
+        if(htmlContent.contains("<span class=\"g\">")&&htmlContent.contains("</span>")){
             String temp = htmlContent;
-            int startIndex = temp.indexOf("<span class = \"g\">");
+            int startIndex = temp.indexOf("<span class=\"g\">");
             temp = temp.substring(startIndex);
             int endIndex = temp.indexOf("</span>");
             temp = temp.substring(0, endIndex);
-            String photo = temp.split("&nbsp;")[1];
-            
-            websiteDateDO = new WebSiteDataDO("baidu", "photo", photo);
+            photo = temp.split("&nbsp;")[1];
         }
-        return websiteDateDO;
+        photo = assignDefaultValueIfBlank(photo);
+        return new WebSiteDataDO("baidu", "photo", photo);
     }
 
 }
