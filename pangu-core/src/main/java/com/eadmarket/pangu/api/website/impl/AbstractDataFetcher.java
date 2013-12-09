@@ -19,7 +19,7 @@ import com.eadmarket.pangu.api.website.IDataFetcher;
 import com.eadmarket.pangu.api.website.WebSiteDataDO;
 
 abstract class AbstractDataFetcher implements IDataFetcher {
-	private final static Logger LOG = LoggerFactory.getLogger(AbstractDataFetcher.class);
+	protected final static Logger LOG = LoggerFactory.getLogger(AbstractDataFetcher.class);
 
     protected final static String NEGATIVE_ONE = "-1";
 
@@ -59,8 +59,8 @@ abstract class AbstractDataFetcher implements IDataFetcher {
 		try {
 			HttpURLConnection urlCon = (HttpURLConnection) new URL(url)
 					.openConnection();
-			urlCon.setConnectTimeout(10000);
-			urlCon.setReadTimeout(10000);
+			urlCon.setConnectTimeout(30000);
+			urlCon.setReadTimeout(30000);
 			urlCon.setUseCaches(true);
 			urlCon.setRequestMethod("GET");
 			

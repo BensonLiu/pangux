@@ -2,7 +2,7 @@ package com.eadmarket.pangu.api.website.impl;
 
 import com.eadmarket.pangu.api.website.WebSiteDataDO;
 import com.google.common.collect.Lists;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.collections.CollectionUtils;
 
 import java.util.List;
 
@@ -17,6 +17,12 @@ class SeoDataFetcher extends AbstractDataFetcher {
 	protected List<WebSiteDataDO> exactValueFromHtml(String result) {
 		
 		List<WebSiteDataDO> list = Lists.newArrayList();
+
+        List<WebSiteDataDO> govRecord = getGovRecord(result);
+
+        if (CollectionUtils.isNotEmpty(govRecord)) {
+            list.addAll(govRecord);
+        }
 
         WebSiteDataDO baiduBR = getBaiduBR(result);
         if (baiduBR != null) {
@@ -95,5 +101,49 @@ class SeoDataFetcher extends AbstractDataFetcher {
         }
         keyWord = assignDefaultValueIfBlank(keyWord);
         return new WebSiteDataDO("baidu", "keyword", keyWord);
+    }
+
+    /**
+     * 解析出来备案信息
+     */
+    private List<WebSiteDataDO> getGovRecord(String htmlContent) {
+        String[] s = new String[4];
+        try {
+            int index = htmlContent.lastIndexOf("<tr class=\"seo_item\">\t\t\t\t<td title=\"域名备案\"");
+            String tmpString = htmlContent.substring(index);
+
+            index = tmpString.indexOf("</tr>");
+            tmpString = tmpString.substring(0, index);
+
+            index = tmpString.indexOf("<font color=#0269AC>备案号");
+            tmpString = tmpString.substring(index);
+
+            index = tmpString.indexOf("</td>");
+            tmpString = tmpString.substring(0, index).trim();
+
+            final String[] split = tmpString.split("&nbsp;&nbsp;");
+            int i = 0;
+            for (String str : split) {
+                index = str.indexOf("</font>");
+                str = str.substring(index);
+                s[i++] = str.replace("</font>", "").trim();
+            }
+        } catch (Exception ex) {
+            LOG.error("parse govRecord", ex);
+            for (int i = 0; i < s.length; i ++) {
+                s[i] = NEGATIVE_ONE;
+            }
+        }
+
+        return generateWebsiteList(s);
+    }
+
+    private List<WebSiteDataDO> generateWebsiteList(String[] str) {
+        List<WebSiteDataDO> list = Lists.newArrayList();
+        list.add(new WebSiteDataDO("govRecord", "num", str[0]));
+        list.add(new WebSiteDataDO("govRecord", "type", str[1]));
+        list.add(new WebSiteDataDO("govRecord", "name", str[2]));
+        list.add(new WebSiteDataDO("govRecord", "auditDate", str[3]));
+        return list;
     }
 }
