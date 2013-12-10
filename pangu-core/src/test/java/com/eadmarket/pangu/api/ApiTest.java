@@ -24,7 +24,7 @@ public class ApiTest extends BaseTest {
 	@Resource private IDataFetcher baidusiteDataFetcher;
 	
 	@Test public void test() {
-		List<WebSiteDataDO> siteDataDOs = dataFetcherManager.fetchFor("www.126.com");
+		List<WebSiteDataDO> siteDataDOs = dataFetcherManager.fetchFor("www.eadmarket.com");
 		assertThat(siteDataDOs, notNullValue());
         assertThat(siteDataDOs.size(), greaterThanOrEqualTo(10));
 		

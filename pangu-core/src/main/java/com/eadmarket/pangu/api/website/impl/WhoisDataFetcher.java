@@ -33,9 +33,9 @@ class WhoisDataFetcher extends AbstractDataFetcher {
                 /*
                  * 解析detail字段，解析成元素
                  */
-                List<WebSiteDataDO> siteDataDOs = generateWhoisDetailsWebsiteList(value);
-                list.addAll(siteDataDOs);
-                continue;
+                //List<WebSiteDataDO> siteDataDOs = generateWhoisDetailsWebsiteList(value);
+                //list.addAll(siteDataDOs);
+                //continue;
             }
             list.add(new WebSiteDataDO("whois", key, value));
         }
@@ -48,9 +48,11 @@ class WhoisDataFetcher extends AbstractDataFetcher {
         for (String kv : split) {
             if (StringUtils.isNotBlank(kv)) {
                 int endIndex = kv.indexOf(":");
-                String key = kv.substring(0, endIndex);
-                String value = kv.substring(endIndex + 1, kv.length());
-                list.add(new WebSiteDataDO("whois", key, value));
+                if (endIndex > 0) {
+                    String key = kv.substring(0, endIndex);
+                    String value = kv.substring(endIndex + 1, kv.length());
+                    list.add(new WebSiteDataDO("whois", key, value));
+                }
             }
         }
         return list;
