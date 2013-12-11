@@ -39,10 +39,6 @@ abstract class AbstractDataFetcher implements IDataFetcher {
 		
 		String htmlContent = getHTMLContent(requestUrl);
 		
-		if (StringUtils.isBlank(htmlContent)) {
-			return Collections.emptyList();
-		}
-		
 		return exactValueFromHtml(htmlContent);
 	}
 

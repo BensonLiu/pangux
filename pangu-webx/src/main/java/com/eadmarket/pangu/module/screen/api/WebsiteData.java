@@ -23,9 +23,9 @@ public class WebsiteData {
         String requestUrl = runData.getParameters().getString("url");
         Map<String, Object> map = Maps.newHashMap();
         if (StringUtils.isBlank(requestUrl)) {
-        	map.put("success", false);
+        	map.put("success", "false");
         } else {
-        	map.put("success", true);
+        	map.put("success", "true");
         	Map<String, Map<String, String>> data = getWebsiteDataMap(requestUrl);
         	map.put("data", data);
         }

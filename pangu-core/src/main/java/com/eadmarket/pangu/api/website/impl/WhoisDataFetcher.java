@@ -22,8 +22,10 @@ class WhoisDataFetcher extends AbstractDataFetcher {
         final String success = (String) responseJson.get("success");
         List<WebSiteDataDO> list = Lists.newArrayList();
         if (!"1".equals(success)) {
+            list.add(new WebSiteDataDO("whois", "success", "false"));
             return list;
         }
+        list.add(new WebSiteDataDO("whois", "success", "true"));
         final Map<String, String> data = (Map<String, String>) responseJson.get("result");
 
         for (Map.Entry<String, String> entry : data.entrySet()) {

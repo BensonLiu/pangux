@@ -110,32 +110,41 @@ class SeoDataFetcher extends AbstractDataFetcher {
         String[] s = new String[4];
         try {
             int index = htmlContent.lastIndexOf("<tr class=\"seo_item\">\t\t\t\t<td title=\"域名备案\"");
-            String tmpString = htmlContent.substring(index);
 
-            index = tmpString.indexOf("</tr>");
-            tmpString = tmpString.substring(0, index);
+            if (index < 0) {
+                filledWithNegativeOne(s);
+            } else {
+                String tmpString = htmlContent.substring(index);
 
-            index = tmpString.indexOf("<font color=#0269AC>备案号");
-            tmpString = tmpString.substring(index);
+                index = tmpString.indexOf("</tr>");
+                tmpString = tmpString.substring(0, index);
 
-            index = tmpString.indexOf("</td>");
-            tmpString = tmpString.substring(0, index).trim();
+                index = tmpString.indexOf("<font color=#0269AC>备案号");
+                tmpString = tmpString.substring(index);
 
-            final String[] split = tmpString.split("&nbsp;&nbsp;");
-            int i = 0;
-            for (String str : split) {
-                index = str.indexOf("</font>");
-                str = str.substring(index);
-                s[i++] = str.replace("</font>", "").trim();
+                index = tmpString.indexOf("</td>");
+                tmpString = tmpString.substring(0, index).trim();
+
+                final String[] split = tmpString.split("&nbsp;&nbsp;");
+                int i = 0;
+                for (String str : split) {
+                    index = str.indexOf("</font>");
+                    str = str.substring(index);
+                    s[i++] = str.replace("</font>", "").trim();
+                }
             }
         } catch (Exception ex) {
             LOG.error("parse govRecord", ex);
-            for (int i = 0; i < s.length; i ++) {
-                s[i] = NEGATIVE_ONE;
-            }
+            filledWithNegativeOne(s);
         }
 
         return generateWebsiteList(s);
+    }
+
+    private void filledWithNegativeOne(String[] s) {
+        for (int i = 0; i < s.length; i ++) {
+            s[i] = NEGATIVE_ONE;
+        }
     }
 
     private List<WebSiteDataDO> generateWebsiteList(String[] str) {

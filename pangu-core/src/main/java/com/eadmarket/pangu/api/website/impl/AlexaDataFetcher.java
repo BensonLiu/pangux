@@ -13,7 +13,7 @@ class AlexaDataFetcher extends AbstractDataFetcher {
 	
 	@Override
 	protected List<WebSiteDataDO> exactValueFromHtml(String htmlContent) {
-		List<WebSiteDataDO> list = Collections.emptyList();
+		List<WebSiteDataDO> list = Lists.newArrayList();
 		
 		if(htmlContent.contains(ALEXA_CHINAZ_URL)&&htmlContent.contains("\">")){
             int startIndex = htmlContent.indexOf(ALEXA_CHINAZ_URL);
@@ -23,11 +23,17 @@ class AlexaDataFetcher extends AbstractDataFetcher {
             String url = currentUrl.replace("≈ ","");
             if(!url.contains("排名")) {
             	String value = getHTMLContent(url);
-            	list = translateToList(value);
+                list.addAll(translateToList(value));
             }
         }
-		
-		return list;
+
+        if (!list.isEmpty()) {
+            list.add(new WebSiteDataDO("alexa", "success", "true"));
+        } else {
+            list.add(new WebSiteDataDO("alexa", "success", "false"));
+        }
+
+        return list;
 	}
 
     /**
