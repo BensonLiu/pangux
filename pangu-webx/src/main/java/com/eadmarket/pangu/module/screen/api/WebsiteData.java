@@ -15,6 +15,11 @@ import com.alibaba.fastjson.JSON;
 import com.eadmarket.pangu.api.website.DataFetcherManager;
 import com.google.common.collect.Maps;
 
+/**
+ * 站长助手使用的数据服务
+ *
+ * @author liuyongpo@gmail.com
+ */
 public class WebsiteData {
 	
 	@Resource private DataFetcherManager dataFetcherManager;
