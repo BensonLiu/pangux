@@ -12,12 +12,21 @@ import lombok.ToString;
  */
 @Data@ToString
 public class ReportDO {
+    /**
+     * 记录编号
+     */
 	private Long id;
-	
+    /**
+     * 广告位编号
+     */
 	private Long positionId;
-	
+    /**
+     * 产品编号
+     */
 	private Long productId;
-	
+    /**
+     * 交易编号
+     */
 	private Long tradeId;
 	/**
 	 * 展示次数
@@ -39,6 +48,8 @@ public class ReportDO {
 	 * 创建时间
 	 */
 	private Date gmtCreate;
-	
+    /**
+     * 访问来源ip
+     */
 	private String ip;
 }

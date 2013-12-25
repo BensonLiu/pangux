@@ -5,6 +5,7 @@
 <configuration>
   <typeAliases>
   	<package name="com.eadmarket.pangu.domain"/>
+    <package name="com.eadmarket.pangu.query"/>
   	<package name="com.eadmarket.pangu.dao.typehandler"/>
   </typeAliases>
   <typeHandlers>
@@ -18,5 +19,6 @@
     <mapper resource="com/eadmarket/pangu/sqlmap/mapper/RechargeMapper.xml"/>
     <mapper resource="com/eadmarket/pangu/sqlmap/mapper/TradeMapper.xml"/>
     <mapper resource="com/eadmarket/pangu/sqlmap/mapper/FinanceMapper.xml"/>
+    <mapper resource="com/eadmarket/pangu/sqlmap/mapper/ReportMapper.xml"/>
   </mappers>
 </configuration>

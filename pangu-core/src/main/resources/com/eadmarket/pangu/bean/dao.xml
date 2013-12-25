@@ -14,5 +14,6 @@
 	<bean id="userDao" class="com.eadmarket.pangu.dao.user.impl.UserDaoImpl" />
 	
 	<bean id="financeDao" class="com.eadmarket.pangu.dao.finance.impl.FinanceDaoImpl" />
-	
+
+    <bean id="reportDao" class="com.eadmarket.pangu.dao.report.impl.ReportDaoImpl" />
 </beans>
