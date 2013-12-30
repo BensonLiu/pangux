@@ -2,12 +2,9 @@ package com.eadmarket.pangu.component.impl;
 
 import com.eadmarket.pangu.component.ResponseAdvertiseComponent;
 import com.eadmarket.pangu.domain.AdvertiseDO;
-import org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean;
 
 import javax.annotation.Resource;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * 响应广告位的浏览和点击事件，异步实现方式

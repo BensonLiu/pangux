@@ -35,6 +35,8 @@ public class ViewAdvertise {
 
         Long advertiseId = runData.getParameters().getLong("aid", -1);
 
+        context.put("aid", advertiseId);
+
         if (advertiseId <= 0) {
             context.put("success", "false");
             return;
@@ -67,11 +69,14 @@ public class ViewAdvertise {
                 String content = generateAdvertiseDisplayUrl(advertiseDO.getFormat(), contractDO.getDisplayContent());
                 extractAdvertiseVOAndSendViewEvent(context, advertiseDO, remoteAddress, content, sendViewEvent);
             }
-
         } catch (ManagerException ex) {
             context.put("success", "false");
             LOG.error("ViewAdvertise, advertiseId=" + advertiseId, ex);
         }
+        /*
+         * 设置格式，以备跨域请求需求
+         */
+        runData.getResponse().setContentType("text/javascript");
     }
 
     private void extractAdvertiseVOAndSendViewEvent(Context context, AdvertiseDO advertiseDO, String remoteAddr,

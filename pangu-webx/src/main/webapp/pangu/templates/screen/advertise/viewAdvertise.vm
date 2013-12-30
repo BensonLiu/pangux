@@ -1,7 +1,7 @@
 #if($!success == "false")
-    #noescape(){"success":"$!success"}#end
+    var eadmarket_ad_detail_$!aid = #noescape(){"success":"$!success"}#end
 #else
-    #noescape(){"success":"$!success","clickUrl":"$!advertiseInfoVO.clickUrl",
+    var eadmarket_ad_detail_$!aid = #noescape(){"success":"$!success","clickUrl":"$!advertiseInfoVO.clickUrl",
     "type":"$!advertiseInfoVO.type","content":"$!advertiseInfoVO.content","height":"$!advertiseInfoVO.height",
     "width":"$!advertiseInfoVO.width","style":"$!advertiseInfoVO.style"}
     #end
