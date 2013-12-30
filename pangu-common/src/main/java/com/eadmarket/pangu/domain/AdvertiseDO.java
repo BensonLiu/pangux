@@ -11,8 +11,15 @@ import lombok.ToString;
  * 
  * @author liuyongpo@gmail.com
  */
-@Data@ToString
-public class PositionDO {
+@Data @ToString
+public final class AdvertiseDO {
+
+    public final static Integer TEXT_FORMAT = 0;
+
+    public final static Integer IMAGE_FORMAT = 1;
+
+    public final static Integer VIDEO_FORMAT = 2;
+
 	/**
 	 * 主键
 	 */
@@ -48,21 +55,30 @@ public class PositionDO {
 	/**
 	 * 广告位状态
 	 */
-	private PositionStatus status;
+	private AdvertiseStatus status;
 	/**
 	 * 广告收益，以分为单位
 	 */
 	private Long profit;
-	
+    /**
+     * 广告位的样式
+     */
+    private String style;
+    /**
+     * 默认展示内容
+     */
+    private String defaultDisplayContent;
+    /**
+     * 广告位对应的广告契约
+     */
+    private AdvertiseContractDO contractDO;
+    /**
+     * FIXME！以后才会需要
+     */
 	private Long ownerId;
-	
-	/**
-	 * 广告位对应的激活链接
-	 */
-	private String activeUrl;
-	
-	//private Integer process;
-	
+
+    private String activeUrl;
+
 	public double getPriceYuan() {
 		return (double)(price / 100);
 	}
@@ -72,19 +88,27 @@ public class PositionDO {
 	}
 	
 	public boolean isOnSale() {
-		return PositionStatus.ON_SALE == status;
+		return AdvertiseStatus.ON_SALE == status;
 	}
+
+    public boolean isCanReserve() {
+        return AdvertiseStatus.CAN_RESERVE == status;
+    }
+
+    public boolean isSoldOut() {
+        return AdvertiseStatus.SOLD_OUT == status;
+    }
 	
-	public static enum PositionStatus implements IEnum {
+	public static enum AdvertiseStatus implements IEnum {
 		ON_SALE(0, "闲置中"),
 		SOLD_OUT(1, "已卖出"),
-		LOCKED(2, "已锁定"),
+		CAN_RESERVE(2, "可预订"),
 		;
 		
 		@Getter private final int code;
 		@Getter private final String desc;
 		
-		private PositionStatus(final int code, final String desc) {
+		private AdvertiseStatus(final int code, final String desc) {
 			this.code = code;
 			this.desc = desc;
 		}

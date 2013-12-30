@@ -9,9 +9,9 @@ import com.eadmarket.pangu.DaoException;
 import com.eadmarket.pangu.ExceptionCode;
 import com.eadmarket.pangu.ManagerException;
 import com.eadmarket.pangu.common.Query;
-import com.eadmarket.pangu.dao.position.PositionDao;
+import com.eadmarket.pangu.dao.position.AdvertiseDao;
 import com.eadmarket.pangu.dao.project.ProjectDao;
-import com.eadmarket.pangu.domain.PositionDO;
+import com.eadmarket.pangu.domain.AdvertiseDO;
 import com.eadmarket.pangu.domain.ProjectDO;
 import com.eadmarket.pangu.domain.ProjectDO.ProjectStatus;
 import com.eadmarket.pangu.dto.CreateProjectContext;
@@ -27,7 +27,7 @@ import com.eadmarket.pangu.query.ProjectQuery;
 class ProjectManagerImpl implements ProjectManager {
 
 	@Resource private ProjectDao projectDao;
-	@Resource private PositionDao positionDao;
+	@Resource private AdvertiseDao advertiseDao;
 	
 	@Override
 	public ProjectDO getById(Long id) throws ManagerException {
@@ -43,7 +43,7 @@ class ProjectManagerImpl implements ProjectManager {
 			throws ManagerException {
 		ProjectDO project = getById(id);
 		try {
-			List<PositionDO> positions = positionDao.getByProjectId(id);
+			List<AdvertiseDO> positions = advertiseDao.getByProjectId(id);
 			project.setPositions(positions);
 		} catch (DaoException ex) {
 			throw new ManagerException(ExceptionCode.SYSTEM_ERROR, "id:" + id, ex);

@@ -42,7 +42,15 @@
 	
 	<update id="updateReportImpAndClick" parameterType="ReportDO">
 		update report
-        set impression = impression + #{impression}, click = click + #{click}
+		<set>
+            date = now(),
+            <if test="impression != null">
+                impression = impression + #{impression},
+            </if>
+            <if test="click != null">
+                click = click + #{click}
+            </if>
+		</set>
 		where id = #{id}
 	</update>
 </mapper>

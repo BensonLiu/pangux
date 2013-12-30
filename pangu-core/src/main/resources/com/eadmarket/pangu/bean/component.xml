@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	<bean id="executorService" class="org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean">
+        <property name="corePoolSize" value="50"/>
+        <property name="maxPoolSize" value="100"/>
+        <property name="queueCapacity" value="500"/>
+        <property name="threadNamePrefix" value="ResponseAdvertise-" />
+        <property name="rejectedExecutionHandler">
+            <bean class="com.eadmarket.pangu.component.LogRejectedExecutionHandler"/>
+        </property>
+	</bean>
+
+    <bean id="syncResponseAdvertiseComponent" class="com.eadmarket.pangu.component.impl.SyncResponseAdvertiseComponent"/>
+
+    <bean id="responseAdvertiseComponent" class="com.eadmarket.pangu.component.impl.AsyncResponseAdvertiseComponent" />
+
+</beans>

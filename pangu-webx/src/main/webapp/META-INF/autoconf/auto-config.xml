@@ -6,8 +6,10 @@
 			<validator name="choice" choice="trace, debug, info, warn, error" />
 		</property>
 		<property name="eadmarket.log.root" description="日志输出路径" defaultValue="/Users/liu/logs/eadmarket/" />
+        <property name="eadmarket.com" description="主干域名地址" defaultValue="www.eadmarket.com" />
 	</group>
 	<script>
 		<generate template="WEB-INF/web.xml" />
+        <generate template="WEB-INF/common/uris.xml" />
 	</script>
 </config>

@@ -13,7 +13,7 @@
   </typeHandlers>
   <mappers>
     <mapper resource="com/eadmarket/pangu/sqlmap/mapper/UserMapper.xml"/>
-    <mapper resource="com/eadmarket/pangu/sqlmap/mapper/PositionMapper.xml"/>
+    <mapper resource="com/eadmarket/pangu/sqlmap/mapper/AdvertiseMapper.xml"/>
     <mapper resource="com/eadmarket/pangu/sqlmap/mapper/ProjectMapper.xml"/>
     <mapper resource="com/eadmarket/pangu/sqlmap/mapper/ProductMapper.xml"/>
     <mapper resource="com/eadmarket/pangu/sqlmap/mapper/RechargeMapper.xml"/>

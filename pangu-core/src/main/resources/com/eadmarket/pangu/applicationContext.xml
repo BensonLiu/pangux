@@ -4,6 +4,7 @@
 	<import resource="bean/persistent.xml"/>
 	<import resource="bean/dao.xml"/>
 	<import resource="bean/manager.xml"/>
+    <import resource="bean/component.xml"/>
 	
 	<import resource="bean/timer.xml"/>
 	<import resource="bean/util.xml"/>

@@ -1,4 +1,4 @@
-package com.eadmarket.pangu.user;
+package com.eadmarket.pangu.dao;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;

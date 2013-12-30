@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.eadmarket.pangu.domain.AdvertiseDO;
 import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,11 +18,9 @@ import com.eadmarket.pangu.DaoException;
 import com.eadmarket.pangu.ExceptionCode;
 import com.eadmarket.pangu.ManagerException;
 import com.eadmarket.pangu.common.Query;
-import com.eadmarket.pangu.dao.position.PositionDao;
+import com.eadmarket.pangu.dao.position.AdvertiseDao;
 import com.eadmarket.pangu.dao.trade.TradeDao;
 import com.eadmarket.pangu.dao.user.UserDao;
-import com.eadmarket.pangu.domain.PositionDO;
-import com.eadmarket.pangu.domain.PositionDO.PositionStatus;
 import com.eadmarket.pangu.domain.TradeDO;
 import com.eadmarket.pangu.domain.TradeDO.TradeStatus;
 import com.eadmarket.pangu.dto.CreateTradeContext;
@@ -39,40 +38,40 @@ class TradeManagerImpl implements TradeManager {
 	
 	@Resource private UserDao userDao;
 	
-	@Resource private PositionDao positionDao;
+	@Resource private AdvertiseDao advertiseDao;
 	
 	@Resource private TransactionTemplate adTransactionTemplate;
 	
 	@Override
 	public Long createTrade(final CreateTradeContext tradeContext)
 			throws ManagerException {
-		final PositionDO positionDO;
+		final AdvertiseDO advertiseDO;
 		try {
-			positionDO = positionDao.getById(tradeContext.getPositionId());
+			advertiseDO = advertiseDao.getById(tradeContext.getPositionId());
 		} catch (DaoException ex) {
 			throw new ManagerException(ExceptionCode.SYSTEM_ERROR, ex);
 		}
-		if (positionDO == null) {
+		if (advertiseDO == null) {
 			throw new ManagerException(ExceptionCode.POSITION_NOT_EXIST);
 		}
-		if (!positionDO.isOnSale()) {
+		if (!advertiseDO.isOnSale()) {
 			throw new ManagerException(ExceptionCode.POSITION_NOT_ON_SALE);
 		}
-		final TradeDO trade = generateTradeDO(tradeContext, positionDO);
+		final TradeDO trade = generateTradeDO(tradeContext, advertiseDO);
 		ExceptionCode code = adTransactionTemplate.execute(new TransactionCallback<ExceptionCode>() {
 
 			@Override
 			public ExceptionCode doInTransaction(TransactionStatus status) {
 				try {
-					boolean reduceCach = userDao.reduceCachFrom(positionDO.getOwnerId(), trade.getTotalFee());
+					boolean reduceCach = userDao.reduceCachFrom(advertiseDO.getOwnerId(), trade.getTotalFee());
 					if (!reduceCach) {
 						return ExceptionCode.ACCOUNT_HAVE_NO_ENGHOU_MONEY;
 					}
 					
-					PositionDO positionParam = new PositionDO();
-					positionParam.setId(positionDO.getId());
-					positionParam.setStatus(PositionStatus.SOLD_OUT);
-					int updateCount = positionDao.updatePositionById(positionParam);
+					AdvertiseDO positionParam = new AdvertiseDO();
+					positionParam.setId(advertiseDO.getId());
+					positionParam.setStatus(AdvertiseDO.AdvertiseStatus.SOLD_OUT);
+					int updateCount = advertiseDao.updateAdvertiseById(positionParam);
 					if (updateCount <= 0) {
 						status.setRollbackOnly();
 						return ExceptionCode.POSITION_NOT_ON_SALE;
@@ -96,9 +95,9 @@ class TradeManagerImpl implements TradeManager {
 		return trade.getId();
 	}
 	
-	private TradeDO generateTradeDO(CreateTradeContext tradeContext, PositionDO positionDO) {
+	private TradeDO generateTradeDO(CreateTradeContext tradeContext, AdvertiseDO advertiseDO) {
 		TradeDO trade = new TradeDO();
-		trade.setSellerId(positionDO.getOwnerId());
+		trade.setSellerId(advertiseDO.getOwnerId());
 		trade.setBuyerId(tradeContext.getBuyerId());
 		trade.setNum(tradeContext.getNum());
 		trade.setPositionId(tradeContext.getPositionId());

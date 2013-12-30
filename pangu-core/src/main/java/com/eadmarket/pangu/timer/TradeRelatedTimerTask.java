@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.eadmarket.pangu.domain.*;
 import lombok.Setter;
 
 import org.apache.commons.lang3.time.DateUtils;
@@ -19,17 +20,12 @@ import org.springframework.transaction.support.TransactionTemplate;
 import com.eadmarket.pangu.DaoException;
 import com.eadmarket.pangu.common.Query;
 import com.eadmarket.pangu.dao.finance.FinanceDao;
-import com.eadmarket.pangu.dao.position.PositionDao;
+import com.eadmarket.pangu.dao.position.AdvertiseDao;
 import com.eadmarket.pangu.dao.product.ProductDao;
 import com.eadmarket.pangu.dao.trade.TradeDao;
 import com.eadmarket.pangu.dao.user.UserDao;
-import com.eadmarket.pangu.domain.FinanceDO;
-import com.eadmarket.pangu.domain.PositionDO;
-import com.eadmarket.pangu.domain.PositionDO.PositionStatus;
-import com.eadmarket.pangu.domain.ProductDO;
-import com.eadmarket.pangu.domain.TradeDO;
+import com.eadmarket.pangu.domain.AdvertiseDO;
 import com.eadmarket.pangu.domain.TradeDO.TradeStatus;
-import com.eadmarket.pangu.domain.UserDO;
 import com.eadmarket.pangu.query.TradeQuery;
 import com.eadmarket.pangu.util.email.EmailService;
 import com.google.common.collect.Maps;
@@ -56,7 +52,7 @@ public class TradeRelatedTimerTask {
 	private TransactionTemplate adTransactionTemplate;
 	
 	@Resource
-	private PositionDao positionDao;
+	private AdvertiseDao advertiseDao;
 	
 	@Resource
 	private ProductDao productDao;
@@ -85,10 +81,10 @@ public class TradeRelatedTimerTask {
 				try {
 					int updateCount = tradeDao.updateStatus(trade.getId(), trade.getStatus(), TradeStatus.COMPLETED);
 					if (updateCount > 0) {
-						PositionDO position = new PositionDO();
+						AdvertiseDO position = new AdvertiseDO();
 						position.setId(trade.getPositionId());
-						position.setStatus(PositionStatus.ON_SALE);
-						positionDao.updatePositionById(position);
+						position.setStatus(AdvertiseDO.AdvertiseStatus.ON_SALE);
+						advertiseDao.updateAdvertiseById(position);
 						LOG.warn("Trade {} expired, update position {} to ON_SALE", trade.getId(), trade.getPositionId());
 					} else {
 						result = Boolean.FALSE;
@@ -108,7 +104,7 @@ public class TradeRelatedTimerTask {
 				UserDO seller = userDao.getById(trade.getSellerId());
 				Map<String, Object> emailParam = Maps.newHashMap();
 				emailParam.put("name", seller.getNick());
-				PositionDO position = positionDao.getById(trade.getPositionId());
+				AdvertiseDO position = advertiseDao.getById(trade.getPositionId());
 				emailParam.put("title", position.getTitle());
 				emailService.sendEmail("201410141717", seller.getEmail(), emailParam);
 			} catch (Exception ex) {
@@ -123,7 +119,7 @@ public class TradeRelatedTimerTask {
 				ProductDO product = productDao.getById(trade.getProductId());
 				emailParam.put("title", product.getName());
 				
-				PositionDO position = positionDao.getById(trade.getPositionId());
+				AdvertiseDO position = advertiseDao.getById(trade.getPositionId());
 				emailParam.put("positionTitle", position.getTitle());
 				emailService.sendEmail("201410141747", buyer.getEmail(), emailParam);
 			} catch (Exception ex) {
@@ -206,7 +202,7 @@ public class TradeRelatedTimerTask {
 				/*
 				 * 2.增加广告位收益
 				 */
-				positionDao.updateProfitById(trade.getPositionId(), cash);
+				advertiseDao.updateProfitById(trade.getPositionId(), cash);
 				/*
 				 * 3.插入卖家财务记录
 				 */

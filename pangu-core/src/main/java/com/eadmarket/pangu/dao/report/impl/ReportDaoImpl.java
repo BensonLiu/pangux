@@ -39,6 +39,8 @@ class ReportDaoImpl extends BaseDao implements ReportDao {
 
     @Override
     public void updateReportImpAndClick(ReportDO reportDO) throws DaoException {
-        update("ReportDao.updateReportImpAndClick", reportDO);
+        if (reportDO.getId() != null && (reportDO.getClick() != null || reportDO.getImpression() != null)) {
+            update("ReportDao.updateReportImpAndClick", reportDO);
+        }
     }
 }

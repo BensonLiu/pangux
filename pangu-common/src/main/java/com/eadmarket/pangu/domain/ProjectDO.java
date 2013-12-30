@@ -63,7 +63,7 @@ public class ProjectDO {
 	/**
 	 * 网站下的广告位
 	 */
-	private List<PositionDO> positions = Collections.emptyList();
+	private List<AdvertiseDO> positions = Collections.emptyList();
 	
 	public static enum ProjectStatus implements IEnum {
 		INVALIDE(0, "未验证"),

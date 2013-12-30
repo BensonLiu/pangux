@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans default-autowire="byName">
 	
-	<bean id="positionManager" class="com.eadmarket.pangu.manager.position.impl.PositionManagerImpl" />
+	<bean id="advertiseManager" class="com.eadmarket.pangu.manager.position.impl.AdvertiseManagerImpl" />
 	
 	<bean id="productManager" class="com.eadmarket.pangu.manager.product.impl.ProductManagerImpl" />
 	

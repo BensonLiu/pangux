@@ -1,4 +1,4 @@
-package com.eadmarket.pangu.user;
+package com.eadmarket.pangu.dao;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -12,12 +12,12 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.eadmarket.pangu.dao.position.AdvertiseDao;
 import org.junit.Test;
 
 import com.eadmarket.pangu.BaseTest;
 import com.eadmarket.pangu.DaoException;
 import com.eadmarket.pangu.common.Query;
-import com.eadmarket.pangu.dao.position.PositionDao;
 import com.eadmarket.pangu.dao.project.ProjectDao;
 import com.eadmarket.pangu.domain.ProjectDO;
 import com.eadmarket.pangu.query.ProjectQuery;
@@ -30,7 +30,7 @@ public class ProjectDaoTest extends BaseTest {
 	
 	@Resource private ProjectDao projectDao;
 	
-	@Resource private PositionDao positionDao;
+	@Resource private AdvertiseDao advertiseDao;
 	
 	@Resource private WebsiteAlexaUpdator websiteAlexaUpdator;
 	
