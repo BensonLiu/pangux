@@ -9,8 +9,6 @@ import com.eadmarket.pangu.domain.AdvertiseDO;
 /**
  * 广告位的存储层接口
  * 
- * @throws DaoException
- * 
  * @author liuyongpo@gmail.com
  */
 public interface AdvertiseDao {
@@ -32,6 +30,14 @@ public interface AdvertiseDao {
      * @return 关联的活跃广告契约
      */
     AdvertiseContractDO getActiveContractByAdvertiseId(Long advertiseId) throws DaoException;
+
+    /**
+     * 更新契约表状态
+     *
+     * @param advertiseId 广告位编号
+     * @param status 要更新到的状态
+     */
+    void updateContractStatusByAdvertiseId(Long advertiseId, Integer status) throws DaoException;
 
 	/**
 	 * 获取广告位编号大于minId并且状态是status的广告位

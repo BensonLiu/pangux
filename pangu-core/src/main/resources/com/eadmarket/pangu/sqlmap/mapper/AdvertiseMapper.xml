@@ -59,7 +59,13 @@
         from advertise_contract
         where advertise_id = #{advertiseId} and status = 1
     </select>
-	
+
+    <update id="updateContractStatusByAdvertiseId" parameterType="map">
+        update advertise_contract
+        set status = #{status}, gmt_modified = now()
+        where advertise_id = #{advertiseId}
+    </update>
+
 	<select id="getById" resultMap="AdvertiseMap" parameterType="long">
 		select 
 		<include refid="allFields"/>

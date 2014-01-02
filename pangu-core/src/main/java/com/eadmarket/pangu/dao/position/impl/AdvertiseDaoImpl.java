@@ -53,6 +53,14 @@ class AdvertiseDaoImpl extends BaseDao implements AdvertiseDao {
     }
 
     @Override
+    public void updateContractStatusByAdvertiseId(Long advertiseId, Integer status) throws DaoException {
+        Map<String, Object> param = Maps.newHashMap();
+        param.put("status", status);
+        param.put("advertiseId", advertiseId);
+        update("AdvertiseDao.updateContractStatusByAdvertiseId", param);
+    }
+
+    @Override
 	public List<AdvertiseDO> queryPositionsForTimer(Long minId, AdvertiseDO.AdvertiseStatus status)
 			throws DaoException {
 		Map<String, Object> param = Maps.newHashMap();

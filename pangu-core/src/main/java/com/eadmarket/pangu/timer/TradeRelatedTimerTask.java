@@ -81,10 +81,17 @@ public class TradeRelatedTimerTask {
 				try {
 					int updateCount = tradeDao.updateStatus(trade.getId(), trade.getStatus(), TradeStatus.COMPLETED);
 					if (updateCount > 0) {
-						AdvertiseDO position = new AdvertiseDO();
-						position.setId(trade.getPositionId());
-						position.setStatus(AdvertiseDO.AdvertiseStatus.ON_SALE);
-						advertiseDao.updateAdvertiseById(position);
+						AdvertiseDO advertise = new AdvertiseDO();
+						advertise.setId(trade.getPositionId());
+						advertise.setStatus(AdvertiseDO.AdvertiseStatus.ON_SALE);
+						/*
+						 * 更新广告位状态
+						 */
+                        advertiseDao.updateAdvertiseById(advertise);
+                        /*
+                         * 更新广告契约，置为废弃状态
+                         */
+                        advertiseDao.updateContractStatusByAdvertiseId(trade.getPositionId(), AdvertiseContractDO.INVALID_STATUS);
 						LOG.warn("Trade {} expired, update position {} to ON_SALE", trade.getId(), trade.getPositionId());
 					} else {
 						result = Boolean.FALSE;

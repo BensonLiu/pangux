@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -51,5 +52,17 @@ public class AdvertiseDaoTest extends BaseTest {
         AdvertiseContractDO nullAdvertise = advertiseDao.getActiveContractByAdvertiseId(notExistedAdvertiseId);
 
         assertThat(nullAdvertise, is(nullValue()));
+    }
+
+    @Test public void testUpdateContractStatusByAdvertiseId_with_unExistedContract() throws DaoException {
+        advertiseDao.updateContractStatusByAdvertiseId(0L, AdvertiseContractDO.INVALID_STATUS);
+    }
+
+    @Test public void testUpdateContractStatusByAdvertiseId_with_existedContract() throws DaoException {
+        advertiseDao.updateContractStatusByAdvertiseId(24L, AdvertiseContractDO.INVALID_STATUS);
+
+        Map<String,Object> map = adJdbcTemplate.queryForMap("select status from advertise_contract where advertise_id = 24");
+        assertThat(map.isEmpty(), is(false));
+        assertThat((Integer) map.get("status"), is(equalTo(AdvertiseContractDO.INVALID_STATUS)));
     }
 }
