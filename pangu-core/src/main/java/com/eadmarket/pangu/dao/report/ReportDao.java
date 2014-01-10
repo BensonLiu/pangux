@@ -36,4 +36,7 @@ public interface ReportDao {
      * @param reportDO 更新参数
      */
     void updateReportImpAndClick(ReportDO reportDO) throws DaoException;
+
+
+    List<ReportDO> getReportDOsByMinId(Long minId, Integer pageSize) throws DaoException;
 }

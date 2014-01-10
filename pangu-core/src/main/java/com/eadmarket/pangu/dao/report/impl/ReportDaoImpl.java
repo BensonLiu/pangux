@@ -43,4 +43,9 @@ class ReportDaoImpl extends BaseDao implements ReportDao {
             update("ReportDao.updateReportImpAndClick", reportDO);
         }
     }
+
+    @Override
+    public List<ReportDO> getReportDOsByMinId(Long minId, Integer pageSize) throws DaoException {
+        return null;
+    }
 }
