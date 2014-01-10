@@ -58,6 +58,7 @@
         <include refid="allFields_contract"/>
         from advertise_contract
         where advertise_id = #{advertiseId} and status = 1
+        limit 1
     </select>
 
     <update id="updateContractStatusByAdvertiseId" parameterType="map">

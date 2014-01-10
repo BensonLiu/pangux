@@ -1,0 +1,59 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="KVDao">
+
+    <update id="updateContractStatusByAdvertiseId" parameterType="map">
+        update advertise_contract
+        set status = #{status}, gmt_modified = now()
+        where advertise_id = #{advertiseId}
+    </update>
+
+	<select id="getByKey" parameterType="string">
+		select 
+
+		from kv_tab
+		where id = #{id}
+	</select>
+	
+	<select id="getByProjectId" resultMap="AdvertiseMap" parameterType="long">
+		select
+		<include refid="allFields"/>
+		from advertise
+		where project =#{id}
+	</select>
+	
+	<insert id="addAdvertise" parameterType="AdvertiseDO" useGeneratedKeys="true" keyProperty="id">
+	    insert into advertise (project, title, content, format, width, height, price, profit, state) 
+	    values (#{projectId}, #{title}, #{content}, #{format}, #{width}, #{height}, #{price}, #{profit},#{status,typeHandler=AdvertiseStatusTypeHandler})
+	</insert>
+	
+	<update id="updateAdvertiseById" parameterType="AdvertiseDO">
+		update advertise
+		<set>
+			<if test="status != null">state=#{status,typeHandler=AdvertiseStatusTypeHandler},</if>
+			<if test="price != null">price=#{price},</if>
+			<if test="title != null">title=#{title},</if>
+			<if test="content != null">content=#{content},</if>
+			<if test="width != null">width=#{width},</if>
+			<if test="height != null">height=#{height},</if>
+			<if test="format != null">format=#{format}</if>
+		</set>
+		where id =#{id}
+	</update>
+	
+	<update id="updateProfitById" parameterType="java.util.HashMap">
+		update advertise
+		set profit = profit + #{addProfit}
+		where id = #{id}
+	</update>
+	
+	<select id="queryPositionsForTimer" resultMap="AdvertiseMap" parameterType="map">
+		select
+		<include refid="allFields"/>
+		from advertise
+		where id > #{minId} and state = #{status,typeHandler=AdvertiseStatusTypeHandler}
+		order by id
+		limit 30
+	</select>
+</mapper>

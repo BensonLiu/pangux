@@ -33,6 +33,7 @@
 		<include refid="allFields"/>
 		from report
 		where advertise = #{positionId} and ip = #{ip}
+        limit 1
 	</select>
 
 	<insert id="insert" parameterType="ReportDO" useGeneratedKeys="true" keyProperty="id">
