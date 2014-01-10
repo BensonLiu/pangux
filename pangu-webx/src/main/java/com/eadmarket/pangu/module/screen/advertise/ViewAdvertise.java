@@ -101,10 +101,8 @@ public class ViewAdvertise {
         advertiseInfoVO.setType(advertiseDO.getFormat());
         advertiseInfoVO.setWidth(advertiseDO.getWidth());
         advertiseInfoVO.setHeight(advertiseDO.getHeight());
-        String style = advertiseDO.getStyle();
-        if (StringUtils.isNotBlank(style)) {
-            advertiseInfoVO.setStyle(style);
-        }
+        advertiseInfoVO.setStatus(advertiseDO.getStatus().getCode());
+
         return advertiseInfoVO;
     }
 

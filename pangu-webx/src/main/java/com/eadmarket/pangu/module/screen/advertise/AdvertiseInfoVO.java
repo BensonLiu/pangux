@@ -19,5 +19,6 @@ public class AdvertiseInfoVO {
 
     private Integer height;
 
-    private String style = "";
+    private Integer status;
+
 }
