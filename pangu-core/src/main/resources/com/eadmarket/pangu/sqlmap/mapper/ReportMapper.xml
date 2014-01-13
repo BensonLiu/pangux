@@ -54,4 +54,12 @@
 		</set>
 		where id = #{id}
 	</update>
+
+    <select id="getReportDOsByMinId" parameterType="map" resultMap="reportMap">
+        select
+        <include refid="allFields"/>
+        from report
+        where id > #{minId}
+        limit #{pageSize}
+    </select>
 </mapper>

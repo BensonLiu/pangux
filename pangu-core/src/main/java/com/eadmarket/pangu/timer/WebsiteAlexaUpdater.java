@@ -27,9 +27,9 @@ import com.eadmarket.pangu.query.ProjectQuery;
  * 
  * @author liuyongpo@gmail.com
  */
-public final class WebsiteAlexaUpdator {
+public final class WebsiteAlexaUpdater {
 	
-	private final static Logger LOG = LoggerFactory.getLogger(WebsiteAlexaUpdator.class);
+	private final static Logger LOG = LoggerFactory.getLogger(WebsiteAlexaUpdater.class);
 	
 	@Resource private ProjectDao projectDao;
 	

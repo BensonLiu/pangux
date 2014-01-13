@@ -13,6 +13,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.eadmarket.pangu.dao.position.AdvertiseDao;
+import com.eadmarket.pangu.timer.WebsiteAlexaUpdater;
 import org.junit.Test;
 
 import com.eadmarket.pangu.BaseTest;
@@ -21,7 +22,6 @@ import com.eadmarket.pangu.common.Query;
 import com.eadmarket.pangu.dao.project.ProjectDao;
 import com.eadmarket.pangu.domain.ProjectDO;
 import com.eadmarket.pangu.query.ProjectQuery;
-import com.eadmarket.pangu.timer.WebsiteAlexaUpdator;
 
 /**
  * @author liuyongpo@gmail.com
@@ -32,7 +32,7 @@ public class ProjectDaoTest extends BaseTest {
 	
 	@Resource private AdvertiseDao advertiseDao;
 	
-	@Resource private WebsiteAlexaUpdator websiteAlexaUpdator;
+	@Resource private WebsiteAlexaUpdater websiteAlexaUpdater;
 	
 	@Test public void testCount() throws DaoException {
 		ProjectQuery projectQuery = new ProjectQuery();

@@ -1,0 +1,31 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ReportCompDao">
+
+    <select id="getIdByReportCompQuery" parameterType="ReportCompQuery" resultType="long">
+        select id
+        from report_comp
+        where trade_id = #{tradeId} and time_type = #{timeType} and time_value = #{timeValue}
+    </select>
+
+    <update id="updateReportCompById" parameterType="ReportCompQuery">
+        update report_comp
+        <set>
+            <if test="clickNum != null">
+                click_num = click_num + #{clickNum},
+            </if>
+            <if test="displayNum != null">
+                display_num = display_num + #{displayNum},
+            </if>
+            gmt_modified = now()
+        </set>
+        where id = #{id}
+    </update>
+
+	<insert id="insertReportComp" parameterType="ReportCompQuery" >
+	    insert into report_comp (time_type, time_value, advertise_id, display_num, click_num, product_id, trade_id, gmt_create, gmt_modified)
+	    values (#{timeType}, #{timeValue}, #{advertiseId}, #{displayNum}, #{clickNum}, #{productId}, #{tradeId}, now(), now())
+	</insert>
+
+</mapper>

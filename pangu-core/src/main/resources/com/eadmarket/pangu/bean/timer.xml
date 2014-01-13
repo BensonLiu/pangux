@@ -5,7 +5,8 @@
 		<property name="triggers">
 			<list>
 				<ref local="tradeTrigger"/>
-				<ref local="websiteAlexaUpdatorTrigger"/>
+				<ref local="websiteAlexaUpdaterTrigger"/>
+                <ref local="reportConverterTrigger" />
 			</list>
 		</property>
 		<property name="startupDelay" value="120" />
@@ -28,16 +29,27 @@
 		</property>
 	</bean>
 	
-	<bean id="websiteAlexaUpdator" class="com.eadmarket.pangu.timer.WebsiteAlexaUpdator" />
+	<bean id="websiteAlexaUpdater" class="com.eadmarket.pangu.timer.WebsiteAlexaUpdater" />
 	
-	<bean id="websiteAlexaUpdatorTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	<bean id="websiteAlexaUpdaterTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail">
 		    <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		        <property name="concurrent" value="false"/>
-                <property name="targetObject" ref="websiteAlexaUpdator"/>
+                <property name="targetObject" ref="websiteAlexaUpdater"/>
                 <property name="targetMethod" value="execute"/>
 		    </bean>
 		</property>
 		<property name="cronExpression" value="0 10 0 * * ?"/>
 	</bean>
+
+    <bean id="reportConverterTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail">
+            <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+                <property name="concurrent" value="false"/>
+                <property name="targetObject" ref="reportConverter"/>
+                <property name="targetMethod" value="convert"/>
+            </bean>
+        </property>
+        <property name="cronExpression" value="0 0/30 * * * ?"/>
+    </bean>
 </beans>

@@ -16,4 +16,10 @@
 	<bean id="financeDao" class="com.eadmarket.pangu.dao.finance.impl.FinanceDaoImpl" />
 
     <bean id="reportDao" class="com.eadmarket.pangu.dao.report.impl.ReportDaoImpl" />
+
+    <bean id="kvDao" class="com.eadmarket.pangu.dao.kv.impl.KVDaoImpl" />
+
+    <bean id="reportCompDao" class="com.eadmarket.pangu.dao.report.impl.ReportCompDaoImpl" />
+
+    <bean id="reportInfoDao" class="com.eadmarket.pangu.dao.report.impl.ReportInfoDaoImpl" />
 </beans>

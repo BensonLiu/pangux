@@ -19,14 +19,16 @@ class KVDaoImpl extends BaseDao implements KVDao {
     @Override
     public void insertKV(String key, String value) throws DaoException {
         Map<String, Object> param = Maps.newHashMap();
-        param.put(key, value);
+        param.put("tKey", key);
+        param.put("tValue", value);
         insert("KVDao.insertKV", param);
     }
 
     @Override
     public void updateKV(String key, String value) throws DaoException {
         Map<String, Object> param = Maps.newHashMap();
-        param.put(key, value);
+        param.put("tKey", key);
+        param.put("tValue", value);
         update("KVDao.updateKV", param);
     }
 }

@@ -6,8 +6,10 @@ import com.eadmarket.pangu.dao.BaseDao;
 import com.eadmarket.pangu.dao.report.ReportDao;
 import com.eadmarket.pangu.domain.ReportDO;
 import com.eadmarket.pangu.query.ReportQuery;
+import com.google.common.collect.Maps;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * ReportDao的默认实现
@@ -46,6 +48,9 @@ class ReportDaoImpl extends BaseDao implements ReportDao {
 
     @Override
     public List<ReportDO> getReportDOsByMinId(Long minId, Integer pageSize) throws DaoException {
-        return null;
+        Map<String, Object> param = Maps.newHashMap();
+        param.put("minId", minId);
+        param.put("pageSize", pageSize);
+        return selectList("ReportDao.getReportDOsByMinId", param);
     }
 }

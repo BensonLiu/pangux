@@ -1,4 +1,4 @@
-package com.eadmarket.pangu.temp;
+package com.eadmarket.pangu.component.report;
 
 import com.eadmarket.pangu.DaoException;
 import com.eadmarket.pangu.dao.kv.KVDao;
@@ -24,57 +24,17 @@ import java.util.concurrent.TimeUnit;
  *
  * @author liuyongpo@gmail.com
  */
-public class ReportTransfer {
-
-    private static final Logger LOG = LoggerFactory.getLogger(ReportTransfer.class);
-
-    private static final String REPORT_TRANSFER_MIN_ID = "report_transfer_min_id";
-
-    private static final int PAGE_SIZE = 100;
-
-    private static final int[] TIME_TYPES = new int[]{2, 3, 4};
-
-    @Resource private KVDao kvDao;
-
-    @Resource private ReportCompDao reportCompDao;
+public class ReportConverter extends AbstractReportConverter<ReportDO> {
 
     @Resource private ReportDao reportDao;
 
-    @Setter private volatile boolean interrupt = false;
-
-    public void convert() throws DaoException {
-
-        String minIdStr = kvDao.getByKey(REPORT_TRANSFER_MIN_ID);
-
-        Long minId = 0L;
-
-        if (StringUtils.isNotBlank(minIdStr)) {
-            minId = Long.valueOf(minIdStr);
-        }
-
-        while (!interrupt) {
-            List<ReportDO> reportDOs = reportDao.getReportDOsByMinId(minId, PAGE_SIZE);
-            if (CollectionUtils.isEmpty(reportDOs)) {
-                LOG.warn("report transfer completed");
-                return;
-            }
-
-            for (ReportDO reportDO : reportDOs) {
-                mergeReportIntoReportComp(reportDO);
-                minId = reportDO.getId();
-                kvDao.updateKV(REPORT_TRANSFER_MIN_ID, minId.toString());
-            }
-
-            try {
-                TimeUnit.MILLISECONDS.sleep(10L);
-            } catch (InterruptedException ex) {
-                LOG.error("report transfer sleep interrupted", ex);
-            }
-        }
-
+    @Override
+    protected List<ReportDO> getReportSources(Long minId) throws DaoException {
+        return reportDao.getReportDOsByMinId(minId, pageSize);
     }
 
-    private void mergeReportIntoReportComp(ReportDO reportDO) throws DaoException {
+    @Override
+    protected void mergeReportIntoReportComp(ReportDO reportDO) throws DaoException {
         Long tradeId = reportDO.getTradeId();
 
         Long click = reportDO.getClick();
@@ -111,9 +71,19 @@ public class ReportTransfer {
                 reportCompQueryParam.setDisplayNum(impression);
                 reportCompQueryParam.setTradeId(reportDO.getTradeId());
                 reportCompQueryParam.setProductId(reportDO.getProductId());
+                reportCompQueryParam.setAdvertiseId(reportDO.getPositionId());
+                reportCompQueryParam.setTimeType(timeType);
+                reportCompQueryParam.setTimeValue(date);
                 reportCompDao.insertReportComp(reportCompQueryParam);
             }
         }
+    }
+
+    @Override
+    protected Long updateOffset(ReportDO report) throws DaoException {
+        Long minId = report.getId();
+        kvDao.updateKV(offsetKey, minId.toString());
+        return minId;
     }
 
 }

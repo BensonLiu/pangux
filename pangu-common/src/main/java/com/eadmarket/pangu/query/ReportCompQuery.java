@@ -23,4 +23,6 @@ public class ReportCompQuery {
     private Long displayNum;
 
     private Long productId;
+
+    private Long advertiseId;
 }

@@ -15,4 +15,14 @@
 
     <bean id="responseAdvertiseComponent" class="com.eadmarket.pangu.component.impl.AsyncResponseAdvertiseComponent" />
 
+    <bean id="reportConverter" class="com.eadmarket.pangu.component.report.ReportConverter">
+        <property name="offsetKey" value="report_offset_min_id"/>
+        <property name="pageSize" value="200"/>
+    </bean>
+
+    <bean id="reportInfoConverter" class="com.eadmarket.pangu.component.report.ReportInfoConverter">
+        <property name="offsetKey" value="report_info_offset_min_id"/>
+        <property name="pageSize" value="150"/>
+    </bean>
+
 </beans>

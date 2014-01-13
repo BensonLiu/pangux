@@ -20,5 +20,8 @@
     <mapper resource="com/eadmarket/pangu/sqlmap/mapper/TradeMapper.xml"/>
     <mapper resource="com/eadmarket/pangu/sqlmap/mapper/FinanceMapper.xml"/>
     <mapper resource="com/eadmarket/pangu/sqlmap/mapper/ReportMapper.xml"/>
+    <mapper resource="com/eadmarket/pangu/sqlmap/mapper/ReportInfoMapper.xml"/>
+    <mapper resource="com/eadmarket/pangu/sqlmap/mapper/KVMapper.xml"/>
+    <mapper resource="com/eadmarket/pangu/sqlmap/mapper/ReportCompMapper.xml"/>
   </mappers>
 </configuration>
