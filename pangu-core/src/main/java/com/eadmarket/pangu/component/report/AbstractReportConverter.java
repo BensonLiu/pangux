@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * 其他表数据迁移merge到report_comp
@@ -37,14 +38,26 @@ public abstract class AbstractReportConverter<T> {
 
     @Setter protected int pageSize = DEFAULT_PAGE_SIZE;
 
+    /**
+     * merge操作是否正在执行，防止多个线程同时执行
+     */
+    private AtomicBoolean executing = new AtomicBoolean(false);
+
     public void convert() {
 
+        if (!executing.compareAndSet(false, true)) {
+            LOG.warn("converter is executing, return now");
+            return;
+        }
+
         try {
+            LOG.warn("begin to convert");
+
             Long minId = initOffset();
             while (!interrupt) {
                 List<T> reportDOs = getReportSources(minId);
                 if (CollectionUtils.isEmpty(reportDOs)) {
-                    LOG.warn("report transfer completed");
+                    LOG.warn("report convert completed");
                     return;
                 }
                 for (T report : reportDOs) {
@@ -58,6 +71,8 @@ public abstract class AbstractReportConverter<T> {
             }
         } catch (DaoException ex) {
             LOG.error("AbstractReportConverter", ex);
+        } finally {
+            executing.set(false);
         }
 
     }

@@ -1,13 +1,14 @@
 package com.eadmarket.pangu.domain;
 
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.Date;
 
 /**
  * Created by liu on 1/13/14.
  */
-@Data
+@Data @ToString
 public class ReportInfoDO {
 
     public static final int DISPLAY_OPT_TYPE = 1;
@@ -34,6 +35,10 @@ public class ReportInfoDO {
      * 创建时间
      */
     private Date gmtCreate;
+    /**
+     * 修改时间
+     */
+    private Date gmtModified;
     /**
      * 访问来源ip
      */

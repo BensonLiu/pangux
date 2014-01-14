@@ -70,4 +70,12 @@ public abstract class BaseDao extends SqlSessionDaoSupport {
 		}
 	}
 
+    protected void delete(String statement, Object parameter) throws DaoException {
+        try {
+            getSqlSession().delete(statement, parameter);
+        } catch (DataAccessException ex) {
+            throw new DaoException(ex);
+        }
+    }
+
 }

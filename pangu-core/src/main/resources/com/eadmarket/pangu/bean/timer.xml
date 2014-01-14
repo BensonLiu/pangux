@@ -52,4 +52,43 @@
         </property>
         <property name="cronExpression" value="0 0/30 * * * ?"/>
     </bean>
+
+    <bean id="reportInfoConverterTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail">
+            <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+                <property name="concurrent" value="false"/>
+                <property name="targetObject" ref="reportInfoConverter"/>
+                <property name="targetMethod" value="convert"/>
+            </bean>
+        </property>
+        <property name="cronExpression" value="0 0/20 * * * ?"/>
+    </bean>
+
+    <bean id="reportInfoToHis" class="com.eadmarket.pangu.component.report.ReportInfoToHis"/>
+    <!--
+    <bean id="reportInfoToHisTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail">
+            <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+                <property name="concurrent" value="false"/>
+                <property name="targetObject" ref="reportInfoToHis"/>
+                <property name="targetMethod" value="execute"/>
+            </bean>
+        </property>
+        <property name="cronExpression" value="0 30 3 * * ?"/>
+    </bean>
+    -->
+
+    <bean id="reportCompCleaner" class="com.eadmarket.pangu.component.report.ReportCompCleaner" />
+    <!--
+    <bean id="reportCompCleanerTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail">
+            <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+                <property name="concurrent" value="false"/>
+                <property name="targetObject" ref="reportCompCleaner"/>
+                <property name="targetMethod" value="execute"/>
+            </bean>
+        </property>
+        <property name="cronExpression" value="0 30 3 * * ?"/>
+    </bean>
+    -->
 </beans>

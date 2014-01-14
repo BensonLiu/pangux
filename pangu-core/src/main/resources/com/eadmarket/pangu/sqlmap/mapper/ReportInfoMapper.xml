@@ -9,6 +9,7 @@
         <result column="operation_type" property="operationType" />
 		<result column="source_ip" property="ip"/>
 		<result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
 	</resultMap>
 	
 	<sql id="allFields">
@@ -17,7 +18,8 @@
 		trade_id,
 		operation_type,
 		inet_ntoa(source_ip) as source_ip,
-		gmt_create
+		FROM_UNIXTIME(gmt_create) as gmt_create,
+		gmt_modified
 	</sql>
 
     <select id="getReportInfoDOsByMinId" parameterType="map" resultMap="reportInfoMap">
@@ -28,8 +30,25 @@
         limit #{pageSize}
     </select>
 
+    <select id="getReportInfoDOsByGmtCreate" parameterType="map" resultMap="reportInfoMap">
+        select
+        <include refid="allFields"/>
+        from report_info
+        where gmt_create &lt; UNIX_TIMESTAMP(#{gmtCreate})
+        limit #{pageSize}
+    </select>
+
     <insert id="insertReportInfo" parameterType="ReportInfoDO">
         insert into report_info(source_ip, operation_type, advertise_id, trade_id, gmt_create, gmt_modified)
-        values(inet_aton(#{ip}), #{operationType}, #{advertiseId}, #{tradeId}, now(), now())
+        values(inet_aton(#{ip}), #{operationType}, #{advertiseId}, #{tradeId}, UNIX_TIMESTAMP(now()), now())
     </insert>
+
+    <insert id="insertReportInfoHis" parameterType="ReportInfoDO">
+        insert ignore into report_info_his(id, source_ip, operation_type, advertise_id, trade_id, gmt_create, gmt_modified)
+        values(#{id}, inet_aton(#{ip}), #{operationType}, #{advertiseId}, #{tradeId}, UNIX_TIMESTAMP(#{gmtCreate}), #{gmtModified})
+    </insert>
+
+    <delete id="deleteReportInfoById" parameterType="long">
+        delete from report_info where id = #{id}
+    </delete>
 </mapper>

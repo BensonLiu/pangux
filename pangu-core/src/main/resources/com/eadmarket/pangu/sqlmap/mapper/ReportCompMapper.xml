@@ -6,7 +6,8 @@
     <select id="getIdByReportCompQuery" parameterType="ReportCompQuery" resultType="long">
         select id
         from report_comp
-        where trade_id = #{tradeId} and time_type = #{timeType} and time_value = #{timeValue}
+        where trade_id = #{tradeId} and time_type = #{timeType} and time_value = unix_timestamp(#{timeValue})
+        limit 1
     </select>
 
     <update id="updateReportCompById" parameterType="ReportCompQuery">
@@ -25,7 +26,18 @@
 
 	<insert id="insertReportComp" parameterType="ReportCompQuery" >
 	    insert into report_comp (time_type, time_value, advertise_id, display_num, click_num, product_id, trade_id, gmt_create, gmt_modified)
-	    values (#{timeType}, #{timeValue}, #{advertiseId}, #{displayNum}, #{clickNum}, #{productId}, #{tradeId}, now(), now())
+	    values (#{timeType}, unix_timestamp(#{timeValue}), #{advertiseId}, #{displayNum}, #{clickNum}, #{productId}, #{tradeId}, now(), now())
 	</insert>
+
+    <select id="getRemovableIds" parameterType="map" resultType="long">
+        select id
+        from report_comp
+        where time_type = #{timeType} and time_value &lt; unix_timestamp(#{timeValue})
+        limit #{pageSize}
+    </select>
+
+    <delete id="deleteReportCompById" parameterType="long">
+        delete from report_comp where id = #{id}
+    </delete>
 
 </mapper>
