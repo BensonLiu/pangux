@@ -3,6 +3,7 @@ package com.eadmarket.pangu.component.impl;
 import com.eadmarket.pangu.ManagerException;
 import com.eadmarket.pangu.component.ResponseAdvertiseComponent;
 import com.eadmarket.pangu.domain.AdvertiseDO;
+import com.eadmarket.pangu.domain.ReportInfoDO;
 import com.eadmarket.pangu.manager.position.AdvertiseManager;
 import com.eadmarket.pangu.manager.report.ReportManager;
 import org.slf4j.Logger;
@@ -29,7 +30,7 @@ class SyncResponseAdvertiseComponent implements ResponseAdvertiseComponent {
             if (advertiseDO.isCanReserve()) {
                 advertiseManager.updateAdvertiseStatus(advertiseDO.getId(), AdvertiseDO.AdvertiseStatus.ON_SALE);
             } else if (advertiseDO.isSoldOut()) {
-                reportManager.responseForDisplay(advertiseDO, srcIp);
+                reportManager.responseForOperation(advertiseDO, srcIp, ReportInfoDO.DISPLAY_OPT_TYPE);
             }
         } catch (ManagerException ex) {
             LOG.error("advertiseId:" + advertiseDO.getId() + ",ip:" + srcIp, ex);
@@ -39,7 +40,7 @@ class SyncResponseAdvertiseComponent implements ResponseAdvertiseComponent {
     @Override
     public void responseClickAdvertise(AdvertiseDO advertiseDO, String srcIp) {
         try {
-            reportManager.responseForClick(advertiseDO, srcIp);
+            reportManager.responseForOperation(advertiseDO, srcIp, ReportInfoDO.CLICK_OPT_TYPE);
         } catch (ManagerException ex) {
             LOG.error("advertiseId:" + advertiseDO.getId() + ",ip:" + srcIp, ex);
         }

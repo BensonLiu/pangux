@@ -12,19 +12,12 @@ import com.eadmarket.pangu.domain.AdvertiseDO;
 public interface ReportManager {
 
     /**
-     * 响应广告位的展示事件
+     * 响应广告位的事件
      *
      * @param advertiseDO 广告位
      * @param ip 来源IP
+     * @param operationType 操作类型
      */
-    void responseForDisplay(AdvertiseDO advertiseDO, String ip) throws ManagerException;
-
-    /**
-     * 响应广告位的点击事件
-     *
-     * @param advertiseDO 广告位
-     * @param ip 来源IP
-     */
-    void responseForClick(AdvertiseDO advertiseDO, String ip) throws ManagerException;
+    void responseForOperation(AdvertiseDO advertiseDO, String ip, int operationType) throws ManagerException;
 
 }

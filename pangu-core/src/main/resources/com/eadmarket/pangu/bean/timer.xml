@@ -65,7 +65,7 @@
     </bean>
 
     <bean id="reportInfoToHis" class="com.eadmarket.pangu.component.report.ReportInfoToHis"/>
-    <!--
+
     <bean id="reportInfoToHisTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail">
             <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
@@ -76,7 +76,6 @@
         </property>
         <property name="cronExpression" value="0 30 3 * * ?"/>
     </bean>
-    -->
 
     <bean id="reportCompCleaner" class="com.eadmarket.pangu.component.report.ReportCompCleaner" />
     <!--
