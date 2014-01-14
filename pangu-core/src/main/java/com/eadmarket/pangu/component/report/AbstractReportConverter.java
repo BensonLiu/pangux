@@ -9,6 +9,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.BeanNameAware;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *
  * @author liuyongpo@gmail.com
  */
-public abstract class AbstractReportConverter<T> {
+public abstract class AbstractReportConverter<T> implements BeanNameAware {
 
     private static final Logger LOG = LoggerFactory.getLogger(AbstractReportConverter.class);
 
@@ -38,6 +39,8 @@ public abstract class AbstractReportConverter<T> {
 
     @Setter protected int pageSize = DEFAULT_PAGE_SIZE;
 
+    @Setter private String beanName;
+
     /**
      * merge操作是否正在执行，防止多个线程同时执行
      */
@@ -46,18 +49,18 @@ public abstract class AbstractReportConverter<T> {
     public void convert() {
 
         if (!executing.compareAndSet(false, true)) {
-            LOG.warn("converter is executing, return now");
+            LOG.warn("{} converter is executing, return now", beanName);
             return;
         }
 
         try {
-            LOG.warn("begin to convert");
+            LOG.warn("{} begin to convert", beanName);
 
             Long minId = initOffset();
             while (!interrupt) {
                 List<T> reportDOs = getReportSources(minId);
                 if (CollectionUtils.isEmpty(reportDOs)) {
-                    LOG.warn("report convert completed");
+                    LOG.warn("{} report convert completed", beanName);
                     return;
                 }
                 for (T report : reportDOs) {
