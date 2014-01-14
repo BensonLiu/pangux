@@ -7,6 +7,9 @@
 				<ref local="tradeTrigger"/>
 				<ref local="websiteAlexaUpdaterTrigger"/>
                 <ref local="reportConverterTrigger" />
+                <ref local="reportInfoConverterTrigger" />
+                <ref local="reportInfoToHisTrigger" />
+                <ref local="reportCompCleanerTrigger" />
 			</list>
 		</property>
 		<property name="startupDelay" value="120" />
@@ -78,7 +81,7 @@
     </bean>
 
     <bean id="reportCompCleaner" class="com.eadmarket.pangu.component.report.ReportCompCleaner" />
-    <!--
+
     <bean id="reportCompCleanerTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail">
             <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
@@ -87,7 +90,7 @@
                 <property name="targetMethod" value="execute"/>
             </bean>
         </property>
-        <property name="cronExpression" value="0 30 3 * * ?"/>
+        <property name="cronExpression" value="0 0 5 * * ?"/>
     </bean>
-    -->
+
 </beans>
