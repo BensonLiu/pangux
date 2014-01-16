@@ -5,7 +5,7 @@ import com.eadmarket.pangu.component.ResponseAdvertiseComponent;
 import com.eadmarket.pangu.domain.AdvertiseDO;
 import com.eadmarket.pangu.domain.ReportInfoDO;
 import com.eadmarket.pangu.manager.position.AdvertiseManager;
-import com.eadmarket.pangu.manager.report.ReportManager;
+import com.eadmarket.pangu.manager.report.ReportInfoManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +22,7 @@ class SyncResponseAdvertiseComponent implements ResponseAdvertiseComponent {
 
     @Resource private AdvertiseManager advertiseManager;
 
-    @Resource private ReportManager reportManager;
+    @Resource private ReportInfoManager reportInfoManager;
 
     @Override
     public void responseViewAdvertise(AdvertiseDO advertiseDO, String srcIp) {
@@ -30,7 +30,7 @@ class SyncResponseAdvertiseComponent implements ResponseAdvertiseComponent {
             if (advertiseDO.isCanReserve()) {
                 advertiseManager.updateAdvertiseStatus(advertiseDO.getId(), AdvertiseDO.AdvertiseStatus.ON_SALE);
             } else if (advertiseDO.isSoldOut()) {
-                reportManager.responseForOperation(advertiseDO, srcIp, ReportInfoDO.DISPLAY_OPT_TYPE);
+                reportInfoManager.responseForOperation(advertiseDO, srcIp, ReportInfoDO.DISPLAY_OPT_TYPE);
             }
         } catch (ManagerException ex) {
             LOG.error("advertiseId:" + advertiseDO.getId() + ",ip:" + srcIp, ex);
@@ -40,7 +40,7 @@ class SyncResponseAdvertiseComponent implements ResponseAdvertiseComponent {
     @Override
     public void responseClickAdvertise(AdvertiseDO advertiseDO, String srcIp) {
         try {
-            reportManager.responseForOperation(advertiseDO, srcIp, ReportInfoDO.CLICK_OPT_TYPE);
+            reportInfoManager.responseForOperation(advertiseDO, srcIp, ReportInfoDO.CLICK_OPT_TYPE);
         } catch (ManagerException ex) {
             LOG.error("advertiseId:" + advertiseDO.getId() + ",ip:" + srcIp, ex);
         }

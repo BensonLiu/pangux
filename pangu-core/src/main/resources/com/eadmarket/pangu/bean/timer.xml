@@ -45,17 +45,6 @@
 		<property name="cronExpression" value="0 10 0 * * ?"/>
 	</bean>
 
-    <bean id="reportConverterTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
-        <property name="jobDetail">
-            <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-                <property name="concurrent" value="false"/>
-                <property name="targetObject" ref="reportConverter"/>
-                <property name="targetMethod" value="convert"/>
-            </bean>
-        </property>
-        <property name="cronExpression" value="0 0/30 * * * ?"/>
-    </bean>
-
     <bean id="reportInfoConverterTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail">
             <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">

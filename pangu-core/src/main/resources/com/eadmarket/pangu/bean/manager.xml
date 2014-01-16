@@ -10,7 +10,7 @@
 	
 	<bean id="rechargeManager" class="com.eadmarket.pangu.manager.recharge.impl.RechargeManagerImpl" />
 	
-	<bean id="reportManager" class="com.eadmarket.pangu.manager.report.impl.ReportManagerImpl" />
+	<bean id="reportInfoManager" class="com.eadmarket.pangu.manager.report.impl.ReportInfoManagerImpl" />
 	
 	<bean id="tradeManager" class="com.eadmarket.pangu.manager.trade.impl.TradeManagerImpl" />
 	
