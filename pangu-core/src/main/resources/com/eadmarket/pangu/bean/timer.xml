@@ -6,7 +6,6 @@
 			<list>
 				<ref local="tradeTrigger"/>
 				<ref local="websiteAlexaUpdaterTrigger"/>
-                <ref local="reportConverterTrigger" />
                 <ref local="reportInfoConverterTrigger" />
                 <ref local="reportInfoToHisTrigger" />
                 <ref local="reportCompCleanerTrigger" />
