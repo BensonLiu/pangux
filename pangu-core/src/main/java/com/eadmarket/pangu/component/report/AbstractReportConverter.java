@@ -3,7 +3,6 @@ package com.eadmarket.pangu.component.report;
 import com.eadmarket.pangu.DaoException;
 import com.eadmarket.pangu.dao.kv.KVDao;
 import com.eadmarket.pangu.dao.report.ReportCompDao;
-import com.eadmarket.pangu.dao.report.ReportDao;
 import lombok.Setter;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
