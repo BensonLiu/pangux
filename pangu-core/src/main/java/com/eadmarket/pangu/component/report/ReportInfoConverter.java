@@ -61,7 +61,9 @@ class ReportInfoConverter extends AbstractReportConverter<ReportInfoDO> {
                 ReportCompQuery reportCompQueryParam = new ReportCompQuery();
                 if (operationType == ReportInfoDO.CLICK_OPT_TYPE) {
                     reportCompQueryParam.setClickNum(1L);
+                    reportCompQueryParam.setDisplayNum(0L);
                 } else {
+                    reportCompQueryParam.setClickNum(0L);
                     reportCompQueryParam.setDisplayNum(1L);
                 }
                 reportCompQueryParam.setTradeId(tradeId);
