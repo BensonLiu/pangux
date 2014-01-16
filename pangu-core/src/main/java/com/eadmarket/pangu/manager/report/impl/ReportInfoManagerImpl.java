@@ -6,7 +6,7 @@ import com.eadmarket.pangu.ManagerException;
 import com.eadmarket.pangu.dao.report.ReportInfoDao;
 import com.eadmarket.pangu.domain.AdvertiseDO;
 import com.eadmarket.pangu.domain.ReportInfoDO;
-import com.eadmarket.pangu.manager.report.ReportManager;
+import com.eadmarket.pangu.manager.report.ReportInfoManager;
 
 import javax.annotation.Resource;
 
@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  * 
  * @author liuyongpo@gmail.com
  */
-class ReportManagerImpl implements ReportManager {
+class ReportInfoManagerImpl implements ReportInfoManager {
 
     @Resource private ReportInfoDao reportInfoDao;
 

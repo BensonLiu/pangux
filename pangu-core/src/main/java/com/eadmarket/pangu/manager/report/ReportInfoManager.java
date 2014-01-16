@@ -9,7 +9,7 @@ import com.eadmarket.pangu.domain.AdvertiseDO;
  * @author liuyongpo@gmail.com
  *
  */
-public interface ReportManager {
+public interface ReportInfoManager {
 
     /**
      * 响应广告位的事件
