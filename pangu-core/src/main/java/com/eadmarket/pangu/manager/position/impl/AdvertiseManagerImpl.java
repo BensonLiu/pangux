@@ -57,7 +57,7 @@ class AdvertiseManagerImpl implements AdvertiseManager {
         advertiseDO.setId(advertiseId);
         advertiseDO.setStatus(targetStatus);
         try {
-            advertiseDao.addAdvertise(advertiseDO);
+            advertiseDao.updateAdvertiseById(advertiseDO);
         } catch (DaoException ex) {
             throw new ManagerException(ExceptionCode.SYSTEM_ERROR, "advertise:" + advertiseDO, ex);
         }
