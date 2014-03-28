@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap-theme.min.css">
 </head>
 <body>
-<form method="post" action="#">
+<form method="post" enctype="multipart/form-data" action="#">
     <input type="hidden" name="action" value="knowledgeAction" />
     <label>当前共有$!{knowledgeCount}条知识</label><br />
     类型：
@@ -28,6 +28,7 @@
     </select>
     <br />
     内容：<textarea name="summary" rows="20" cols="20">$!{summary}</textarea><br />
+    附件：<input type="file" name="upFile"><br/>
     <input type="submit" name="event_submit_do_add" value="提交" />$!{error_message}
 
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->

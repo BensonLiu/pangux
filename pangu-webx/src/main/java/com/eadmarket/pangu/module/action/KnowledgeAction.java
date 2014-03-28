@@ -6,6 +6,8 @@ import com.eadmarket.pangu.ExceptionCode;
 import com.eadmarket.pangu.ManagerException;
 import com.eadmarket.pangu.domain.KnowledgeDO;
 import com.eadmarket.pangu.manager.knowledge.KnowledgeManager;
+import com.eadmarket.pangu.util.FileUploadUtil;
+import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,8 +22,12 @@ import javax.annotation.Resource;
 public class KnowledgeAction {
 	
 	private final static Logger LOG = LoggerFactory.getLogger(KnowledgeAction.class);
-	
+
+    private final static int MAX_FILE_SIZE_BYTES = 1024 * 1024;
+
 	@Resource private KnowledgeManager knowledgeManager;
+
+    @Resource private FileUploadUtil fileUploadUtil;
 	
 	public void doAdd(TurbineRunData runData, Context context){
 		try {
@@ -35,10 +41,20 @@ public class KnowledgeAction {
                 context.put("error_message", "请填写内容");
                 formIsInvalid = true;
             }
-
             context.put("summary", summary);
 
-			if (formIsInvalid) {
+            FileItem fileItem = runData.getParameters().getFileItem("upFile");
+            String url = null;
+            if (fileItem != null) {
+                if (fileItem.getSize() > MAX_FILE_SIZE_BYTES) {
+                    context.put("error_message", "图片体积不能超过1M");
+                    formIsInvalid = true;
+                } else {
+                    url = fileUploadUtil.uploadFile(fileItem);
+                }
+            }
+
+            if (formIsInvalid) {
 				return;
 			}
 
@@ -46,6 +62,7 @@ public class KnowledgeAction {
 
             knowledgeDO.setSummary(summary);
             knowledgeDO.setCategory(category);
+            knowledgeDO.setImgUrl(url);
 
             knowledgeManager.saveKnowledge(knowledgeDO);
             context.put("error_message", "添加成功");
@@ -55,7 +72,10 @@ public class KnowledgeAction {
 			if (code.isSystemError()) {
 				LOG.error("addKnowledge " + code, ex);
 			}
-		}
+		} catch (Exception ex) {
+            context.put("error_message", "系统异常，请稍候重试");
+            LOG.error("failed to add knowledge", ex);
+        }
 	}
 
 }

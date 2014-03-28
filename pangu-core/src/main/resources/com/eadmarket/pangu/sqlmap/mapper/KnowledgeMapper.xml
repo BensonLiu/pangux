@@ -6,17 +6,19 @@
 		<result column="id" property="id"/>
 		<result column="summary" property="summary"/>
 		<result column="category" property="category"/>
+        <result column="img_url" property="imgUrl" />
 	</resultMap>
 	
 	<sql id="allFields_min">
 		id,
 		summary,
-		category
+		category,
+		img_url
 	</sql>
 
 	<insert id="saveKnowledge" parameterType="KnowledgeDO" useGeneratedKeys="true" keyProperty="id">
-	    insert into knowledge_info (summary, category, status, gmt_create, gmt_modified)
-	    values (#{summary}, #{category}, #{status}, now(), now())
+	    insert into knowledge_info (summary, category, status, img_url, gmt_create, gmt_modified)
+	    values (#{summary}, #{category}, #{status}, #{imgUrl}, now(), now())
 	</insert>
 
     <select id="queryByMinId" parameterType="Query" resultMap="KnowledgeMinMap">

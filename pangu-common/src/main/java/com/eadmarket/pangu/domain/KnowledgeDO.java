@@ -20,4 +20,9 @@ public class KnowledgeDO {
 
     private Long category;
 
+    /**
+     * 图片对应的Url
+     */
+    private String imgUrl;
+
 }
