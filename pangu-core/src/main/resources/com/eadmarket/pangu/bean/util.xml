@@ -6,4 +6,10 @@
     <bean id="fileUploadUtil" class="com.eadmarket.pangu.util.FileUploadUtil">
         <property name="fileUploadPath" value="${file.destination.path}" />
     </bean>
+
+    <bean id="sequenceGenerator" class="com.eadmarket.pangu.util.seq.impl.DatabaseBasedSequenceGenerator"
+          init-method="init">
+        <property name="dataSource" ref="educationAppDataSource" />
+        <property name="seqTableName" value="seq_info" />
+    </bean>
 </beans>
