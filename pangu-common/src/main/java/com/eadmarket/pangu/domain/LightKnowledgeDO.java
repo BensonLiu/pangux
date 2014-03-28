@@ -13,12 +13,14 @@ public class LightKnowledgeDO {
 
     private Long category;
 
+    private String imgUrl;
+
     public static LightKnowledgeDO from(KnowledgeDO knowledgeDO) {
         LightKnowledgeDO lightKnowledgeDO = new LightKnowledgeDO();
         lightKnowledgeDO.setId(knowledgeDO.getId());
         lightKnowledgeDO.setContent(knowledgeDO.getSummary());
-
         lightKnowledgeDO.setCategory(knowledgeDO.getCategory());
+        lightKnowledgeDO.setImgUrl(knowledgeDO.getImgUrl());
         return lightKnowledgeDO;
     }
 }
