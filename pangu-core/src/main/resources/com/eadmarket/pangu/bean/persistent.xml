@@ -26,7 +26,7 @@
 	    <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
 	</bean>
 	
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="adSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 	    <property name="dataSource" ref="adDataSource" />
 	    <property name="configLocation">
 	    	<value>classpath:com/eadmarket/pangu/sqlmap/ad-config.xml</value>
@@ -40,4 +40,44 @@
 	<bean id="adTransactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
 		<property name="transactionManager" ref="adTransactionManager" />
 	</bean>
+
+    <bean id="educationAppDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="url" value="${education.db.url}" />
+        <property name="username" value="${education.db.username}" />
+        <property name="password" value="${education.db.password}" />
+
+        <property name="filters" value="stat" />
+
+        <property name="maxActive" value="20" />
+        <property name="initialSize" value="1" />
+        <property name="maxWait" value="60000" />
+        <property name="minIdle" value="1" />
+
+        <property name="timeBetweenEvictionRunsMillis" value="3000" />
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+
+        <property name="validationQuery" value="SELECT 'x'" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+
+        <property name="poolPreparedStatements" value="true" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+    </bean>
+
+    <bean id="educationAppSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="educationAppDataSource" />
+        <property name="configLocation">
+            <value>classpath:com/eadmarket/pangu/sqlmap/educationApp-config.xml</value>
+        </property>
+    </bean>
+
+    <bean id="educationAppTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="educationAppDataSource" />
+    </bean>
+
+    <bean id="educationAppTransactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="transactionManager" ref="educationAppTransactionManager" />
+    </bean>
+
 </beans>

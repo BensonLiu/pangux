@@ -15,4 +15,6 @@
 	<bean id="tradeManager" class="com.eadmarket.pangu.manager.trade.impl.TradeManagerImpl" />
 	
 	<bean id="userManager" class="com.eadmarket.pangu.manager.user.impl.UserManagerImpl"/>
+
+    <bean id="knowledgeManager" class="com.eadmarket.pangu.manager.knowledge.impl.KnowledgeManagerImpl" />
 </beans>

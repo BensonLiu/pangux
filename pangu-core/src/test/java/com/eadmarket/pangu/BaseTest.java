@@ -22,4 +22,6 @@ public class BaseTest extends AbstractJUnit4SpringContextTests {
     protected final Logger LOG = LoggerFactory.getLogger(getClass());
 
 	@Resource protected JdbcTemplate adJdbcTemplate;
+
+    @Resource protected JdbcTemplate educationAppJdbcTemplate;
 }

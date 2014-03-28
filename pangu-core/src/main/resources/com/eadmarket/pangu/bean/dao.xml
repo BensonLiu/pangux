@@ -1,23 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans default-autowire="byName">
-	<bean id="advertiseDao" class="com.eadmarket.pangu.dao.position.impl.AdvertiseDaoImpl" />
-	
-	<bean id="productDao" class="com.eadmarket.pangu.dao.product.impl.ProductDaoImpl" />
-	
-	<bean id="projectDao" class="com.eadmarket.pangu.dao.project.impl.ProjectDaoImpl" />
-	
-	<bean id="rechargeDao" class="com.eadmarket.pangu.dao.recharge.impl.RechargeDaoImpl" />
-	
-	<bean id="tradeDao" class="com.eadmarket.pangu.dao.trade.impl.TradeDaoImpl" />
-	
-	<bean id="userDao" class="com.eadmarket.pangu.dao.user.impl.UserDaoImpl" />
-	
-	<bean id="financeDao" class="com.eadmarket.pangu.dao.finance.impl.FinanceDaoImpl" />
 
-    <bean id="kvDao" class="com.eadmarket.pangu.dao.kv.impl.KVDaoImpl" />
+    <bean id="adBaseDao" class="com.eadmarket.pangu.dao.BaseDao" abstract="true">
+        <property name="sqlSessionFactory" ref="adSqlSessionFactory" />
+    </bean>
 
-    <bean id="reportCompDao" class="com.eadmarket.pangu.dao.report.impl.ReportCompDaoImpl" />
+	<bean id="advertiseDao" class="com.eadmarket.pangu.dao.position.impl.AdvertiseDaoImpl" parent="adBaseDao" />
+	
+	<bean id="productDao" class="com.eadmarket.pangu.dao.product.impl.ProductDaoImpl" parent="adBaseDao" />
+	
+	<bean id="projectDao" class="com.eadmarket.pangu.dao.project.impl.ProjectDaoImpl" parent="adBaseDao" />
+	
+	<bean id="rechargeDao" class="com.eadmarket.pangu.dao.recharge.impl.RechargeDaoImpl" parent="adBaseDao" />
+	
+	<bean id="tradeDao" class="com.eadmarket.pangu.dao.trade.impl.TradeDaoImpl" parent="adBaseDao" />
+	
+	<bean id="userDao" class="com.eadmarket.pangu.dao.user.impl.UserDaoImpl" parent="adBaseDao" />
+	
+	<bean id="financeDao" class="com.eadmarket.pangu.dao.finance.impl.FinanceDaoImpl" parent="adBaseDao" />
 
-    <bean id="reportInfoDao" class="com.eadmarket.pangu.dao.report.impl.ReportInfoDaoImpl" />
+    <bean id="kvDao" class="com.eadmarket.pangu.dao.kv.impl.KVDaoImpl" parent="adBaseDao" />
+
+    <bean id="reportCompDao" class="com.eadmarket.pangu.dao.report.impl.ReportCompDaoImpl" parent="adBaseDao" />
+
+    <bean id="reportInfoDao" class="com.eadmarket.pangu.dao.report.impl.ReportInfoDaoImpl" parent="adBaseDao" />
+
+    <bean id="educationAppBaseDao" class="com.eadmarket.pangu.dao.BaseDao" abstract="true">
+        <property name="sqlSessionFactory" ref="educationAppSqlSessionFactory" />
+    </bean>
+
+    <bean id="knowledgeDao"
+          class="com.eadmarket.pangu.dao.knowledge.impl.KnowledgeDaoImpl" parent="educationAppBaseDao" />
 </beans>

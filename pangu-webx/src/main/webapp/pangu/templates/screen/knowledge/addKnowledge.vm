@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>add knowledge</title>
+    <!-- 最新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap-theme.min.css">
+</head>
+<body>
+<form method="post" action="#">
+    <input type="hidden" name="action" value="knowledgeAction" />
+    <label>当前共有$!{knowledgeCount}条知识</label><br />
+    类型：
+    <select name="category">
+        <option value="1" #if($!category == 1) selected #end>自然</option>
+        <option value="2" #if($!category == 2) selected #end>文化</option>
+        <option value="3" #if($!category == 3) selected #end>人物</option>
+        <option value="4" #if($!category == 4) selected #end>历史</option>
+        <option value="5" #if($!category == 5) selected #end>生活</option>
+        <option value="6" #if($!category == 6) selected #end>社会</option>
+        <option value="7" #if($!category == 7) selected #end>艺术</option>
+        <option value="8" #if($!category == 8) selected #end>经济</option>
+        <option value="9" #if($!category == 9) selected #end>科学</option>
+        <option value="10" #if($!category == 10) selected #end>体育</option>
+        <option value="11" #if($!category == 11) selected #end>技术</option>
+        <option value="12" #if($!category == 12) selected #end>地理</option>
+    </select>
+    <br />
+    内容：<textarea name="summary" rows="20" cols="20">$!{summary}</textarea><br />
+    <input type="submit" name="event_submit_do_add" value="提交" />$!{error_message}
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+</form>
+</body>
+</html>
