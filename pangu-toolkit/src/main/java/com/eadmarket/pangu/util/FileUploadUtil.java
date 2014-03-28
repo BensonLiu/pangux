@@ -15,7 +15,7 @@ import java.util.Random;
  */
 public final class FileUploadUtil {
 
-    private final static String SEED = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private final static String SEED = "CDOPQRSTEFGXABYZHIJKLMNUVW";
 
     private String fileUploadPath;
 
