@@ -9,13 +9,10 @@
         <property name="education.db.username" description="数据库username" defaultValue="root" />
         <property name="education.db.password" description="数据库password" defaultValue="root" />
         <property name="file.destination.path" description="文件上传目录" defaultValue="/${user.home}/upload" />
-        <property name="education.app.img.host" description="图片服务器的host信息"
-                  defaultValue="http://www.eadmarket.com/img/edu_app/" />
 	</group>
 	<script>
 		<generate template="com/eadmarket/pangu/bean/persistent.xml" />
 		<generate template="com/eadmarket/pangu/bean/timer.xml" />
         <generate template="com/eadmarket/pangu/bean/util.xml" />
-        <generate template="com/eadmarket/pangu/config/img_host.properties" />
 	</script>
 </config>
