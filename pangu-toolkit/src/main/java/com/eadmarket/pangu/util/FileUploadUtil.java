@@ -73,7 +73,7 @@ public final class FileUploadUtil {
     }
 
     private static String generateFileName(String fileType) {
-        String timestamp = DateFormatUtils.format(new Date(), "yyyyMMddHHmm_ss_");
+        String timestamp = DateFormatUtils.format(new Date(), "yyMMddHHmm_ss_");
         return timestamp + randomStr() + fileType;
     }
 
