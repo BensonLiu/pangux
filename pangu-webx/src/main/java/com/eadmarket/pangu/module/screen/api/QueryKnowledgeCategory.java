@@ -2,6 +2,7 @@ package com.eadmarket.pangu.module.screen.api;
 
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.fastjson.JSON;
+import com.eadmarket.pangu.domain.KnowledgeDO;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
@@ -12,9 +13,12 @@ import java.util.Map;
  */
 public class QueryKnowledgeCategory {
 
+    private final static int API_VERSION = 1;
+
     public void execute(Context context) {
         Map<String, Object> result = Maps.newHashMap();
 
+        result.put("version", API_VERSION);
         result.put("success", 1);
         result.put("data", CATE_TO_CNNAME);
 
