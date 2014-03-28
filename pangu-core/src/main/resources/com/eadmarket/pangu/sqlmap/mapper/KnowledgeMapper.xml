@@ -17,8 +17,8 @@
 	</sql>
 
 	<insert id="saveKnowledge" parameterType="KnowledgeDO" useGeneratedKeys="true" keyProperty="id">
-	    insert into knowledge_info (summary, category, status, img_url, gmt_create, gmt_modified)
-	    values (#{summary}, #{category}, #{status}, #{imgUrl}, now(), now())
+	    insert into knowledge_info (id, summary, category, status, img_url, gmt_create, gmt_modified)
+	    values (#{id}, #{summary}, #{category}, #{status}, #{imgUrl}, now(), now())
 	</insert>
 
     <select id="queryByMinId" parameterType="Query" resultMap="KnowledgeMinMap">

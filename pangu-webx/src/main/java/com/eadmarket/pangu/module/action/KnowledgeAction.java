@@ -37,8 +37,11 @@ public class KnowledgeAction {
             context.put("category", category);
 
             String summary = runData.getParameters().getString("summary", "");
-            if (StringUtils.isBlank(summary)) {
+            if (StringUtils.isBlank(summary) ) {
                 context.put("error_message", "请填写内容");
+                formIsInvalid = true;
+            } else if (summary.contains("\"")){
+                context.put("error_message", "内容存在双引号，不能添加");
                 formIsInvalid = true;
             }
             context.put("summary", summary);
