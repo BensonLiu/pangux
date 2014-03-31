@@ -1,6 +1,7 @@
 package com.eadmarket.pangu.domain;
 
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Created by liu on 3/27/14.
@@ -20,7 +21,11 @@ public class LightKnowledgeDO {
         lightKnowledgeDO.setId(knowledgeDO.getId());
         lightKnowledgeDO.setContent(knowledgeDO.getSummary());
         lightKnowledgeDO.setCategory(knowledgeDO.getCategory());
-        lightKnowledgeDO.setImgUrl(knowledgeDO.getImgUrl());
+        String imgUrl = knowledgeDO.getImgUrl();
+        if (StringUtils.isBlank(imgUrl)) {
+            imgUrl = "";
+        }
+        lightKnowledgeDO.setImgUrl(imgUrl);
         return lightKnowledgeDO;
     }
 }

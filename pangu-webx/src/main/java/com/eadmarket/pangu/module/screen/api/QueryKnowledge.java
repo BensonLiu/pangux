@@ -83,5 +83,4 @@ public class QueryKnowledge {
     }
 
     private Splitter splitter = Splitter.on('_').trimResults().omitEmptyStrings();
-
 }
