@@ -1,8 +1,10 @@
 package com.eadmarket.pangu.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,11 +19,12 @@ public class LightKnowledgeDO {
 
     private String content;
 
-    private Long category;
-
     private String imgUrl;
 
     private List<KnowledgeCommentDO> comments;
+
+    @JSONField(format = "yyyy-MM-dd HH:mm")
+    private Date createDate;
 
     public static LightKnowledgeDO from(KnowledgeDO knowledgeDO) {
         LightKnowledgeDO lightKnowledgeDO = new LightKnowledgeDO();
@@ -35,6 +38,7 @@ public class LightKnowledgeDO {
         }
         lightKnowledgeDO.setImgUrl(imgUrl);
         lightKnowledgeDO.setComments(knowledgeDO.getComments());
+        lightKnowledgeDO.setCreateDate(knowledgeDO.getGmtCreate());
         return lightKnowledgeDO;
     }
 }

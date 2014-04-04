@@ -7,13 +7,15 @@
 		<result column="knowledge_id" property="knowledgeId"/>
 		<result column="knowledge_comment" property="comment"/>
         <result column="src_ip" property="srcIp" />
+        <result column="gmt_create" property="gmtCreate" />
 	</resultMap>
 	
 	<sql id="allFields">
 		id,
 		knowledge_id,
 		knowledge_comment,
-		src_ip
+		src_ip,
+		gmt_create
 	</sql>
 
 	<insert id="insertComment" parameterType="KnowledgeCommentDO" useGeneratedKeys="true" keyProperty="id">

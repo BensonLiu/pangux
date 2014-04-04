@@ -4,6 +4,8 @@ import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import lombok.ToString;
 
+import java.util.Date;
+
 /**
  * Created by liu on 4/4/14.
  */
@@ -21,5 +23,8 @@ public class KnowledgeCommentDO {
 
     @JSONField(serialize=false)
     private int status = 1;
+
+    @JSONField(name = "createDate", format = "yyyy-MM-dd HH:mm")
+    private Date gmtCreate;
 
 }

@@ -2,6 +2,7 @@ package com.eadmarket.pangu.domain;
 
 import lombok.Data;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,5 +29,7 @@ public class KnowledgeDO {
     private String imgUrl;
 
     private List<KnowledgeCommentDO> comments;
+
+    private Date gmtCreate;
 
 }

@@ -5,15 +5,15 @@
 	<resultMap type="KnowledgeDO" id="KnowledgeMinMap">
 		<result column="id" property="id"/>
 		<result column="summary" property="summary"/>
-		<result column="category" property="category"/>
         <result column="img_url" property="imgUrl" />
+        <result column="gmt_create" property="gmtCreate" />
 	</resultMap>
 	
 	<sql id="allFields_min">
 		id,
 		summary,
-		category,
-		img_url
+		img_url,
+		gmt_create
 	</sql>
 
 	<insert id="saveKnowledge" parameterType="KnowledgeDO" useGeneratedKeys="true" keyProperty="id">
