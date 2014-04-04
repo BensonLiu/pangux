@@ -2,6 +2,8 @@ package com.eadmarket.pangu.domain;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * Created by liu on 3/27/14.
  */
@@ -24,5 +26,7 @@ public class KnowledgeDO {
      * 图片对应的Url
      */
     private String imgUrl;
+
+    private List<KnowledgeCommentDO> comments;
 
 }

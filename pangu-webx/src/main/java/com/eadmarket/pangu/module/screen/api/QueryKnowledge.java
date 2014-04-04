@@ -63,7 +63,7 @@ public class QueryKnowledge {
         try {
             Query<KnowledgeQuery> query = Query.create(knowledgeQuery);
             query.setPageSize(pageSize);
-            List<KnowledgeDO> knowledgeDOs = knowledgeManager.queryByMinId(query);
+            List<KnowledgeDO> knowledgeDOs = knowledgeManager.queryByMinIdWithComments(query);
             result.put("success", 1);
             result.put("data", lightKnowledge(knowledgeDOs));
             String json = JSON.toJSONString(result);

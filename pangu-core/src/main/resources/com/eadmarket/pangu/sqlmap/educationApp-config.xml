@@ -14,5 +14,6 @@
   </typeHandlers>
   <mappers>
     <mapper resource="com/eadmarket/pangu/sqlmap/mapper/KnowledgeMapper.xml"/>
+    <mapper resource="com/eadmarket/pangu/sqlmap/mapper/KnowledgeCommentMapper.xml"/>
   </mappers>
 </configuration>

@@ -16,5 +16,7 @@ public interface KnowledgeManager {
 
     List<KnowledgeDO> queryByMinId(Query<KnowledgeQuery> query) throws ManagerException;
 
+    List<KnowledgeDO> queryByMinIdWithComments(Query<KnowledgeQuery> query) throws ManagerException;
+
     Long countAllKnowledge() throws ManagerException;
 }

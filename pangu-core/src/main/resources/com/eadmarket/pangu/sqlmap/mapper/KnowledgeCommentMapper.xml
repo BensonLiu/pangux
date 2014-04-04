@@ -1,0 +1,32 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="KnowledgeCommentDao">
+	<resultMap type="KnowledgeCommentDO" id="KnowledgeCommentMap">
+		<result column="id" property="id"/>
+		<result column="knowledge_id" property="knowledgeId"/>
+		<result column="knowledge_comment" property="comment"/>
+        <result column="src_ip" property="srcIp" />
+	</resultMap>
+	
+	<sql id="allFields">
+		id,
+		knowledge_id,
+		knowledge_comment,
+		src_ip
+	</sql>
+
+	<insert id="insertComment" parameterType="KnowledgeCommentDO" useGeneratedKeys="true" keyProperty="id">
+	    insert into knowledge_comment(knowledge_id, knowledge_comment, status, src_ip, gmt_create, gmt_modified)
+	    values (#{knowledgeId}, #{comment}, #{status}, #{srcIp}, now(), now())
+	</insert>
+
+    <select id="queryByKnowledgeId" resultMap="KnowledgeCommentMap" parameterType="long">
+        select
+        <include refid="allFields" />
+        from knowledge_comment
+        where knowledge_id = #{knowledgeId} and status = 1
+        order by id
+    </select>
+	
+</mapper>

@@ -32,4 +32,7 @@
 
     <bean id="knowledgeDao"
           class="com.eadmarket.pangu.dao.knowledge.impl.KnowledgeDaoImpl" parent="educationAppBaseDao" />
+
+    <bean id="knowledgeCommentDao"
+          class="com.eadmarket.pangu.dao.knowledge.impl.KnowledgeCommentDaoImpl" parent="educationAppBaseDao" />
 </beans>

@@ -4,12 +4,15 @@ import com.eadmarket.pangu.DaoException;
 import com.eadmarket.pangu.ExceptionCode;
 import com.eadmarket.pangu.ManagerException;
 import com.eadmarket.pangu.common.Query;
+import com.eadmarket.pangu.dao.knowledge.KnowledgeCommentDao;
 import com.eadmarket.pangu.dao.knowledge.KnowledgeDao;
+import com.eadmarket.pangu.domain.KnowledgeCommentDO;
 import com.eadmarket.pangu.domain.KnowledgeDO;
 import com.eadmarket.pangu.manager.knowledge.KnowledgeManager;
 import com.eadmarket.pangu.query.KnowledgeQuery;
 import com.eadmarket.pangu.util.seq.ISequenceGenerator;
 import com.eadmarket.pangu.util.seq.SeqException;
+import org.apache.commons.collections.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -20,6 +23,8 @@ import java.util.List;
 class KnowledgeManagerImpl implements KnowledgeManager {
 
     @Resource private KnowledgeDao knowledgeDao;
+
+    @Resource private KnowledgeCommentDao knowledgeCommentDao;
 
     @Resource private ISequenceGenerator sequenceGenerator;
 
@@ -48,6 +53,24 @@ class KnowledgeManagerImpl implements KnowledgeManager {
         } catch (DaoException ex) {
             throw new ManagerException(ExceptionCode.SYSTEM_ERROR, ex);
         }
+    }
+
+    @Override
+    public List<KnowledgeDO> queryByMinIdWithComments(Query<KnowledgeQuery> query) throws ManagerException {
+        List<KnowledgeDO> knowledgeDOs = queryByMinId(query);
+
+        if (CollectionUtils.isNotEmpty(knowledgeDOs)) {
+            for (KnowledgeDO knowledgeDO : knowledgeDOs) {
+                try {
+                    List<KnowledgeCommentDO> knowledgeCommentDOs
+                            = knowledgeCommentDao.queryCommentByKnowledgeId(knowledgeDO.getId());
+                    knowledgeDO.setComments(knowledgeCommentDOs);
+                } catch (DaoException ex) {
+                    throw new ManagerException(ExceptionCode.SYSTEM_ERROR, ex);
+                }
+            }
+        }
+        return knowledgeDOs;
     }
 
     @Override
