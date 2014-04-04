@@ -8,6 +8,9 @@ import org.apache.commons.lang3.StringUtils;
  */
 @Data
 public class LightKnowledgeDO {
+
+    private final static String PIC_PREFIX = "http://www.eadmarket.com/img/edu_app/";
+
     private Long id;
 
     private String content;
@@ -24,6 +27,8 @@ public class LightKnowledgeDO {
         String imgUrl = knowledgeDO.getImgUrl();
         if (StringUtils.isBlank(imgUrl)) {
             imgUrl = "";
+        } else {
+            imgUrl = PIC_PREFIX + imgUrl;
         }
         lightKnowledgeDO.setImgUrl(imgUrl);
         return lightKnowledgeDO;

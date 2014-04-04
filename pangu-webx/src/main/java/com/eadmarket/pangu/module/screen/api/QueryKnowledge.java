@@ -50,7 +50,7 @@ public class QueryKnowledge {
         KnowledgeQuery knowledgeQuery = new KnowledgeQuery();
         knowledgeQuery.setMinKnowledgeId(minId);
 
-        String categories = runData.getParameters().getString("cats");
+        String categories = runData.getParameters().getString("cats", "14");
         if (StringUtils.isNotBlank(categories)) {
             List<String> strings = splitter.splitToList(categories);
             List<Long> list = Lists.newArrayList();

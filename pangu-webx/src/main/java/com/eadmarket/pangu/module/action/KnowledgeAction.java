@@ -32,15 +32,14 @@ public class KnowledgeAction {
 	public void doAdd(TurbineRunData runData, Context context){
 		try {
 			boolean formIsInvalid = false;
+			/*
 			Long category = runData.getParameters().getLong("category");
-
             context.put("category", category);
+            */
 
             String summary = runData.getParameters().getString("summary", "");
-            if (StringUtils.isBlank(summary) ) {
-                context.put("error_message", "请填写内容");
-                formIsInvalid = true;
-            } else if (summary.contains("\"")){
+
+            if (StringUtils.isNotBlank(summary) && summary.contains("\"")){
                 context.put("error_message", "内容存在双引号，不能添加");
                 formIsInvalid = true;
             }
@@ -64,7 +63,7 @@ public class KnowledgeAction {
             final KnowledgeDO knowledgeDO = new KnowledgeDO();
 
             knowledgeDO.setSummary(summary);
-            knowledgeDO.setCategory(category);
+            knowledgeDO.setCategory(14L);
             knowledgeDO.setImgUrl(url);
 
             knowledgeManager.saveKnowledge(knowledgeDO);
