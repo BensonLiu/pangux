@@ -58,6 +58,8 @@ public class KnowledgeDaoTest extends BaseTest {
         Query<KnowledgeQuery> query = Query.create(knowledgeQuery);
 
         query.setPageSize(100);
+        query.setOrderBy("id");
+        query.setOrderType("desc");
 
         List<KnowledgeDO> knowledgeDOs = knowledgeDao.queryByMinId(query);
 

@@ -47,6 +47,8 @@ public class QueryKnowledge {
 
         int pageSize = runData.getParameters().getInt("p_s", 100);
 
+
+
         KnowledgeQuery knowledgeQuery = new KnowledgeQuery();
         if (minId > 0) {
             knowledgeQuery.setMinKnowledgeId(minId);
@@ -68,6 +70,18 @@ public class QueryKnowledge {
         try {
             Query<KnowledgeQuery> query = Query.create(knowledgeQuery);
             query.setPageSize(pageSize);
+
+            /*
+             * 现在建立了一个假设，就是minId和maxId不会同时都传过来
+             */
+            if (minId > 0) {
+                query.setOrderBy("id");
+                query.setOrderType("asc");
+            } else if (maxId > 0) {
+                query.setOrderType("desc");
+                query.setOrderBy("id");
+            }
+
             List<KnowledgeDO> knowledgeDOs = knowledgeManager.queryByMinIdWithComments(query);
             result.put("success", 1);
             result.put("data", lightKnowledge(knowledgeDOs));

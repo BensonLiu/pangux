@@ -25,6 +25,8 @@ public class Query<T> {
 	
 	private int     startRow;
     private int     endRow;
+
+    @Setter@Getter private String orderType;
 	
 	@Setter@Getter private String orderBy;
 	
@@ -176,9 +178,6 @@ public class Query<T> {
         return totalItem;
     }
 
-    /**
-     * @param totalItem The totalItem to set.
-     */
     public void setTotalItem(Integer tItem) {
         if (tItem == null) {
             throw new IllegalArgumentException("TotalItem can't be null.");
