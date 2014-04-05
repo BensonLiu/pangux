@@ -48,8 +48,12 @@ public class QueryKnowledge {
         int pageSize = runData.getParameters().getInt("p_s", 100);
 
         KnowledgeQuery knowledgeQuery = new KnowledgeQuery();
-        knowledgeQuery.setMinKnowledgeId(minId);
-        knowledgeQuery.setMaxKnowledgeId(maxId);
+        if (minId > 0) {
+            knowledgeQuery.setMinKnowledgeId(minId);
+        }
+        if (maxId > 0) {
+            knowledgeQuery.setMaxKnowledgeId(maxId);
+        }
 
         String categories = runData.getParameters().getString("cats", "14");
         if (StringUtils.isNotBlank(categories)) {

@@ -51,7 +51,8 @@ public class KnowledgeDaoTest extends BaseTest {
 
     @Test public void test_queryByMinId() throws DaoException {
         KnowledgeQuery knowledgeQuery = new KnowledgeQuery();
-        knowledgeQuery.setMinKnowledgeId(10L);
+        //knowledgeQuery.setMaxKnowledgeId(10000L);
+        knowledgeQuery.setMinKnowledgeId(1L);
         knowledgeQuery.setCategorys(Lists.newArrayList(1L));
 
         Query<KnowledgeQuery> query = Query.create(knowledgeQuery);
@@ -67,6 +68,11 @@ public class KnowledgeDaoTest extends BaseTest {
     @Test public void test_countAllKnowledge() throws DaoException {
         Long count = knowledgeDao.countAllKnowledge();
         assertThat(count, greaterThanOrEqualTo(0L));
+    }
+
+    @Test public void test_getKnowledgeById() throws DaoException {
+        KnowledgeDO knowledgeDO = knowledgeDao.getKnowledgeById(10L);
+        assertThat(knowledgeDO, anything());
     }
 
 }
