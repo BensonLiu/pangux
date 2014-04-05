@@ -18,4 +18,8 @@ public class KnowledgeQuery {
      * 类别集合
      */
     private List<Long> categorys;
+    /**
+     * 最大的知识编号
+     */
+    private Long maxKnowledgeId;
 }

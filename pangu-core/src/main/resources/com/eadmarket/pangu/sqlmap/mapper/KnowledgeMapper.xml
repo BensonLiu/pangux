@@ -25,7 +25,13 @@
         select
         <include refid="allFields_min" />
         from knowledge_info
-        where id &gt; #{condition.minKnowledgeId} and status = 1
+        where status = 1
+        <if test="condition.minKnowledgeId != null">
+            and id &gt; #{condition.minKnowledgeId}
+        </if>
+        <if test="condition.maxKnowledgeId != null">
+            and id &lt; #{condition.maxKnowledgeId}
+        </if>
         <if test="condition.categorys != null">
             and category in
             <foreach item="item" index="index" collection="condition.categorys"

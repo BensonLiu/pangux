@@ -34,11 +34,11 @@ public class QueryKnowledge {
 	@Resource private KnowledgeManager knowledgeManager;
 	
 	public void execute(TurbineRunData runData, Context context) {
-        Long minId = runData.getParameters().getLong("min_id", 0);
-
         Map<String, Object> result = Maps.newHashMap();
 
-        if (minId <= 0) {
+        Long minId = runData.getParameters().getLong("min_id", 0);
+        Long maxId = runData.getParameters().getLong("max_id", 0);
+        if (minId <= 0 && maxId <= 0) {
             result.put("success", 0);
             String json = JSON.toJSONString(result);
             context.put("JSON", json);
@@ -49,6 +49,7 @@ public class QueryKnowledge {
 
         KnowledgeQuery knowledgeQuery = new KnowledgeQuery();
         knowledgeQuery.setMinKnowledgeId(minId);
+        knowledgeQuery.setMaxKnowledgeId(maxId);
 
         String categories = runData.getParameters().getString("cats", "14");
         if (StringUtils.isNotBlank(categories)) {
