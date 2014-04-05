@@ -23,7 +23,7 @@ public class KnowledgeAction {
 	
 	private final static Logger LOG = LoggerFactory.getLogger(KnowledgeAction.class);
 
-    private final static int MAX_FILE_SIZE_BYTES = 1024 * 1024;
+    private final static int MAX_FILE_SIZE_BYTES = 1024 * 1024 * 5;
 
 	@Resource private KnowledgeManager knowledgeManager;
 
@@ -49,7 +49,7 @@ public class KnowledgeAction {
             String url = null;
             if (fileItem != null) {
                 if (fileItem.getSize() > MAX_FILE_SIZE_BYTES) {
-                    context.put("error_message", "图片体积不能超过1M");
+                    context.put("error_message", "图片体积不能超过5M");
                     formIsInvalid = true;
                 } else {
                     url = fileUploadUtil.uploadFile(fileItem);
