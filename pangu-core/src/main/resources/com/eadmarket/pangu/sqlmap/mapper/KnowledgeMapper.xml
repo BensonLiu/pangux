@@ -47,4 +47,11 @@
         from knowledge_info
         where status = 1
     </select>
+
+    <select id="getKnowledgeById" resultMap="KnowledgeMinMap">
+        select
+        <include refid="allFields_min" />
+        from knowledge_info
+        where id = #{id} and status = 1
+    </select>
 </mapper>

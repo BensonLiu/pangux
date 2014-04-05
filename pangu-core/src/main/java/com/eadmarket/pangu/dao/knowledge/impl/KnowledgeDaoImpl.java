@@ -29,4 +29,9 @@ class KnowledgeDaoImpl extends BaseDao implements KnowledgeDao {
     public Long countAllKnowledge() throws DaoException {
         return selectOne("KnowledgeDao.countAllKnowledge");
     }
+
+    @Override
+    public KnowledgeDO getKnowledgeById(Long id) throws DaoException {
+        return selectOne("KnowledgeDao.getKnowledgeById", id);
+    }
 }

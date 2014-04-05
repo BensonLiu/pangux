@@ -35,4 +35,13 @@ public interface KnowledgeDao {
      * @throws DaoException
      */
     Long countAllKnowledge() throws DaoException;
+
+    /**
+     * 根据知识编号获取只是详情
+     *
+     * @param id 知识编号
+     * @return
+     * @throws DaoException
+     */
+    KnowledgeDO getKnowledgeById(Long id) throws DaoException;
 }
