@@ -39,7 +39,7 @@
                 #{item}
             </foreach>
         </if>
-        order by #{orderBy} #{orderType}
+        order by ${orderBy} ${orderType}
         limit #{pageSize}
     </select>
 

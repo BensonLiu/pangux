@@ -51,13 +51,13 @@ public class KnowledgeDaoTest extends BaseTest {
 
     @Test public void test_queryByMinId() throws DaoException {
         KnowledgeQuery knowledgeQuery = new KnowledgeQuery();
-        //knowledgeQuery.setMaxKnowledgeId(10000L);
-        knowledgeQuery.setMinKnowledgeId(1L);
-        knowledgeQuery.setCategorys(Lists.newArrayList(1L));
+        knowledgeQuery.setMaxKnowledgeId(40L);
+        //knowledgeQuery.setMinKnowledgeId(1L);
+        //knowledgeQuery.setCategorys(Lists.newArrayList(1L));
 
         Query<KnowledgeQuery> query = Query.create(knowledgeQuery);
 
-        query.setPageSize(100);
+        query.setPageSize(1);
         query.setOrderBy("id");
         query.setOrderType("desc");
 
