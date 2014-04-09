@@ -32,10 +32,12 @@ public class KnowledgeAction {
 	public void doAdd(TurbineRunData runData, Context context){
 		try {
 			boolean formIsInvalid = false;
-			/*
-			Long category = runData.getParameters().getLong("category");
-            context.put("category", category);
-            */
+
+            String permit = runData.getParameters().getString("permit");
+
+            if (StringUtils.isBlank(permit)) {
+                return;
+            }
 
             String summary = runData.getParameters().getString("summary", "");
 
