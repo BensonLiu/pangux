@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 public class LightKnowledgeDO {
 
-    private final static String PIC_PREFIX = "http://www.eadmarket.com/img/edu_app/";
+    private final static String PIC_PREFIX = "http://static.eadmarket.com/img/edu_app/";
 
     private Long id;
 
