@@ -3,6 +3,7 @@ package com.eadmarket.pangu.dao.report;
 import com.eadmarket.pangu.DaoException;
 import com.eadmarket.pangu.domain.ReportInfoDO;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.Date;
 import java.util.List;
 

@@ -11,11 +11,11 @@
             <pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
         </layout>
     </appender>
-
+    <!--
     <logger name="org.springframework">
         <level value="debug" />
     </logger>
-
+    -->
     <logger name="org.apache">
         <level value="debug" />
     </logger>
@@ -36,6 +36,26 @@
         <level value="debug" />
     </logger>
 
+    <appender name="slow_log_appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>slow-log.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>slow-log.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>info</level>
+        </filter>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d %-5level %logger{36} - %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <logger name="StatisticsLogger" level="INFO" additivity="false">
+        <appender-ref ref="INFO_APPENDER"/>
+    </logger>
+
+    <logger name="druid.sql" level="info" additivity="false">
+        <appender-ref ref="slow_log_appender" />
+    </logger>
 
     <root>
         <level value="debug" />
