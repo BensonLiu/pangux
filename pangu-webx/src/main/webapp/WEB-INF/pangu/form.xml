@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xmlns:p="http://www.springframework.org/schema/p"
              xmlns:services="http://www.alibaba.com/schema/services"
-             xmlns:fm-conditions="http://www.alibaba.com/schema/services/form/conditions"
              xmlns:fm-validators="http://www.alibaba.com/schema/services/form/validators"
-             xsi:schemaLocation="
-                 http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
-                 http://www.alibaba.com/schema/services/form/conditions http://localhost:8080/schema/services-form-conditions.xsd
+             xsi:schemaLocation="http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+
                  http://www.alibaba.com/schema/services/form/validators http://localhost:8080/schema/services-form-validators.xsd
-                 http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
-             ">
+                 http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd">
 
     <services:form postOnlyByDefault="true">
         <!--
@@ -30,75 +26,75 @@
           - register form
           - ===============================================
          -->
-         <!-- 
-        <group name="register" extends="csrfCheck">
-            <field name="email" displayName="邮箱">
-                <fm-validators:required-validator>
-                    <message>${displayName}必须填写吆</message>
-                </fm-validators:required-validator>
-                <fm-validators:string-length-validator maxLength="200">
-                	<message>${displayName}长度必须小于${maxLength}</message>
-                </fm-validators:string-length-validator>
-                <fm-validators:mail-address-validator>
-                	<message>${displayName}必须是合法的邮箱吆</message>
-                </fm-validators:mail-address-validator>
-                <fm-validators:custom-error id="registerError">
-					<message>${errorMessage}</message>
-				</fm-validators:custom-error>
-            </field>
-            <field name="password" displayName="密码">
-                <fm-validators:required-validator>
-                    <message>${displayName}必须填写吆</message>
-                </fm-validators:required-validator>
-                <fm-validators:string-length-validator minLength="6" maxLength="20">
-                	<message>${displayName}长度必须介于${minLength}-${maxLength}之间</message>
-                </fm-validators:string-length-validator>
-                <fm-validators:regexp-validator pattern="^[A-Za-z_][A-Za-z_0-9]*$">
-					<message>${displayName必须包含字母和数字</message>
-				</fm-validators:regexp-validator>
-            </field>
-            <field name="passwordConfirm" displayName="确认密码">
-                <fm-validators:required-validator>
-                    <message>${displayName}必须填写吆</message>
-                </fm-validators:required-validator>
-                <fm-validators:string-length-validator minLength="6" maxLength="20">
-                	<message>${displayName}长度必须介于${minLength}-${maxLength}之间</message>
-                </fm-validators:string-length-validator>
-                <fm-validators:regexp-validator pattern="^[A-Za-z]*[0-9]*$">
-					<message>${displayName}必须包含字母和数字</message>
-				</fm-validators:regexp-validator>
-                <fm-validators:string-compare-validator equalTo="password">
-					<message>${displayName}必须和 ${password.displayName} 相同</message> 
-				</fm-validators:string-compare-validator>
-            </field>
-            <field name="nick" displayName="名字">
-                <fm-validators:required-validator>
-                    <message>${displayName}必须填写吆</message>
-                </fm-validators:required-validator>
-                <fm-validators:string-length-validator maxLength="200">
-                	<message>${displayName}长度必须小于${maxLength}</message>
-                </fm-validators:string-length-validator>
-            </field>
-            <field name="account" displayName="账户">
-                <fm-validators:required-validator>
-                    <message>${displayName}必须填写吆</message>
-                </fm-validators:required-validator>
-                <fm-validators:string-length-validator maxLength="200">
-                	<message>${displayName}长度必须小于${maxLength}</message>
-                </fm-validators:string-length-validator>
-            </field>
-            <field name="payment" displayName="提现方式">
-                <fm-validators:required-validator>
-                    <message>${displayName}必须填写吆</message>
-                </fm-validators:required-validator>
-            </field>
-            <field name="provision" displayName="注册条款">
-                <fm-validators:required-validator>
-                    <message>${displayName}必须同意吆</message>
-                </fm-validators:required-validator>
-            </field>
-        </group>
-         -->
+        <!--
+       <group name="register" extends="csrfCheck">
+           <field name="email" displayName="邮箱">
+               <fm-validators:required-validator>
+                   <message>${displayName}必须填写吆</message>
+               </fm-validators:required-validator>
+               <fm-validators:string-length-validator maxLength="200">
+                   <message>${displayName}长度必须小于${maxLength}</message>
+               </fm-validators:string-length-validator>
+               <fm-validators:mail-address-validator>
+                   <message>${displayName}必须是合法的邮箱吆</message>
+               </fm-validators:mail-address-validator>
+               <fm-validators:custom-error id="registerError">
+                   <message>${errorMessage}</message>
+               </fm-validators:custom-error>
+           </field>
+           <field name="password" displayName="密码">
+               <fm-validators:required-validator>
+                   <message>${displayName}必须填写吆</message>
+               </fm-validators:required-validator>
+               <fm-validators:string-length-validator minLength="6" maxLength="20">
+                   <message>${displayName}长度必须介于${minLength}-${maxLength}之间</message>
+               </fm-validators:string-length-validator>
+               <fm-validators:regexp-validator pattern="^[A-Za-z_][A-Za-z_0-9]*$">
+                   <message>${displayName必须包含字母和数字</message>
+               </fm-validators:regexp-validator>
+           </field>
+           <field name="passwordConfirm" displayName="确认密码">
+               <fm-validators:required-validator>
+                   <message>${displayName}必须填写吆</message>
+               </fm-validators:required-validator>
+               <fm-validators:string-length-validator minLength="6" maxLength="20">
+                   <message>${displayName}长度必须介于${minLength}-${maxLength}之间</message>
+               </fm-validators:string-length-validator>
+               <fm-validators:regexp-validator pattern="^[A-Za-z]*[0-9]*$">
+                   <message>${displayName}必须包含字母和数字</message>
+               </fm-validators:regexp-validator>
+               <fm-validators:string-compare-validator equalTo="password">
+                   <message>${displayName}必须和 ${password.displayName} 相同</message>
+               </fm-validators:string-compare-validator>
+           </field>
+           <field name="nick" displayName="名字">
+               <fm-validators:required-validator>
+                   <message>${displayName}必须填写吆</message>
+               </fm-validators:required-validator>
+               <fm-validators:string-length-validator maxLength="200">
+                   <message>${displayName}长度必须小于${maxLength}</message>
+               </fm-validators:string-length-validator>
+           </field>
+           <field name="account" displayName="账户">
+               <fm-validators:required-validator>
+                   <message>${displayName}必须填写吆</message>
+               </fm-validators:required-validator>
+               <fm-validators:string-length-validator maxLength="200">
+                   <message>${displayName}长度必须小于${maxLength}</message>
+               </fm-validators:string-length-validator>
+           </field>
+           <field name="payment" displayName="提现方式">
+               <fm-validators:required-validator>
+                   <message>${displayName}必须填写吆</message>
+               </fm-validators:required-validator>
+           </field>
+           <field name="provision" displayName="注册条款">
+               <fm-validators:required-validator>
+                   <message>${displayName}必须同意吆</message>
+               </fm-validators:required-validator>
+           </field>
+       </group>
+        -->
         <group name="login">
             <field name="email" displayName="邮箱">
                 <fm-validators:required-validator>
@@ -111,11 +107,11 @@
                 </fm-validators:required-validator>
             </field>
             <field name="redirectUrl">
-                
+
             </field>
-            
+
         </group>
-        
+
     </services:form>
 
 </beans:beans>

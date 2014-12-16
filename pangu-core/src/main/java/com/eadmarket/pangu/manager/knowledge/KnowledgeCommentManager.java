@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface KnowledgeCommentManager {
 
-    Long commentKnowledge(String ip, Long knowledgeId, String comment) throws ManagerException;
+  Long commentKnowledge(String ip, Long knowledgeId, String comment) throws ManagerException;
 
-    List<KnowledgeCommentDO> queryCommentByKnowledgeId(Long knowledgeId) throws ManagerException;
+  List<KnowledgeCommentDO> queryCommentByKnowledgeId(Long knowledgeId) throws ManagerException;
 }

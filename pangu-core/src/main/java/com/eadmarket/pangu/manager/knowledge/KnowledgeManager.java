@@ -12,11 +12,11 @@ import java.util.List;
  */
 public interface KnowledgeManager {
 
-    void saveKnowledge(KnowledgeDO knowledgeDO) throws ManagerException;
+  void saveKnowledge(KnowledgeDO knowledgeDO) throws ManagerException;
 
-    List<KnowledgeDO> queryByMinId(Query<KnowledgeQuery> query) throws ManagerException;
+  List<KnowledgeDO> queryByMinId(Query<KnowledgeQuery> query) throws ManagerException;
 
-    List<KnowledgeDO> queryByMinIdWithComments(Query<KnowledgeQuery> query) throws ManagerException;
+  List<KnowledgeDO> queryByMinIdWithComments(Query<KnowledgeQuery> query) throws ManagerException;
 
-    Long countAllKnowledge() throws ManagerException;
+  Long countAllKnowledge() throws ManagerException;
 }

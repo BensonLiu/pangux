@@ -1,22 +1,22 @@
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="AdvertiseDao">
-	<resultMap type="AdvertiseDO" id="AdvertiseMap">
-		<result column="id" property="id"/>
-		<result column="project" property="projectId"/>
-		<result column="title" property="title"/>
-		<result column="content" property="content"/>
-		<result column="format" property="format"/>
-		<result column="width" property="width"/>
-		<result column="height" property="height"/>
-		<result column="price" property="price"/>
-		<result column="profit" property="profit"/>
-		<result column="state" property="status" typeHandler="AdvertiseStatusTypeHandler"/>
-		<result column="activeUrl" property="activeUrl"/>
+    <resultMap type="AdvertiseDO" id="AdvertiseMap">
+        <result column="id" property="id"/>
+        <result column="project" property="projectId"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="format" property="format"/>
+        <result column="width" property="width"/>
+        <result column="height" property="height"/>
+        <result column="price" property="price"/>
+        <result column="profit" property="profit"/>
+        <result column="state" property="status" typeHandler="AdvertiseStatusTypeHandler"/>
+        <result column="activeUrl" property="activeUrl"/>
         <result column="style" property="style"/>
         <result column="default_display_content" property="defaultDisplayContent"/>
-	</resultMap>
+    </resultMap>
 
     <resultMap type="AdvertiseContractDO" id="AdvertiseContractMap">
         <result column="id" property="id"/>
@@ -27,33 +27,34 @@
         <result column="display_type" property="displayType"/>
         <result column="display_content" property="displayContent"/>
     </resultMap>
-	
-	<sql id="allFields">
-		id,
-		project,
-		title,
-		content,
-		format,
-		width,
-		height,
-		price,
-		profit,
-		state,
-		activeUrl,
-		style,
-		default_display_content
-	</sql>
+
+    <sql id="allFields">
+        id,
+        project,
+        title,
+        content,
+        format,
+        width,
+        height,
+        price,
+        profit,
+        state,
+        activeUrl,
+        style,
+        default_display_content
+    </sql>
 
     <sql id="allFields_contract">
-		id,
-		advertise_id,
-		trade_id,
-		status,
-		product_url,
-		display_content
-	</sql>
+        id,
+        advertise_id,
+        trade_id,
+        status,
+        product_url,
+        display_content
+    </sql>
 
-    <select id="getActiveContractByAdvertiseId" resultMap="AdvertiseContractMap" parameterType="long">
+    <select id="getActiveContractByAdvertiseId" resultMap="AdvertiseContractMap"
+            parameterType="long">
         select
         <include refid="allFields_contract"/>
         from advertise_contract
@@ -67,51 +68,52 @@
         where advertise_id = #{advertiseId}
     </update>
 
-	<select id="getById" resultMap="AdvertiseMap" parameterType="long">
-		select 
-		<include refid="allFields"/>
-		from advertise 
-		where id = #{id}
-	</select>
-	
-	<select id="getByProjectId" resultMap="AdvertiseMap" parameterType="long">
-		select
-		<include refid="allFields"/>
-		from advertise
-		where project =#{id}
-	</select>
-	
-	<insert id="addAdvertise" parameterType="AdvertiseDO" useGeneratedKeys="true" keyProperty="id">
-	    insert into advertise (project, title, content, format, width, height, price, profit, state) 
-	    values (#{projectId}, #{title}, #{content}, #{format}, #{width}, #{height}, #{price}, #{profit},#{status,typeHandler=AdvertiseStatusTypeHandler})
-	</insert>
-	
-	<update id="updateAdvertiseById" parameterType="AdvertiseDO">
-		update advertise
-		<set>
-			<if test="status != null">state=#{status,typeHandler=AdvertiseStatusTypeHandler},</if>
-			<if test="price != null">price=#{price},</if>
-			<if test="title != null">title=#{title},</if>
-			<if test="content != null">content=#{content},</if>
-			<if test="width != null">width=#{width},</if>
-			<if test="height != null">height=#{height},</if>
-			<if test="format != null">format=#{format}</if>
-		</set>
-		where id =#{id}
-	</update>
-	
-	<update id="updateProfitById" parameterType="java.util.HashMap">
-		update advertise
-		set profit = profit + #{addProfit}
-		where id = #{id}
-	</update>
-	
-	<select id="queryPositionsForTimer" resultMap="AdvertiseMap" parameterType="map">
-		select
-		<include refid="allFields"/>
-		from advertise
-		where id > #{minId} and state = #{status,typeHandler=AdvertiseStatusTypeHandler}
-		order by id
-		limit 30
-	</select>
+    <select id="getById" resultMap="AdvertiseMap" parameterType="long">
+        select
+        <include refid="allFields"/>
+        from advertise
+        where id = #{id}
+    </select>
+
+    <select id="getByProjectId" resultMap="AdvertiseMap" parameterType="long">
+        select
+        <include refid="allFields"/>
+        from advertise
+        where project =#{id}
+    </select>
+
+    <insert id="addAdvertise" parameterType="AdvertiseDO" useGeneratedKeys="true" keyProperty="id">
+        insert into advertise (project, title, content, format, width, height, price, profit, state)
+        values (#{projectId}, #{title}, #{content}, #{format}, #{width}, #{height}, #{price},
+        #{profit},#{status,typeHandler=AdvertiseStatusTypeHandler})
+    </insert>
+
+    <update id="updateAdvertiseById" parameterType="AdvertiseDO">
+        update advertise
+        <set>
+            <if test="status != null">state=#{status,typeHandler=AdvertiseStatusTypeHandler},</if>
+            <if test="price != null">price=#{price},</if>
+            <if test="title != null">title=#{title},</if>
+            <if test="content != null">content=#{content},</if>
+            <if test="width != null">width=#{width},</if>
+            <if test="height != null">height=#{height},</if>
+            <if test="format != null">format=#{format}</if>
+        </set>
+        where id =#{id}
+    </update>
+
+    <update id="updateProfitById" parameterType="java.util.HashMap">
+        update advertise
+        set profit = profit + #{addProfit}
+        where id = #{id}
+    </update>
+
+    <select id="queryPositionsForTimer" resultMap="AdvertiseMap" parameterType="map">
+        select
+        <include refid="allFields"/>
+        from advertise
+        where id > #{minId} and state = #{status,typeHandler=AdvertiseStatusTypeHandler}
+        order by id
+        limit 30
+    </select>
 </mapper>

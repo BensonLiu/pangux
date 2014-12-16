@@ -12,14 +12,14 @@ import java.util.List;
  */
 class KnowledgeCommentDaoImpl extends BaseDao implements KnowledgeCommentDao {
 
-    @Override
-    public Long insertComment(KnowledgeCommentDO knowledgeCommentDO) throws DaoException {
-        insert("KnowledgeCommentDao.insertComment", knowledgeCommentDO);
-        return knowledgeCommentDO.getId();
-    }
+  @Override
+  public Long insertComment(KnowledgeCommentDO knowledgeCommentDO) throws DaoException {
+    insert("KnowledgeCommentDao.insertComment", knowledgeCommentDO);
+    return knowledgeCommentDO.getId();
+  }
 
-    @Override
-    public List<KnowledgeCommentDO> queryCommentByKnowledgeId(Long knowledgeId) throws DaoException {
-        return selectList("KnowledgeCommentDao.queryByKnowledgeId", knowledgeId);
-    }
+  @Override
+  public List<KnowledgeCommentDO> queryCommentByKnowledgeId(Long knowledgeId) throws DaoException {
+    return selectList("KnowledgeCommentDao.queryByKnowledgeId", knowledgeId);
+  }
 }

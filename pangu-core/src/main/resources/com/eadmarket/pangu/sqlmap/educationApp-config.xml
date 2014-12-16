@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration
-  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-  <typeAliases>
-  	<package name="com.eadmarket.pangu.domain"/>
-    <package name="com.eadmarket.pangu.query"/>
-    <package name="com.eadmarket.pangu.common"/>
-  	<package name="com.eadmarket.pangu.dao.typehandler"/>
-  </typeAliases>
-  <typeHandlers>
-  	<package name="com.eadmarket.pangu.dao.typehandler"/>
-  </typeHandlers>
-  <mappers>
-    <mapper resource="com/eadmarket/pangu/sqlmap/mapper/KnowledgeMapper.xml"/>
-    <mapper resource="com/eadmarket/pangu/sqlmap/mapper/KnowledgeCommentMapper.xml"/>
-  </mappers>
+    <typeAliases>
+        <package name="com.eadmarket.pangu.domain"/>
+        <package name="com.eadmarket.pangu.query"/>
+        <package name="com.eadmarket.pangu.common"/>
+        <package name="com.eadmarket.pangu.dao.typehandler"/>
+    </typeAliases>
+    <typeHandlers>
+        <package name="com.eadmarket.pangu.dao.typehandler"/>
+    </typeHandlers>
+    <mappers>
+        <mapper resource="com/eadmarket/pangu/sqlmap/mapper/KnowledgeMapper.xml"/>
+        <mapper resource="com/eadmarket/pangu/sqlmap/mapper/KnowledgeCommentMapper.xml"/>
+    </mappers>
 </configuration>

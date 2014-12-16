@@ -3,11 +3,11 @@
  * -------------------------------------------- *#
 #macro (showHead $defaultTitle)
 
-#showTitle ($defaultTitle)
-#showMetaTags ()
-#showHttpEquiv ()
-#showStylesheets ()
-#showJavascripts ()
+    #showTitle ($defaultTitle)
+    #showMetaTags ()
+    #showHttpEquiv ()
+    #showStylesheets ()
+    #showJavascripts ()
 
 #end
 
@@ -16,11 +16,11 @@
  * -------------------------------------------- *#
 #macro (showTitle $defaultTitle)
 
-#if( $page.title != "" )
-<title>$page.title</title>
-#else
-<title>$!defaultTitle</title>
-#end
+    #if( $page.title != "" )
+    <title>$page.title</title>
+    #else
+    <title>$!defaultTitle</title>
+    #end
 
 #end
 
@@ -29,9 +29,9 @@
  * -------------------------------------------- *#
 #macro (showMetaTags)
 
-#foreach($metaTag in $page.metaTags.keySet())
-<meta name="$metaTag" content="$page.metaTags.get($metaTag)">
-#end
+    #foreach($metaTag in $page.metaTags.keySet())
+    <meta name="$metaTag" content="$page.metaTags.get($metaTag)">
+    #end
 
 #end
 
@@ -40,9 +40,9 @@
  * -------------------------------------------- *#
 #macro (showHttpEquiv)
 
-#foreach($httpEquiv in $page.httpEquivs.keySet())
-<meta http-equiv="$httpEquiv" content="$page.httpEquivs.get($httpEquiv)">
-#end
+    #foreach($httpEquiv in $page.httpEquivs.keySet())
+    <meta http-equiv="$httpEquiv" content="$page.httpEquivs.get($httpEquiv)">
+    #end
 
 #end
 
@@ -51,12 +51,12 @@
  * -------------------------------------------- *#
 #macro (showStylesheets)
 
-#foreach( $styleSheet in $page.styleSheets )
-<link rel="stylesheet" href="$styleSheet.Url"
-  #if($styleSheet.Type != "" ) type="$styleSheet.Type" #end
-  #if($styleSheet.Media != "") media="$styleSheet.Media" #end
-  #if($styleSheet.Title != "") title="$styleSheet.Title" #end>
-#end
+    #foreach( $styleSheet in $page.styleSheets )
+    <link rel="stylesheet" href="$styleSheet.Url"
+        #if($styleSheet.Type != "" ) type="$styleSheet.Type" #end
+        #if($styleSheet.Media != "") media="$styleSheet.Media" #end
+        #if($styleSheet.Title != "") title="$styleSheet.Title" #end>
+    #end
 
 #end
 
@@ -65,9 +65,9 @@
  * -------------------------------------------- *#
 #macro (showJavascripts)
 
-#foreach( $script in $page.scripts )
-<script type="text/javascript" src="$script" language="JavaScript"></script>
-#end
+    #foreach( $script in $page.scripts )
+    <script type="text/javascript" src="$script" language="JavaScript"></script>
+    #end
 
 #end
 
@@ -77,9 +77,9 @@
  * -------------------------------------------- *#
 #macro (bodyAttributes)
 
-#foreach( $attributeName in $page.bodyAttributes.keySet() )
-    $attributeName="$page.bodyAttributes.get($attributeName)"
-#end
+    #foreach( $attributeName in $page.bodyAttributes.keySet() )
+        $attributeName="$page.bodyAttributes.get($attributeName)"
+    #end
 
 #end
 
@@ -88,14 +88,14 @@
  * -------------------------------------------- *#
 #macro (select $name $map $selected $hint)
 
-#set ($_map = $map)
-#set ($_selected = $selected)
+    #set ($_map = $map)
+    #set ($_selected = $selected)
 <select name="$name">
-  <option value="">$hint</option>
+    <option value="">$hint</option>
 
-#foreach ($_key in $_map.keySet())
-  <option value="$_key" #if ($_key == $_selected) selected #end>$_map.get($_key)</option>
-#end
+    #foreach ($_key in $_map.keySet())
+        <option value="$_key" #if ($_key == $_selected) selected #end>$_map.get($_key)</option>
+    #end
 
 </select>
 

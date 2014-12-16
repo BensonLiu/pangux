@@ -17,23 +17,23 @@
     </logger>
     -->
     <logger name="org.apache">
-        <level value="debug" />
+        <level value="debug"/>
     </logger>
 
     <logger name="org.mybatis">
-        <level value="debug" />
+        <level value="debug"/>
     </logger>
 
     <logger name="java.sql.Connection">
-        <level value="debug" />
+        <level value="debug"/>
     </logger>
 
     <logger name="java.sql.Statement">
-        <level value="debug" />
+        <level value="debug"/>
     </logger>
 
     <logger name="java.sql.PreparedStatement">
-        <level value="debug" />
+        <level value="debug"/>
     </logger>
 
     <appender name="slow_log_appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -54,11 +54,11 @@
     </logger>
 
     <logger name="druid.sql" level="info" additivity="false">
-        <appender-ref ref="slow_log_appender" />
+        <appender-ref ref="slow_log_appender"/>
     </logger>
 
     <root>
-        <level value="debug" />
-        <appender-ref ref="STDOUT" />
+        <level value="debug"/>
+        <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

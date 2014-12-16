@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:services="http://www.alibaba.com/schema/services" xmlns:uris="http://www.alibaba.com/schema/services/uris"
-	xmlns:beans="http://www.springframework.org/schema/beans"
-	xsi:schemaLocation="
+             xmlns:services="http://www.alibaba.com/schema/services"
+             xmlns:uris="http://www.alibaba.com/schema/services/uris"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xsi:schemaLocation="
                  http://www.alibaba.com/schema/services      http://localhost:8080/schema/services.xsd
                  http://www.alibaba.com/schema/services/uris http://localhost:8080/schema/services-uris.xsd
                  http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
              ">
 
-	<services:uris requestAware="false">
+    <services:uris requestAware="false">
 
         <uris:turbine-content-uri id="mainLink" exposed="true">
             <serverURI>http://${eadmarket.com}</serverURI>
@@ -26,26 +27,26 @@
             <prefixPath>/img/adcontent/video/</prefixPath>
         </uris:turbine-content-uri>
 
-		<uris:turbine-uri id="panguLink" exposed="true" requestAware="true" />
+        <uris:turbine-uri id="panguLink" exposed="true" requestAware="true"/>
 
-		<uris:turbine-content-uri id="panguContent" exposed="true" extends="panguLink" />
+        <uris:turbine-content-uri id="panguContent" exposed="true" extends="panguLink"/>
 
-		<uris:turbine-uri id="loginLink" extends="panguLink" exposed="true">
-			<target>/member/login.htm</target>
-		</uris:turbine-uri>
+        <uris:turbine-uri id="loginLink" extends="panguLink" exposed="true">
+            <target>/member/login.htm</target>
+        </uris:turbine-uri>
 
-		<uris:turbine-uri id="logoutLink" extends="panguLink" exposed="true">
-			<target>/member/logout.htm</target>
-		</uris:turbine-uri>
+        <uris:turbine-uri id="logoutLink" extends="panguLink" exposed="true">
+            <target>/member/logout.htm</target>
+        </uris:turbine-uri>
 
-		<uris:turbine-uri id="indexLink" extends="panguLink" exposed="true">
-			<target>/index.htm</target>
-		</uris:turbine-uri>
+        <uris:turbine-uri id="indexLink" extends="panguLink" exposed="true">
+            <target>/index.htm</target>
+        </uris:turbine-uri>
 
         <uris:turbine-uri id="advertiseClick" extends="panguLink" exposed="true">
             <target>/advertise/click_advertise.htm</target>
         </uris:turbine-uri>
 
-	</services:uris>
+    </services:uris>
 
 </beans:beans>

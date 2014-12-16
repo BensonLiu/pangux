@@ -1,30 +1,32 @@
 package com.eadmarket.pangu.domain;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import lombok.Data;
-import lombok.ToString;
 
 import java.util.Date;
+
+import lombok.Data;
+import lombok.ToString;
 
 /**
  * Created by liu on 4/4/14.
  */
-@Data @ToString
+@Data
+@ToString
 public class KnowledgeCommentDO {
 
-    private Long id;
+  private Long id;
 
-    private String srcIp;
+  private String srcIp;
 
-    @JSONField(serialize=false)
-    private Long knowledgeId;
+  @JSONField(serialize = false)
+  private Long knowledgeId;
 
-    private String comment;
+  private String comment;
 
-    @JSONField(serialize=false)
-    private int status = 1;
+  @JSONField(serialize = false)
+  private int status = 1;
 
-    @JSONField(name = "createDate", format = "yyyy-MM-dd HH:mm")
-    private Date gmtCreate;
+  @JSONField(name = "createDate", format = "yyyy-MM-dd HH:mm")
+  private Date gmtCreate;
 
 }

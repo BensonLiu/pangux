@@ -26,8 +26,8 @@
             ]]></pattern>
         </layout>
     </appender>
-	
-	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${loggingRoot}/pangu.log</file>
         <encoding>utf-8</encoding>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
@@ -43,23 +43,23 @@
             <pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
         </layout>
     </appender>
-	
+
     <logger name="org.apache">
-        <level value="INFO" />
+        <level value="INFO"/>
     </logger>
 
     <logger name="org.springframework">
-        <level value="INFO" />
+        <level value="INFO"/>
     </logger>
 
     <logger name="com.alibaba.citrus.springext.support.context">
-        <level value="INFO" />
+        <level value="INFO"/>
     </logger>
 
     <root>
-        <level value="${loggingLevel}" />
-        <appender-ref ref="STDERR" />
-        <appender-ref ref="STDOUT" />
-        <appender-ref ref="FILE" />
+        <level value="${loggingLevel}"/>
+        <appender-ref ref="STDERR"/>
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
     </root>
 </configuration>

@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+        "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans default-autowire="byName">
-	
-	<bean id="advertiseManager" class="com.eadmarket.pangu.manager.position.impl.AdvertiseManagerImpl" />
-	
-	<bean id="productManager" class="com.eadmarket.pangu.manager.product.impl.ProductManagerImpl" />
-	
-	<bean id="projectManager" class="com.eadmarket.pangu.manager.project.impl.ProjectManagerImpl" />
-	
-	<bean id="rechargeManager" class="com.eadmarket.pangu.manager.recharge.impl.RechargeManagerImpl" />
-	
-	<bean id="reportInfoManager" class="com.eadmarket.pangu.manager.report.impl.ReportInfoManagerImpl" />
-	
-	<bean id="tradeManager" class="com.eadmarket.pangu.manager.trade.impl.TradeManagerImpl" />
-	
-	<bean id="userManager" class="com.eadmarket.pangu.manager.user.impl.UserManagerImpl"/>
 
-    <bean id="knowledgeManager" class="com.eadmarket.pangu.manager.knowledge.impl.KnowledgeManagerImpl" />
+    <bean id="advertiseManager"
+          class="com.eadmarket.pangu.manager.position.impl.AdvertiseManagerImpl"/>
 
-    <bean id="knowledgeCommentManager" class="com.eadmarket.pangu.manager.knowledge.impl.KnowledgeCommentManagerImpl" />
+    <bean id="productManager" class="com.eadmarket.pangu.manager.product.impl.ProductManagerImpl"/>
+
+    <bean id="projectManager" class="com.eadmarket.pangu.manager.project.impl.ProjectManagerImpl"/>
+
+    <bean id="rechargeManager"
+          class="com.eadmarket.pangu.manager.recharge.impl.RechargeManagerImpl"/>
+
+    <bean id="reportInfoManager"
+          class="com.eadmarket.pangu.manager.report.impl.ReportInfoManagerImpl"/>
+
+    <bean id="tradeManager" class="com.eadmarket.pangu.manager.trade.impl.TradeManagerImpl"/>
+
+    <bean id="userManager" class="com.eadmarket.pangu.manager.user.impl.UserManagerImpl"/>
+
+    <bean id="knowledgeManager"
+          class="com.eadmarket.pangu.manager.knowledge.impl.KnowledgeManagerImpl"/>
+
+    <bean id="knowledgeCommentManager"
+          class="com.eadmarket.pangu.manager.knowledge.impl.KnowledgeCommentManagerImpl"/>
 </beans>

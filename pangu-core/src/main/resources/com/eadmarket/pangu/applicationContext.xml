@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+        "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans default-autowire="byName">
-	<import resource="bean/persistent.xml"/>
-	<import resource="bean/dao.xml"/>
-	<import resource="bean/manager.xml"/>
+    <import resource="bean/persistent.xml"/>
+    <import resource="bean/dao.xml"/>
+    <import resource="bean/manager.xml"/>
     <import resource="bean/component.xml"/>
-	
-	<import resource="bean/timer.xml"/>
-	<import resource="bean/util.xml"/>
-	
-	<import resource="bean/website.xml"/>
+
+    <import resource="bean/timer.xml"/>
+    <import resource="bean/util.xml"/>
+
+    <import resource="bean/website.xml"/>
 </beans>

@@ -7,9 +7,9 @@ import com.eadmarket.pangu.DaoException;
  */
 public interface KVDao {
 
-    String getByKey(String key) throws DaoException;
+  String getByKey(String key) throws DaoException;
 
-    void insertKV(String key, String value) throws DaoException;
+  void insertKV(String key, String value) throws DaoException;
 
-    void updateKV(String key, String value) throws DaoException;
+  void updateKV(String key, String value) throws DaoException;
 }

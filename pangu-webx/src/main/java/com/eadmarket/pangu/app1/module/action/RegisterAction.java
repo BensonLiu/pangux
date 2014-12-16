@@ -19,12 +19,12 @@ package com.eadmarket.pangu.app1.module.action;
 
 import com.alibaba.citrus.turbine.Navigator;
 import com.alibaba.citrus.turbine.dataresolver.FormGroup;
-
 import com.eadmarket.pangu.app1.Visitor;
 
 public class RegisterAction {
-    public void doRegister(@FormGroup("register") Visitor visitor, Navigator nav) {
-        String name = visitor.getName();
-        nav.redirectTo("app1Link").withTarget("form/welcome").withParameter("name", name);
-    }
+
+  public void doRegister(@FormGroup("register") Visitor visitor, Navigator nav) {
+    String name = visitor.getName();
+    nav.redirectTo("app1Link").withTarget("form/welcome").withParameter("name", name);
+  }
 }

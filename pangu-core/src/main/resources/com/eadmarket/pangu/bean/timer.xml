@@ -1,50 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+        "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans default-autowire="byName">
-	<bean id="eadmarket-timer" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-		<property name="triggers">
-			<list>
-				<ref local="tradeTrigger"/>
-				<ref local="websiteAlexaUpdaterTrigger"/>
-                <ref local="reportInfoConverterTrigger" />
-                <ref local="reportInfoToHisTrigger" />
-                <ref local="reportCompCleanerTrigger" />
-			</list>
-		</property>
-		<property name="startupDelay" value="120" />
-	</bean>
-	
-	<bean id="tradeTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
-		<property name="jobDetail">
-		    <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		        <property name="concurrent" value="false"/>
+    <bean id="eadmarket-timer" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref local="tradeTrigger"/>
+                <ref local="websiteAlexaUpdaterTrigger"/>
+                <ref local="reportInfoConverterTrigger"/>
+                <ref local="reportInfoToHisTrigger"/>
+                <ref local="reportCompCleanerTrigger"/>
+            </list>
+        </property>
+        <property name="startupDelay" value="120"/>
+    </bean>
+
+    <bean id="tradeTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail">
+            <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+                <property name="concurrent" value="false"/>
                 <property name="targetObject" ref="tradeTimer"/>
                 <property name="targetMethod" value="execute"/>
-		    </bean>
-		</property>
-		<property name="cronExpression" value="0 0/2 * * * ?"/>
-	</bean>
-	
-	<bean id="tradeTimer" class="com.eadmarket.pangu.timer.TradeRelatedTimerTask">
-		<property name="eadmarketAccountId">
-			<value>${eadmarket.account.id}</value>
-		</property>
-	</bean>
-	
-	<bean id="websiteAlexaUpdater" class="com.eadmarket.pangu.timer.WebsiteAlexaUpdater" />
-	
-	<bean id="websiteAlexaUpdaterTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
-		<property name="jobDetail">
-		    <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		        <property name="concurrent" value="false"/>
+            </bean>
+        </property>
+        <property name="cronExpression" value="0 0/2 * * * ?"/>
+    </bean>
+
+    <bean id="tradeTimer" class="com.eadmarket.pangu.timer.TradeRelatedTimerTask">
+        <property name="eadmarketAccountId">
+            <value>${eadmarket.account.id}</value>
+        </property>
+    </bean>
+
+    <bean id="websiteAlexaUpdater" class="com.eadmarket.pangu.timer.WebsiteAlexaUpdater"/>
+
+    <bean id="websiteAlexaUpdaterTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail">
+            <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+                <property name="concurrent" value="false"/>
                 <property name="targetObject" ref="websiteAlexaUpdater"/>
                 <property name="targetMethod" value="execute"/>
-		    </bean>
-		</property>
-		<property name="cronExpression" value="0 10 0 * * ?"/>
-	</bean>
+            </bean>
+        </property>
+        <property name="cronExpression" value="0 10 0 * * ?"/>
+    </bean>
 
-    <bean id="reportInfoConverterTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <bean id="reportInfoConverterTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail">
             <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
                 <property name="concurrent" value="false"/>
@@ -68,9 +71,10 @@
         <property name="cronExpression" value="0 30 3 * * ?"/>
     </bean>
 
-    <bean id="reportCompCleaner" class="com.eadmarket.pangu.component.report.ReportCompCleaner" />
+    <bean id="reportCompCleaner" class="com.eadmarket.pangu.component.report.ReportCompCleaner"/>
 
-    <bean id="reportCompCleanerTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <bean id="reportCompCleanerTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail">
             <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
                 <property name="concurrent" value="false"/>

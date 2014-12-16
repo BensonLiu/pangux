@@ -7,13 +7,13 @@ import java.util.List;
  */
 public interface ISequenceGenerator {
 
-    /**
-     * 获取一个id
-     */
-    Long get(String seqName) throws SeqException;
+  /**
+   * 获取一个id
+   */
+  Long get(String seqName) throws SeqException;
 
-    /**
-     * 获取多个id
-     */
-    List<Long> getMulti(String seqName, Integer num) throws SeqException;
+  /**
+   * 获取多个id
+   */
+  List<Long> getMulti(String seqName, Integer num) throws SeqException;
 }

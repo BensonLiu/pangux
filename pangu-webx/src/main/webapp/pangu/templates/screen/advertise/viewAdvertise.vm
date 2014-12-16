@@ -2,5 +2,5 @@
 var eadmarket_ad_detail_$!aid = #noescape(){"success":"$!success"}#end
 #else
 var eadmarket_ad_detail_$!aid = #noescape(){"success":"$!success","clickUrl":"$!advertiseInfoVO.clickUrl","type":"$!advertiseInfoVO.type","content":"$!advertiseInfoVO.content","height":"$!advertiseInfoVO.height","width":"$!advertiseInfoVO.width","status":"$!advertiseInfoVO.status"}
-    #end
+#end
 #end

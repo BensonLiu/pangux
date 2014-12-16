@@ -7,7 +7,7 @@ import com.eadmarket.pangu.domain.AdvertiseDO;
  */
 public interface ResponseAdvertiseComponent {
 
-    void responseViewAdvertise(AdvertiseDO advertiseDO, String srcIp);
+  void responseViewAdvertise(AdvertiseDO advertiseDO, String srcIp);
 
-    void responseClickAdvertise(AdvertiseDO advertiseDO, String srcIp);
+  void responseClickAdvertise(AdvertiseDO advertiseDO, String srcIp);
 }

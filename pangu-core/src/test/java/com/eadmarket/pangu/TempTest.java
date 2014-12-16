@@ -12,19 +12,19 @@ import java.util.Date;
  */
 public class TempTest {
 
-    @Test
-    public void testDateUtilsTruncate() {
-        Date truncate = DateUtils.truncate(new Date(), Calendar.HOUR_OF_DAY);
-        String format = DateFormatUtils.ISO_DATETIME_FORMAT.format(truncate);
-        System.out.println(format);
+  @Test
+  public void testDateUtilsTruncate() {
+    Date truncate = DateUtils.truncate(new Date(), Calendar.HOUR_OF_DAY);
+    String format = DateFormatUtils.ISO_DATETIME_FORMAT.format(truncate);
+    System.out.println(format);
 
-        truncate = DateUtils.truncate(new Date(), Calendar.MONTH);
-        format = DateFormatUtils.ISO_DATETIME_FORMAT.format(truncate);
-        System.out.println(format);
+    truncate = DateUtils.truncate(new Date(), Calendar.MONTH);
+    format = DateFormatUtils.ISO_DATETIME_FORMAT.format(truncate);
+    System.out.println(format);
 
-        truncate = DateUtils.truncate(new Date(), Calendar.DATE);
-        format = DateFormatUtils.ISO_DATETIME_FORMAT.format(truncate);
-        System.out.println(format);
+    truncate = DateUtils.truncate(new Date(), Calendar.DATE);
+    format = DateFormatUtils.ISO_DATETIME_FORMAT.format(truncate);
+    System.out.println(format);
 
-    }
+  }
 }

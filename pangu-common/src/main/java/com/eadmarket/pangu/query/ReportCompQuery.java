@@ -1,8 +1,8 @@
 package com.eadmarket.pangu.query;
 
-import lombok.Data;
-
 import java.util.Date;
+
+import lombok.Data;
 
 /**
  * Created by liu on 1/10/14.
@@ -10,19 +10,19 @@ import java.util.Date;
 @Data
 public class ReportCompQuery {
 
-    private Long tradeId;
+  private Long tradeId;
 
-    private Integer timeType;
+  private Integer timeType;
 
-    private Date timeValue;
+  private Date timeValue;
 
-    private Long id;
+  private Long id;
 
-    private Long clickNum;
+  private Long clickNum;
 
-    private Long displayNum;
+  private Long displayNum;
 
-    private Long productId;
+  private Long productId;
 
-    private Long advertiseId;
+  private Long advertiseId;
 }

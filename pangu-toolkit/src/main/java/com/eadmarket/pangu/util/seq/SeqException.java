@@ -5,11 +5,11 @@ package com.eadmarket.pangu.util.seq;
  */
 public class SeqException extends Exception {
 
-    public SeqException (String message) {
-        super(message);
-    }
+  public SeqException(String message) {
+    super(message);
+  }
 
-    public SeqException (String message, Throwable cause) {
-        super(message, cause);
-    }
+  public SeqException(String message, Throwable cause) {
+    super(message, cause);
+  }
 }

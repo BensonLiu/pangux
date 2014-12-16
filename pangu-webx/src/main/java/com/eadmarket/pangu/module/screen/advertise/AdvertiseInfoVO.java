@@ -9,16 +9,17 @@ import lombok.Data;
  */
 @Data
 public class AdvertiseInfoVO {
-    private int type;
 
-    private String content = "";
+  private int type;
 
-    private String clickUrl;
+  private String content = "";
 
-    private Integer width;
+  private String clickUrl;
 
-    private Integer height;
+  private Integer width;
 
-    private Integer status;
+  private Integer height;
+
+  private Integer status;
 
 }

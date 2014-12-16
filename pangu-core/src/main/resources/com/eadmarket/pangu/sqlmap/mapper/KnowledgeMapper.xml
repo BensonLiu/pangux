@@ -1,29 +1,30 @@
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="KnowledgeDao">
-	<resultMap type="KnowledgeDO" id="KnowledgeMinMap">
-		<result column="id" property="id"/>
-		<result column="summary" property="summary"/>
-        <result column="img_url" property="imgUrl" />
-        <result column="gmt_create" property="gmtCreate" />
-	</resultMap>
-	
-	<sql id="allFields_min">
-		id,
-		summary,
-		img_url,
-		gmt_create
-	</sql>
+    <resultMap type="KnowledgeDO" id="KnowledgeMinMap">
+        <result column="id" property="id"/>
+        <result column="summary" property="summary"/>
+        <result column="img_url" property="imgUrl"/>
+        <result column="gmt_create" property="gmtCreate"/>
+    </resultMap>
 
-	<insert id="saveKnowledge" parameterType="KnowledgeDO" useGeneratedKeys="true" keyProperty="id">
-	    insert into knowledge_info (id, summary, category, status, img_url, gmt_create, gmt_modified)
-	    values (#{id}, #{summary}, #{category}, #{status}, #{imgUrl}, now(), now())
-	</insert>
+    <sql id="allFields_min">
+        id,
+        summary,
+        img_url,
+        gmt_create
+    </sql>
+
+    <insert id="saveKnowledge" parameterType="KnowledgeDO" useGeneratedKeys="true" keyProperty="id">
+        insert into knowledge_info (id, summary, category, status, img_url, gmt_create,
+        gmt_modified)
+        values (#{id}, #{summary}, #{category}, #{status}, #{imgUrl}, now(), now())
+    </insert>
 
     <select id="queryByMinId" parameterType="Query" resultMap="KnowledgeMinMap">
         select
-        <include refid="allFields_min" />
+        <include refid="allFields_min"/>
         from knowledge_info
         where status = 1
         <if test="condition.minKnowledgeId != null">
@@ -51,7 +52,7 @@
 
     <select id="getKnowledgeById" resultMap="KnowledgeMinMap">
         select
-        <include refid="allFields_min" />
+        <include refid="allFields_min"/>
         from knowledge_info
         where id = #{id} and status = 1
     </select>

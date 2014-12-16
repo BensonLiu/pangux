@@ -7,9 +7,9 @@ import com.eadmarket.pangu.domain.TradeDO.TradeStatus;
  */
 public class TradeStatusTypeHandler extends IEnumTypeHandler<TradeStatus> {
 
-	@Override
-	protected TradeStatus[] allCells() {
-		return TradeStatus.values();
-	}
+  @Override
+  protected TradeStatus[] allCells() {
+    return TradeStatus.values();
+  }
 
 }

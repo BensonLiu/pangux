@@ -1,96 +1,98 @@
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="UserDao">
-	<resultMap type="UserDO" id="usermap">
-		<result column="id" property="id"/>
-		<result column="name" property="nick"/>
-		<result column="email" property="email"/>
-		<result column="password" property="password"/>
-		<result column="type" property="type"/>
-		<result column="balance" property="balance"/>
-		<result column="headimg" property="headerUrl"/>
-		<result column="time" property="registerDate"/>
-		<result column="verify" property="status" typeHandler="UserStatusTypeHandler"/>
-		<result column="score" property="score"/>
-	</resultMap>
-	
-	<sql id="allFields">
-		id,
-		name,
-		email,
-		password,
-		type,
-		balance,
-		headimg,
-		time,
-		verify,
-		score
-	</sql>
-	
-	<select id="getById" resultMap="usermap" parameterType="long">
-		select 
-		<include refid="allFields"/>
-		from user 
-		where id = #{id}
-	</select>
-	
-	<select id="getByEmail" resultMap="usermap" parameterType="string">
-		select 
-		<include refid="allFields"/>
-		from user 
-		where email = #{email}
-	</select>
-	
-	<insert id="insert" parameterType="UserDO" useGeneratedKeys="true" keyProperty="id">
-	    insert into user (name, email, password, type, balance, headimg, time, verify, score, account) 
-	    values (
-	    	#{nick}, #{email}, #{password}, #{type}, #{balance}, #{headerUrl}, now(), #{status,typeHandler=UserStatusTypeHandler},#{score},#{account}
-	    )
-	</insert>
-	
-	<update id="updateStatusById" parameterType="hashMap">
-		update user 
-		set verify = #{status,typeHandler=UserStatusTypeHandler} 
-		where id = #{userId}
-	</update>
-	
-	<update id="updatePassword" parameterType="hashMap">
-		update user 
-		set password = #{password} 
-		where id = #{userId}
-	</update>
-	
-	<update id="addCashTo" parameterType="hashMap">
-		update user set balance = balance + #{cash} where id = #{userId}
-	</update>
-	
-	<update id="reduceCachFrom" parameterType="hashMap">
-		update user set balance = balance - #{cash} where id = #{userId} and balance >= #{cash}
-	</update>
-	
-	<update id="reduceCachWithoutCheck" parameterType="hashMap">
-		update user set balance = balance - #{cash} where id = #{userId}
-	</update>
-	
-	<update id="updateUser" parameterType="UserDO">
-		update user
-		<set>
-			<if test="headUrl != null">
-				headimg = #{headUrl},
-			</if>
-			<if test="account != null">
-				account = #{account},
-			</if>
-			<if test="payment != null">
-				payment = #{payment},
-			</if>
-			<if test="status != null">
-				verify = #{status,typeHandler=UserStatusTypeHandler} 
-			</if>
-		</set>
-		where id = #{Id}
-	</update>
-	
-	
+    <resultMap type="UserDO" id="usermap">
+        <result column="id" property="id"/>
+        <result column="name" property="nick"/>
+        <result column="email" property="email"/>
+        <result column="password" property="password"/>
+        <result column="type" property="type"/>
+        <result column="balance" property="balance"/>
+        <result column="headimg" property="headerUrl"/>
+        <result column="time" property="registerDate"/>
+        <result column="verify" property="status" typeHandler="UserStatusTypeHandler"/>
+        <result column="score" property="score"/>
+    </resultMap>
+
+    <sql id="allFields">
+        id,
+        name,
+        email,
+        password,
+        type,
+        balance,
+        headimg,
+        time,
+        verify,
+        score
+    </sql>
+
+    <select id="getById" resultMap="usermap" parameterType="long">
+        select
+        <include refid="allFields"/>
+        from user
+        where id = #{id}
+    </select>
+
+    <select id="getByEmail" resultMap="usermap" parameterType="string">
+        select
+        <include refid="allFields"/>
+        from user
+        where email = #{email}
+    </select>
+
+    <insert id="insert" parameterType="UserDO" useGeneratedKeys="true" keyProperty="id">
+        insert into user (name, email, password, type, balance, headimg, time, verify, score,
+        account)
+        values (
+        #{nick}, #{email}, #{password}, #{type}, #{balance}, #{headerUrl}, now(),
+        #{status,typeHandler=UserStatusTypeHandler},#{score},#{account}
+        )
+    </insert>
+
+    <update id="updateStatusById" parameterType="hashMap">
+        update user
+        set verify = #{status,typeHandler=UserStatusTypeHandler}
+        where id = #{userId}
+    </update>
+
+    <update id="updatePassword" parameterType="hashMap">
+        update user
+        set password = #{password}
+        where id = #{userId}
+    </update>
+
+    <update id="addCashTo" parameterType="hashMap">
+        update user set balance = balance + #{cash} where id = #{userId}
+    </update>
+
+    <update id="reduceCachFrom" parameterType="hashMap">
+        update user set balance = balance - #{cash} where id = #{userId} and balance >= #{cash}
+    </update>
+
+    <update id="reduceCachWithoutCheck" parameterType="hashMap">
+        update user set balance = balance - #{cash} where id = #{userId}
+    </update>
+
+    <update id="updateUser" parameterType="UserDO">
+        update user
+        <set>
+            <if test="headUrl != null">
+                headimg = #{headUrl},
+            </if>
+            <if test="account != null">
+                account = #{account},
+            </if>
+            <if test="payment != null">
+                payment = #{payment},
+            </if>
+            <if test="status != null">
+                verify = #{status,typeHandler=UserStatusTypeHandler}
+            </if>
+        </set>
+        where id = #{Id}
+    </update>
+
+
 </mapper>

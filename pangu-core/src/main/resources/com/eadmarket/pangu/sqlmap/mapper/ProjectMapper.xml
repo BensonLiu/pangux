@@ -1,112 +1,113 @@
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ProjectDao">
-	<resultMap type="ProjectDO" id="projectMap">
-		<result column="id" property="id"/>
-		<result column="name" property="title"/>
-		<result column="url" property="url"/>
-		<result column="description" property="description"/>
-		<result column="type" property="type"/>
-		<result column="logo" property="logoUrl"/>
-		<result column="category" property="categoryId"/>
-		<result column="owner" property="ownerId"/>
-		<result column="verify" property="status" typeHandler="ProjectStatusTypeHandler"/>
-		<result column="alexa" property="alexa"/>
-		<result column="localRank" property="localRank"/>
-	</resultMap>
-	
-	<sql id="allFields">
-		id,
-		name,
-		url,
-		description,
-		type,
-		logo,
-		category,
-		owner,
-		verify,
-		alexa,
-		localRank
-	</sql>
-	
-	<select id="getById" resultMap="projectMap" parameterType="long">
-		select 
-		<include refid="allFields"/>
-		from project 
-		where id = #{id}
-	</select>
-	
-	<select id="getByUserId" resultMap="projectMap" parameterType="long">
-		select 
-		<include refid="allFields"/>
-		from project 
-		where owner = #{userId} and verify in (0,1)
-	</select>
-	
-	<insert id="insert" parameterType="ProjectDO" useGeneratedKeys="true" keyProperty="id">
-	    insert into project (name, url, description, logo, category, owner, verify, alexa, type) 
-	    values (#{title}, #{url}, #{description}, #{logoUrl}, #{categoryId}, #{ownerId}, #{status,typeHandler=ProjectStatusTypeHandler}, #{alexa},#{type})
-	</insert>
-	
-	<update id="updateById" parameterType="ProjectDO">
-		update project
-		<set>
-			<if test="title != null">
-				name = #{title},
-			</if>
-			<if test="url != null">
-				url = #{url},
-			</if>
-			<if test="description != null">
-				description = #{description},
-			</if>
-			<if test="logoUrl != null">
-				logo = #{logoUrl},
-			</if>
-			<if test="categoryId != null">
-				category = #{categoryId},
-			</if>
-			<if test="status != null">
-				verify = #{status,typeHandler=ProjectStatusTypeHandler},
-			</if>
-			<if test="alexa != null">
-				alexa = #{alexa},
-			</if>
-			<if test="localRank != null">
-				localRank = #{localRank}
-			</if>
-		</set>
-		where id =#{id}
-	</update>
-	
-	<select id="query" resultMap="projectMap" parameterType="com.eadmarket.pangu.common.Query">
-		select 
-		<include refid="allFields"/>
-		from project
-		<where>
-			<if test="condition.categoryId != null">
-				category=#{condition.categoryId}
-			</if>
-			<if test="condition.descriKeyWord != null">
-				AND description like '%'||#{condition.descriKeyWord}||'%'
-			</if>
-		</where>
-		limit #{mysqlPageFirstItem}, #{pageSize}
-	</select>
-	
-	<select id="count" resultType="int" parameterType="com.eadmarket.pangu.common.Query">
-		select count(*)
-		from project
-		<where>
-			<if test="condition.categoryId != null">
-				category=#{condition.categoryId}
-			</if>
-			<if test="condition.descriKeyWord != null">
-				AND description like '%'||#{condition.descriKeyWord}||'%'
-			</if>
-		</where>
-	</select>
+    <resultMap type="ProjectDO" id="projectMap">
+        <result column="id" property="id"/>
+        <result column="name" property="title"/>
+        <result column="url" property="url"/>
+        <result column="description" property="description"/>
+        <result column="type" property="type"/>
+        <result column="logo" property="logoUrl"/>
+        <result column="category" property="categoryId"/>
+        <result column="owner" property="ownerId"/>
+        <result column="verify" property="status" typeHandler="ProjectStatusTypeHandler"/>
+        <result column="alexa" property="alexa"/>
+        <result column="localRank" property="localRank"/>
+    </resultMap>
 
-	
+    <sql id="allFields">
+        id,
+        name,
+        url,
+        description,
+        type,
+        logo,
+        category,
+        owner,
+        verify,
+        alexa,
+        localRank
+    </sql>
+
+    <select id="getById" resultMap="projectMap" parameterType="long">
+        select
+        <include refid="allFields"/>
+        from project
+        where id = #{id}
+    </select>
+
+    <select id="getByUserId" resultMap="projectMap" parameterType="long">
+        select
+        <include refid="allFields"/>
+        from project
+        where owner = #{userId} and verify in (0,1)
+    </select>
+
+    <insert id="insert" parameterType="ProjectDO" useGeneratedKeys="true" keyProperty="id">
+        insert into project (name, url, description, logo, category, owner, verify, alexa, type)
+        values (#{title}, #{url}, #{description}, #{logoUrl}, #{categoryId}, #{ownerId},
+        #{status,typeHandler=ProjectStatusTypeHandler}, #{alexa},#{type})
+    </insert>
+
+    <update id="updateById" parameterType="ProjectDO">
+        update project
+        <set>
+            <if test="title != null">
+                name = #{title},
+            </if>
+            <if test="url != null">
+                url = #{url},
+            </if>
+            <if test="description != null">
+                description = #{description},
+            </if>
+            <if test="logoUrl != null">
+                logo = #{logoUrl},
+            </if>
+            <if test="categoryId != null">
+                category = #{categoryId},
+            </if>
+            <if test="status != null">
+                verify = #{status,typeHandler=ProjectStatusTypeHandler},
+            </if>
+            <if test="alexa != null">
+                alexa = #{alexa},
+            </if>
+            <if test="localRank != null">
+                localRank = #{localRank}
+            </if>
+        </set>
+        where id =#{id}
+    </update>
+
+    <select id="query" resultMap="projectMap" parameterType="com.eadmarket.pangu.common.Query">
+        select
+        <include refid="allFields"/>
+        from project
+        <where>
+            <if test="condition.categoryId != null">
+                category=#{condition.categoryId}
+            </if>
+            <if test="condition.descriKeyWord != null">
+                AND description like '%'||#{condition.descriKeyWord}||'%'
+            </if>
+        </where>
+        limit #{mysqlPageFirstItem}, #{pageSize}
+    </select>
+
+    <select id="count" resultType="int" parameterType="com.eadmarket.pangu.common.Query">
+        select count(*)
+        from project
+        <where>
+            <if test="condition.categoryId != null">
+                category=#{condition.categoryId}
+            </if>
+            <if test="condition.descriKeyWord != null">
+                AND description like '%'||#{condition.descriKeyWord}||'%'
+            </if>
+        </where>
+    </select>
+
+
 </mapper>

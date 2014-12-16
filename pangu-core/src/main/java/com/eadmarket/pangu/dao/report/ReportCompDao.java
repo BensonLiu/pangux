@@ -11,14 +11,14 @@ import java.util.List;
  */
 public interface ReportCompDao {
 
-    Long getIdByReportCompQuery(ReportCompQuery reportCompQuery) throws DaoException;
+  Long getIdByReportCompQuery(ReportCompQuery reportCompQuery) throws DaoException;
 
-    void updateReportCompById(ReportCompQuery reportCompQuery) throws DaoException;
+  void updateReportCompById(ReportCompQuery reportCompQuery) throws DaoException;
 
-    void insertReportComp(ReportCompQuery reportCompQuery) throws DaoException;
+  void insertReportComp(ReportCompQuery reportCompQuery) throws DaoException;
 
-    List<Long> getRemovableIds(int timeType, Date timeValue, int pageSize) throws DaoException;
+  List<Long> getRemovableIds(int timeType, Date timeValue, int pageSize) throws DaoException;
 
-    void deleteReportCompById(Long reportId) throws DaoException;
+  void deleteReportCompById(Long reportId) throws DaoException;
 
 }

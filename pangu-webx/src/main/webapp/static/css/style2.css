@@ -1,73 +1,316 @@
-﻿body{background-color: #f9f9f9;font-family: "微软雅黑","雅黑","黑体"}
-.orange{background-color: #ED561B;}
-.blue{background-color: #058DC7;}
-.green{background-color: #50B432;}
-.yellow{background-color: #DDDF00;}
-.red{background-color: #EC4F4F;}
-.red-color{color: #EC4F4F;}
-.blue-color{color: #058DC7;}
-.green-color{color:#07733f;}
-.orange-color{color: #ed4306;}
-.gray-color{color: #f6f6f6;}
-.a{background-color: #24CBE5;}
-.b{background-color: #64E572;}
-.c{background-color: #FF9655;}
-.d{background-color: #FFF263;}
-.e{background-color: #6AF9C4;}
-.logo{width: 365px;height: 90px;}
-.title{font-weight: bold;}
-.ad{padding:10px;border: solid 1px #ccc;border-radius: 5px;box-shadow: 0px 0px 1px #ccc;
-margin:0px 0 20px 0;background-color: #f8f8f8;cursor: pointer;display: block;color:#555;
-font-size: 12px;min-width: 20%;}
-.ad img{width: 50px;height: 50px;}
-.nav-stacked li{position: relative;}
-.nav-stacked li a{color:  #058DC7;padding-left: 30px;}
-.nav-stacked li a.active{color:  #fff;background-color: #0088cc;}
-.nav-stacked li i{position: absolute;top:10px;right: 10px;color: #ccc;}
-.box{box-shadow: 0px 0px 1px #eee;border: solid 1px #ededed; border-radiuks: 5px; background-color: #fff; padding:15px;
-width: 98%;margin: 15px 0px;}
-.help-block{font-size: 12px;color: #999;}
-.header{padding:20px; border-bottom:solid 1px #ededed; background-color: #fff;}
-.header .span3{margin-top:30px;}
-.header .btn{ font-weight: bold; width: 50px;}
-.container{ width: 90%;}
-
-.nav-head{margin-bottom:-1px;margin-top:10px;border:0;padding-bottom: 0px;}
-.nav-head a{ margin-left: 30px; color: #000;}
-.nav-header .span10{width: 90%;}
-.intro{box-shadow: 0px 0px 1px #eee;border: solid 1px #ededed; border-radius: 5px; background-color: #fff; padding:10px;
-width: 98%;margin-left: 10px;}
-.intro .close{right: 0;}
-.ok{position:relative;top:-5px;left:10px;display:none;}
-a{color: #c33e00;}
-
-a{ cursor: pointer;}
-a:hover{color: #c33e00;}
-
-.section .row-fluid{margin: 10px;padding: 20px 0px;}
-.section{ padding: 20px;}
-.section aside{margin:10px 0px;  color: #666;}
-
-.nav-bar {box-shadow: 0px 0px 1px #eee;border: solid 1px #ededed; border-radius: 5px; background-color: #fff;
+﻿body {
+    background-color: #f9f9f9;
+    font-family: "微软雅黑", "雅黑", "黑体"
 }
-.side-bar li a{padding: 10px 40px;color: #000;border-bottom: solid 1px #e5e5e5;font-size: 14px;}
-.side-bar li a:hover{color: #005580;border-bottom: solid 1px #e5e5e5;}
-.side-bar li.active{font-weight: bold;}
-.side-bar .nav-header{padding: 10px 20px;}
 
-.main-body{box-shadow: 0px 0px 1px #eee;border: solid 1px #ededed; border-radius: 5px; background-color: #fff;
-padding: 20px;}
-.hot{ padding: 0px;margin: 0;}
-.ad-box{font-size: 12px;}
-#controller{bottom: 0px; background-color: #000; margin-left: 10px;}
-.ads{margin: 0px;padding: 0px;overflow: hidden;}
-.ads div li{margin: 12px;padding: 5px;overflow: hidden;}
-form .alert{border:solid 1px #be0100;position:relative;left:20%;width:70%;display: none;font-size: 12px;}
-.footer .container{padding: 20px 0px; border-top: solid 1px #ededed;font-size: 12px;}
-.control-group{ margin-left:0px;}
-.footer .span4 a{color:#000;}
-#legend{border: 0;}
-#legend .span4{ font-size: 14px;}
-#legend span{ font-size: 14px; margin-right: 20px;}
-#legend input{ width: 200px;}
-#legend .progress{padding: 0;}
+.orange {
+    background-color: #ED561B;
+}
+
+.blue {
+    background-color: #058DC7;
+}
+
+.green {
+    background-color: #50B432;
+}
+
+.yellow {
+    background-color: #DDDF00;
+}
+
+.red {
+    background-color: #EC4F4F;
+}
+
+.red-color {
+    color: #EC4F4F;
+}
+
+.blue-color {
+    color: #058DC7;
+}
+
+.green-color {
+    color: #07733f;
+}
+
+.orange-color {
+    color: #ed4306;
+}
+
+.gray-color {
+    color: #f6f6f6;
+}
+
+.a {
+    background-color: #24CBE5;
+}
+
+.b {
+    background-color: #64E572;
+}
+
+.c {
+    background-color: #FF9655;
+}
+
+.d {
+    background-color: #FFF263;
+}
+
+.e {
+    background-color: #6AF9C4;
+}
+
+.logo {
+    width: 365px;
+    height: 90px;
+}
+
+.title {
+    font-weight: bold;
+}
+
+.ad {
+    padding: 10px;
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 1px #ccc;
+    margin: 0px 0 20px 0;
+    background-color: #f8f8f8;
+    cursor: pointer;
+    display: block;
+    color: #555;
+    font-size: 12px;
+    min-width: 20%;
+}
+
+.ad img {
+    width: 50px;
+    height: 50px;
+}
+
+.nav-stacked li {
+    position: relative;
+}
+
+.nav-stacked li a {
+    color: #058DC7;
+    padding-left: 30px;
+}
+
+.nav-stacked li a.active {
+    color: #fff;
+    background-color: #0088cc;
+}
+
+.nav-stacked li i {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #ccc;
+}
+
+.box {
+    box-shadow: 0px 0px 1px #eee;
+    border: solid 1px #ededed;
+    border-radiuks: 5px;
+    background-color: #fff;
+    padding: 15px;
+    width: 98%;
+    margin: 15px 0px;
+}
+
+.help-block {
+    font-size: 12px;
+    color: #999;
+}
+
+.header {
+    padding: 20px;
+    border-bottom: solid 1px #ededed;
+    background-color: #fff;
+}
+
+.header .span3 {
+    margin-top: 30px;
+}
+
+.header .btn {
+    font-weight: bold;
+    width: 50px;
+}
+
+.container {
+    width: 90%;
+}
+
+.nav-head {
+    margin-bottom: -1px;
+    margin-top: 10px;
+    border: 0;
+    padding-bottom: 0px;
+}
+
+.nav-head a {
+    margin-left: 30px;
+    color: #000;
+}
+
+.nav-header .span10 {
+    width: 90%;
+}
+
+.intro {
+    box-shadow: 0px 0px 1px #eee;
+    border: solid 1px #ededed;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 10px;
+    width: 98%;
+    margin-left: 10px;
+}
+
+.intro .close {
+    right: 0;
+}
+
+.ok {
+    position: relative;
+    top: -5px;
+    left: 10px;
+    display: none;
+}
+
+a {
+    color: #c33e00;
+}
+
+a {
+    cursor: pointer;
+}
+
+a:hover {
+    color: #c33e00;
+}
+
+.section .row-fluid {
+    margin: 10px;
+    padding: 20px 0px;
+}
+
+.section {
+    padding: 20px;
+}
+
+.section aside {
+    margin: 10px 0px;
+    color: #666;
+}
+
+.nav-bar {
+    box-shadow: 0px 0px 1px #eee;
+    border: solid 1px #ededed;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.side-bar li a {
+    padding: 10px 40px;
+    color: #000;
+    border-bottom: solid 1px #e5e5e5;
+    font-size: 14px;
+}
+
+.side-bar li a:hover {
+    color: #005580;
+    border-bottom: solid 1px #e5e5e5;
+}
+
+.side-bar li.active {
+    font-weight: bold;
+}
+
+.side-bar .nav-header {
+    padding: 10px 20px;
+}
+
+.main-body {
+    box-shadow: 0px 0px 1px #eee;
+    border: solid 1px #ededed;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 20px;
+}
+
+.hot {
+    padding: 0px;
+    margin: 0;
+}
+
+.ad-box {
+    font-size: 12px;
+}
+
+#controller {
+    bottom: 0px;
+    background-color: #000;
+    margin-left: 10px;
+}
+
+.ads {
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+}
+
+.ads div li {
+    margin: 12px;
+    padding: 5px;
+    overflow: hidden;
+}
+
+form .alert {
+    border: solid 1px #be0100;
+    position: relative;
+    left: 20%;
+    width: 70%;
+    display: none;
+    font-size: 12px;
+}
+
+.footer .container {
+    padding: 20px 0px;
+    border-top: solid 1px #ededed;
+    font-size: 12px;
+}
+
+.control-group {
+    margin-left: 0px;
+}
+
+.footer .span4 a {
+    color: #000;
+}
+
+#legend {
+    border: 0;
+}
+
+#legend .span4 {
+    font-size: 14px;
+}
+
+#legend span {
+    font-size: 14px;
+    margin-right: 20px;
+}
+
+#legend input {
+    width: 200px;
+}
+
+#legend .progress {
+    padding: 0;
+}

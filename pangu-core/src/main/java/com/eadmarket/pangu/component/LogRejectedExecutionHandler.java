@@ -11,10 +11,10 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 class LogRejectedExecutionHandler implements RejectedExecutionHandler {
 
-    private final static Logger LOG = LoggerFactory.getLogger(LogRejectedExecutionHandler.class);
+  private final static Logger LOG = LoggerFactory.getLogger(LogRejectedExecutionHandler.class);
 
-    @Override
-    public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
-        LOG.error("ThreadPool reject", r);
-    }
+  @Override
+  public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
+    LOG.error("ThreadPool reject", r);
+  }
 }

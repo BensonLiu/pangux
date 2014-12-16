@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+        "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans default-autowire="byName">
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-       <property name="locations">
-           <list>
-              <value>jdbc.properties</value>
-           </list>
-       </property>
-    </bean>	
-	
-	<import resource="classpath:com/eadmarket/pangu/applicationContext.xml"/>
-	
-	<bean id="adJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-		<property name="dataSource" ref="adDataSource" />
-	</bean>
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>jdbc.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <import resource="classpath:com/eadmarket/pangu/applicationContext.xml"/>
+
+    <bean id="adJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="adDataSource"/>
+    </bean>
 
     <bean id="educationAppJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-        <property name="dataSource" ref="educationAppDataSource" />
+        <property name="dataSource" ref="educationAppDataSource"/>
     </bean>
 </beans>

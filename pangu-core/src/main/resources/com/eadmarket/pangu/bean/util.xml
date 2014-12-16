@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+        "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans default-autowire="byName">
-	<bean id="emailService" class="com.eadmarket.pangu.util.email.impl.EmailServiceImpl" init-method="initConfig"/>
+    <bean id="emailService" class="com.eadmarket.pangu.util.email.impl.EmailServiceImpl"
+          init-method="initConfig"/>
 
     <bean id="fileUploadUtil" class="com.eadmarket.pangu.util.FileUploadUtil">
-        <property name="fileUploadPath" value="${file.destination.path}" />
+        <property name="fileUploadPath" value="${file.destination.path}"/>
     </bean>
 
-    <bean id="sequenceGenerator" class="com.eadmarket.pangu.util.seq.impl.DatabaseBasedSequenceGenerator"
+    <bean id="sequenceGenerator"
+          class="com.eadmarket.pangu.util.seq.impl.DatabaseBasedSequenceGenerator"
           init-method="init">
-        <property name="dataSource" ref="educationAppDataSource" />
-        <property name="seqTableName" value="seq_info" />
+        <property name="dataSource" ref="educationAppDataSource"/>
+        <property name="seqTableName" value="seq_info"/>
     </bean>
 </beans>
