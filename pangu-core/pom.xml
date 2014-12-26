@@ -40,10 +40,6 @@
             <artifactId>spring-test</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-all</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
         </dependency>
