@@ -6,7 +6,6 @@ import com.eadmarket.pangu.domain.AdvertiseDO;
 import com.eadmarket.pangu.domain.ReportInfoDO;
 import com.eadmarket.pangu.manager.position.AdvertiseManager;
 import com.eadmarket.pangu.manager.report.ReportInfoManager;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +36,7 @@ class SyncResponseAdvertiseComponent implements ResponseAdvertiseComponent {
         reportInfoManager.responseForOperation(advertiseDO, srcIp, ReportInfoDO.DISPLAY_OPT_TYPE);
       }
     } catch (ManagerException ex) {
-      LOG.error("advertiseId:" + advertiseDO.getId() + ",ip:" + srcIp, ex);
+      LOG.error("advertiseId:{}, ip: {}", advertiseDO.getId(), srcIp, ex);
     }
   }
 
@@ -46,7 +45,7 @@ class SyncResponseAdvertiseComponent implements ResponseAdvertiseComponent {
     try {
       reportInfoManager.responseForOperation(advertiseDO, srcIp, ReportInfoDO.CLICK_OPT_TYPE);
     } catch (ManagerException ex) {
-      LOG.error("advertiseId:" + advertiseDO.getId() + ",ip:" + srcIp, ex);
+      LOG.error("advertiseId:{}, ip:{}", advertiseDO.getId(), srcIp, ex);
     }
   }
 }
