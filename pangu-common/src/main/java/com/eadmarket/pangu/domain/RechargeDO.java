@@ -54,7 +54,7 @@ public class RechargeDO {
     return status == RechargeStatus.COMPELETED;
   }
 
-  public static enum ChannelType implements IEnum {
+  public enum ChannelType implements IEnum {
     ALIPAY(101, "支付宝"),
     CFT(102, "财付通"),;
 
@@ -64,7 +64,7 @@ public class RechargeDO {
     @Getter
     private final String desc;
 
-    private ChannelType(int code, String desc) {
+    ChannelType(int code, String desc) {
       this.code = code;
       this.desc = desc;
     }

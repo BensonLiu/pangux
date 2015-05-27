@@ -308,6 +308,10 @@
                 <groupId>com.alibaba.citrus.tool</groupId>
                 <artifactId>springext-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok-maven-plugin</artifactId>
+            </plugin>
         </plugins>
         <pluginManagement>
             <plugins>
