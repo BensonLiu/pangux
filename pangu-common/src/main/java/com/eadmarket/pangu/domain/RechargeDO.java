@@ -71,7 +71,7 @@ public class RechargeDO {
 
   }
 
-  public static enum RechargeStatus implements IEnum {
+  public enum RechargeStatus implements IEnum {
     NEW(1, "待付款"),
     COMPELETED(2, "已完成"),;
 

@@ -98,7 +98,8 @@
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
-                <version>0.11.8</version>
+                <version>1.16.4</version>
+                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>com.google.guava</groupId>
@@ -217,6 +218,10 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>${java.version}</source>
@@ -308,10 +313,6 @@
                 <groupId>com.alibaba.citrus.tool</groupId>
                 <artifactId>springext-maven-plugin</artifactId>
             </plugin>
-            <plugin>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok-maven-plugin</artifactId>
-            </plugin>
         </plugins>
         <pluginManagement>
             <plugins>
@@ -363,7 +364,7 @@
                 <plugin>
                     <groupId>org.projectlombok</groupId>
                     <artifactId>lombok-maven-plugin</artifactId>
-                    <version>0.11.8.0</version>
+                    <version>1.16.4.1</version>
                 </plugin>
                 <plugin>
                     <groupId>com.alibaba.citrus.tool</groupId>
