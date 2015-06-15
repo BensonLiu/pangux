@@ -50,8 +50,7 @@
                 <artifactId>autoconfig-maven-plugin</artifactId>
                 <configuration>
                     <exploding>true</exploding>
-                    <explodedDirectory>${project.build.directory}/pangu-exploded.war
-                    </explodedDirectory>
+                    <explodedDirectory>${project.build.directory}/pangu-exploded.war</explodedDirectory>
                 </configuration>
                 <executions>
                     <execution>
