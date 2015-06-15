@@ -26,7 +26,6 @@ public class Visitor {
   public static void main(String[] args) throws UnsupportedEncodingException {
     byte[] raw = "@138dgf$~497_+25".getBytes("UTF-8");
     int actualKeySize = raw.length * 8;
-    System.out.println(actualKeySize);
   }
 
   public String getName() {
