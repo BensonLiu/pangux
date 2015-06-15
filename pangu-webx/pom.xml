@@ -34,6 +34,7 @@
     </dependencies>
     <build>
         <plugins>
+            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -43,7 +44,7 @@
                     <warName>pangu</warName>
                     <webappDirectory>${project.build.directory}/pangu-exploded.war</webappDirectory>
                 </configuration>
-            </plugin>
+            </plugin>-->
             <plugin>
                 <groupId>com.alibaba.citrus.tool</groupId>
                 <artifactId>autoconfig-maven-plugin</artifactId>
