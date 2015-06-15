@@ -9,7 +9,7 @@
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
-    <name>eadmarket-web-application</name>
+    <name>eadmarket-application</name>
     <modules>
         <module>pangu-core</module>
         <module>pangu-common</module>
