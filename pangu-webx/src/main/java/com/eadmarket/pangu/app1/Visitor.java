@@ -7,7 +7,6 @@ public class Visitor {
   private String name;
 
   public static void main(String[] args) throws UnsupportedEncodingException {
-    
   }
 
   public String getName() {
