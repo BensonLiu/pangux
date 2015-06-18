@@ -42,7 +42,6 @@ public class ProjectDaoTest extends BaseTest {
   public void testQuery() throws DaoException {
     ProjectQuery projectQuery = new ProjectQuery();
     projectQuery.setDescriKeyWord("人气");
-    //projectQuery.setCategoryId(12L);
 
     Query<ProjectQuery> query = Query.create(projectQuery);
     query.setCurrentPage(1);
@@ -67,7 +66,6 @@ public class ProjectDaoTest extends BaseTest {
     projectDao.updateById(projectDO);
 
     ProjectDO project = projectDao.getById(id);
-
     assertThat(project.getAlexa(), is(equalTo(alexa)));
     assertThat(project.getLocalRank(), is(equalTo(alexa)));
   }
