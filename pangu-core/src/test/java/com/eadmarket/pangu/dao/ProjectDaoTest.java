@@ -3,11 +3,9 @@ package com.eadmarket.pangu.dao;
 import com.eadmarket.pangu.BaseTest;
 import com.eadmarket.pangu.DaoException;
 import com.eadmarket.pangu.common.Query;
-import com.eadmarket.pangu.dao.position.AdvertiseDao;
 import com.eadmarket.pangu.dao.project.ProjectDao;
 import com.eadmarket.pangu.domain.ProjectDO;
 import com.eadmarket.pangu.query.ProjectQuery;
-import com.eadmarket.pangu.timer.WebsiteAlexaUpdater;
 
 import org.junit.Test;
 
@@ -23,25 +21,15 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
-/**
- * @author liuyongpo@gmail.com
- */
 public class ProjectDaoTest extends BaseTest {
 
   @Resource
   private ProjectDao projectDao;
 
-  @Resource
-  private AdvertiseDao advertiseDao;
-
-  @Resource
-  private WebsiteAlexaUpdater websiteAlexaUpdater;
-
   @Test
   public void testCount() throws DaoException {
     ProjectQuery projectQuery = new ProjectQuery();
     projectQuery.setDescriKeyWord("人气");
-    //projectQuery.setCategoryId(12L);
 
     Query<ProjectQuery> query = Query.create(projectQuery);
 
