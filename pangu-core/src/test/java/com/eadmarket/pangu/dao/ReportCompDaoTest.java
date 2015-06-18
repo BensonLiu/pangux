@@ -17,9 +17,6 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
-/**
- * Created by liu on 1/13/14.
- */
 public class ReportCompDaoTest extends BaseTest {
 
   @Resource
