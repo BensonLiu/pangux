@@ -9,6 +9,7 @@
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
+
     <name>eadmarket-application</name>
 
     <modules>
@@ -109,6 +110,7 @@
                 <artifactId>guava</artifactId>
                 <version>18.0</version>
             </dependency>
+
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
