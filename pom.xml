@@ -18,6 +18,7 @@
         <module>pangu-webx</module>
         <module>pangu-toolkit</module>
     </modules>
+
     <properties>
         <java.version>1.6</java.version>
         <java.encoding>UTF-8</java.encoding>
