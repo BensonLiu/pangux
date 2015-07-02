@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
 
     <name>eadmarket-application</name>
+
     <modules>
         <module>pangu-core</module>
         <module>pangu-common</module>
@@ -86,6 +87,7 @@
                 <version>3.0.1</version>
                 <scope>provided</scope>
             </dependency>
+
             <dependency>
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis</artifactId>
